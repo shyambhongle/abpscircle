@@ -43,5 +43,12 @@ router.post('/',passport.authenticate('jwt', { session: false }),(req, res) => {
 
 
 
+router.get('/profile',passport.authenticate('jwt',{session:false}),(req,res)=>{
+Post.find({user:req.user.id})
+    .then(pro=>{
+      return res.json(pro);
+    })
+});
+
 
 module.exports = router;

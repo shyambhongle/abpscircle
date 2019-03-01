@@ -1,0 +1,87 @@
+.Login{
+  min-height:67vh;
+  padding-top: 7vh;
+  text-align: center;
+  align-items: center;
+  background: linear-gradient(to bottom right, #FEEDF6, #FCF0E2);
+  background-image: linear-gradient(to right bottom, rgb(254, 237, 246), rgb(252, 240, 226));
+}
+
+
+.LoginBox{
+  margin: auto;
+  margin-top: 2%;
+  display: inline-block;
+  width: 400px;
+  box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
+  padding: 20px 10px;
+  background-color: white;
+}
+
+.LoginTitle{
+font-size: 1.8em;
+}
+
+
+.FormBox{
+ margin: auto;
+ width: 87%;
+ display: block;
+ margin-top: 10px;
+ margin-inline-start: 2px;
+ padding-block-start: 0.35em;
+ padding-inline-start: 0.75em;
+ padding-inline-end: 0.75em;
+ padding-block-end: 0.625em;
+ min-inline-size: min-content;
+}
+
+.FormBox .TextInput{
+  margin-right: 20px;
+  margin: auto;
+  display: inline-block;
+  color: #282C3F;
+  font-size: 15px;
+  width: 100%;
+  border: 0px;
+  padding: 15px;
+  border-bottom: 1px solid #D5D6D9;
+}
+
+.Gender{
+  display: inline-block;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  height: 50px;
+  margin-top: 10px;
+  align-items: center;
+}
+
+.Gender label{
+  height: 25px;
+  font-size: 20px;
+  font-family: "Varela Round";
+  color: #696E79;
+}
+
+.Gender input[type=radio] {
+ border: 0px;
+ width: 18px;
+ height: 18px;
+}
+
+.FormBox button{
+background-color: #4CAF50; /* Green */
+border: none;
+color: white;
+text-align: center;
+text-decoration: none;
+display: inline-block;
+font-size: 16px;
+margin: 15px 2px;
+
+cursor: pointer;
+padding: 12px 40px;
+border-radius: 5px;
+}
