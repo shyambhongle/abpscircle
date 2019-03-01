@@ -1,6 +1,6 @@
 import React,{Component} from 'react';
 import classes from './register.css';
-import {registerUser} from './../../actions/authAction';
+import {registerUser} from './../../../actions/authAction';
 import {connect} from 'react-redux';
 
 class Register extends Component{
