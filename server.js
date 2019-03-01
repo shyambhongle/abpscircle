@@ -16,9 +16,19 @@ app.use(bodyParser.json());
 // DB Config
 const db = require('./config/keys').mongoDB;
 
+// Passport middleware
+app.use(passport.initialize());
+
+// Passport Config
+require('./config/passport')(passport);
+
+
+
 //routes
-const profile=require('./routes/profile/profile');
 const auth=require('./routes/auth/auth');
+const home=require('./routes/home/home');
+const post=require('./routes/post/post');
+const profile=require('./routes/profile/profile');
 
 
 
@@ -31,7 +41,9 @@ mongoose
 
 //route middleware
 app.use('/auth',auth);
+app.use('/',home);
 app.use('/profile',profile);
+app.use('/post',post);
 
 
 
