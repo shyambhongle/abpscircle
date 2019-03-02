@@ -1,0 +1,32 @@
+.Post{
+  width: 500px;
+  margin:auto;
+  padding-top: 25px;
+  border: 1px solid #eaeaec;
+  background-color: white;
+  margin-top: 25px;
+}
+
+
+.Title{
+  position:relative;
+  left: 10px;
+  color: #1d2129;
+  font-size: 18px;
+}
+
+textarea{
+  position:relative;
+  left: 10px;
+  width: 90%;
+  height: 10%;
+  margin: auto;
+}
+
+button{
+  padding: 5px 20px;
+  position:relative;
+  left: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}

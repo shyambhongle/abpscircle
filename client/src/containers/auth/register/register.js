@@ -2,6 +2,7 @@ import React,{Component} from 'react';
 import classes from './register.css';
 import {registerUser} from './../../../actions/authAction';
 import {connect} from 'react-redux';
+import {Link} from  'react-router-dom';
 
 class Register extends Component{
 
@@ -11,6 +12,15 @@ state={
   email:'',
   password:''
 }
+
+
+componentDidMount(){
+  if (this.props.auth.isAuthenticated) {
+      this.props.history.push('/');
+  }
+}
+
+
 
 inputChangeHandler=(e)=>{
 this.setState({
@@ -46,6 +56,7 @@ submitHandler=(e)=>{
       <br/>
       <button type="submit">Register</button>
       </form>
+      <div className={classes.NavigateAuth}>Already registerd?<Link to="/auth/login"> Login here</Link></div>
       </div>
       </div>
       </div>
@@ -53,5 +64,8 @@ submitHandler=(e)=>{
   }
 }
 
+const mapStateToProps=state=>({
+  auth:state.auth
+})
 
-export default connect(null,{registerUser})(Register);
+export default connect(mapStateToProps,{registerUser})(Register);

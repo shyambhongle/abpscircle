@@ -1,0 +1,51 @@
+.Header{
+  width: 100vw;
+  height: 11vh;
+  background-color: yellow;
+}
+
+.HeaderWrapper{
+  width: 80%;
+  margin: auto;
+  height: 100%;
+  position: relative;
+}
+
+.CompanyName{
+  position: absolute;
+  left: 2%;
+  top: 20%;
+  margin-left: 10%;
+  color: Black;
+  font-size: 2em;
+}
+
+.ProfileButton{
+  background-color: lightgreen;
+  border: none;
+  float: right;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 15px 2px;
+  cursor: pointer;
+  padding: 12px 40px;
+  border-radius: 5px;
+}
+
+.Logout{
+  background-color: tomato;
+  border: none;
+  float: right;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 15px 2px;
+  cursor: pointer;
+  padding: 12px 40px;
+  border-radius: 5px;
+}

@@ -1,0 +1,14 @@
+.Home{
+  width: 100vw;
+  min-height: 100vh;
+  background-color: #eaeaea;
+}
+
+
+.PostWrapper{
+  width: 50%;
+  margin: auto;
+  min-height: 81vh;
+  padding-bottom:50px;
+  height: auto;
+}
