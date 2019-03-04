@@ -1,6 +1,8 @@
 import axios from 'axios';
 import setAuthToken from '../utils/setAuthToken';
 import jwt_decode from 'jwt-decode';
+import {setProfile} from './profileAction';
+import store from './../store/store';
 
 import { GET_ERRORS, SET_CURRENT_USER } from './actionType';
 
@@ -32,6 +34,7 @@ export const loginUser = (userData,history) => dispatch => {
       const decoded = jwt_decode(token);
       // Set current user
       dispatch(setCurrentUser(decoded));
+      store.dispatch(setProfile());
       history.push('/')
     })
     .catch(err =>
@@ -58,6 +61,7 @@ export const logoutUser = (history) => dispatch => {
   setAuthToken(false);
   // Set current user to {} which will set isAuthenticated to false
   dispatch(setCurrentUser({}));
-  history.push('/auth/login');
-
+  if (history) {
+    history.push('/auth/login')
+  }
 };

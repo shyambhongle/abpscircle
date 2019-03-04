@@ -11,13 +11,55 @@
   position: relative;
 }
 
+.SearchBox{
+    width: 200px;
+    margin: 20px 10px 20px 0;
+    background-color: #F5F5F6;
+    display: flex;
+    position: relative;
+    left: 33%;
+    z-index: 1;
+    display: inline-block;
+  }
+
+  .SearchBox input{
+    height: 20px;
+   display: inline-block;
+   width: 90%;
+   background-color: #F5F5F6;
+   line-height: 24px;
+   color: #696E79;
+   padding: 5px 10px ;
+   border: 1px solid #D5D6D9;
+   border-radius: 4px;
+  }
+
+.SearchContainer{
+  width: 94%;
+  padding: 5px 5px 5px 10px;
+  position: absolute;
+  background-color: white;
+}
+
+
+
+.SearchContainer li{
+  list-style: none;
+  color: Black;
+  font-size: 14px;
+  display: block;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+
 .CompanyName{
   position: absolute;
   left: 2%;
-  top: 20%;
+  top: 33%;
   margin-left: 10%;
   color: Black;
-  font-size: 2em;
+  font-size: 1.2em;
 }
 
 .ProfileButton{
@@ -31,7 +73,7 @@
   font-size: 16px;
   margin: 15px 2px;
   cursor: pointer;
-  padding: 12px 40px;
+  padding: 10px 20px;
   border-radius: 5px;
 }
 
@@ -46,6 +88,27 @@
   font-size: 16px;
   margin: 15px 2px;
   cursor: pointer;
-  padding: 12px 40px;
+  padding: 10px 20px;
   border-radius: 5px;
+}
+
+
+.NotificationIcon{
+  width: 25px;
+  height: 25px;
+  background-color: brown;
+  position: relative;
+   top: 10px;
+   left: 350px;
+  display: inline-block;
+  z-index: 1;
+
+}
+
+.Notification{
+  position: absolute;
+  height: 100px;
+  width: 200px;
+  top: 25px;
+  background-color: white;
 }

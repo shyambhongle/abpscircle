@@ -1,5 +1,5 @@
 const express=require('express');
-const router=express();
+const router=express.Router();
 const passport=require('passport');
 const Profile=require('./../../models/profile');
 const User=require('./../../models/user');
@@ -11,7 +11,6 @@ router.get('/',passport.authenticate('jwt', { session: false }),  (req, res) => 
     const errors = {};
     Profile.findOne({ user: req.user.id })
       .then(profile => {
-        console.log(profile);
         if (!profile) {
           let newProfile=new Profile({
             user:req.user.id,

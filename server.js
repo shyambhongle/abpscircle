@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const passport = require('passport');
 const path = require('path');
-
+const socket=require('socket.io');
 
 
 const app = express();
@@ -29,6 +29,8 @@ const auth=require('./routes/auth/auth');
 const home=require('./routes/home/home');
 const post=require('./routes/post/post');
 const profile=require('./routes/profile/profile');
+const search=require('./routes/search/search');
+const util=require('./routes/friendsystem/friendsystem');
 
 
 
@@ -44,6 +46,8 @@ app.use('/auth',auth);
 app.use('/',home);
 app.use('/profile',profile);
 app.use('/post',post);
+app.use('/search',search);
+app.use('/util',util);
 
 
 
@@ -63,4 +67,15 @@ if (process.env.NODE_ENV === 'production') {
 
 const port = process.env.PORT || 5000;
 
-app.listen(port, () => console.log(`Server running on port ${port}`));
+const server=app.listen(port, () => console.log(`Server running on port ${port}`));
+
+const io=socket(server);
+
+io.on('connection',(socket)=>{
+  socket.on('chat',(data)=>{
+    io.sockets.emit('chat',data)
+  })
+  socket.on('typing',(data)=>{
+    socket.broadcast.emit('typing',data);
+  })
+})

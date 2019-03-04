@@ -22,7 +22,16 @@ const ProfileSchema = new Schema({
   date: {
     type: Date,
     default: Date.now
-  }
+  },
+    friendRequest:{
+      type:Array
+    },
+    sentRequest:{
+      type:Array
+    },
+    allFriends:{
+      type:Array
+    }
 });
 
 module.exports = Profile = mongoose.model('profile', ProfileSchema);

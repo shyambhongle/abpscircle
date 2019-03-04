@@ -16,11 +16,29 @@ const validatePostInput = require('./../../validation/post');
 
 
 router.get('/',passport.authenticate('jwt',{session:false}),(req,res)=>{
-   Post.find()
-  .sort({ date: -1 })
-  .then(posts => res.json(posts))
-  .catch(err => res.status(404).json({ nopostsfound: 'No posts found' }));
-  })
+  Profile.findOne({user:req.user.id})
+          .then(profile=>{
+            console.log(profile.allFriends);
+            let allfriendspost=[];
+            let freindsPost=profile.allFriends.map(friend=>{
+              return Post.find({user:friend.id})
+                    .then(
+                      posts=>{
+                        return allfriendspost.push(posts)
+                      }
+                    )
+            })
+
+            Promise.all(freindsPost).then((completed) =>
+            {
+              return   res.json(allfriendspost);
+
+            }
+          );
+          })
+})
+
+
 
 
 

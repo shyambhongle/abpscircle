@@ -11,3 +11,52 @@ export const setProfile=()=>{
           })
   }
 }
+
+
+export const addFriend=(data)=>{
+  return dispatch=>{
+    axios.post('/util/addfriend',data)
+        .then(res=>{
+          console.log(res);
+        })
+  };
+}
+
+export const acceptRequest=(data)=>{
+  return dispatch=>{
+    axios.post('/util/acceptrequest',data)
+        .then(res=>{
+          console.log(res);
+        })
+  };
+}
+
+
+export const cancelRequest=(data)=>{
+  return dispatch=>{
+    axios.post('/util/cancelrequest',data)
+        .then(res=>{
+          console.log(res);
+        })
+  };
+}
+
+
+export const reject=(data)=>{
+  return dispatch=>{
+    axios.post('/util/reject',data)
+        .then(res=>{
+          console.log(res);
+        })
+  };
+}
+
+
+export const unfriend=(data)=>{
+  return dispatch=>{
+    axios.post('/util/unfriend',data)
+        .then(res=>{
+          console.log(res);
+        })
+  };
+}

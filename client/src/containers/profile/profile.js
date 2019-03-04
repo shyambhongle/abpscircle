@@ -1,11 +1,10 @@
 import React,{Component} from 'react';
-import classes from './profile.css';
 import Header from './../../components/header/header';
 import Post from './../post/post';
 import PostDisplay from './../../components/postdisplay/postdisplay';
 import {connect} from 'react-redux';
 import * as actionCreators from './../../actions/index';
-import axios from 'axios';
+import classes from './profile.css';
 
 class Profile extends Component{
 
@@ -19,8 +18,9 @@ class Profile extends Component{
   }
 
 
+
+
 componentWillReceiveProps(props){
-  console.log(props.post);
   this.setState({
     profilePostpro:props.post.profilePost
   })
@@ -28,10 +28,15 @@ componentWillReceiveProps(props){
 
 
   render(){
-    console.log(this.state);
     return(
       <div>
       <Header/>
+      <div className={classes.ProfileBanner}>
+      <div className={classes.Avatar}>
+      <img src={this.props.profile.avatar} alt="profile pic"/>
+      </div>
+      <div className={classes.ProfileName}>{this.props.profile.name}</div>
+      </div>
       <Post/>
       <PostDisplay data={this.state.profilePostpro}/>
       </div>
@@ -41,7 +46,8 @@ componentWillReceiveProps(props){
 
 const mapStateToProps=state=>({
   auth:state.auth,
-  post:state.post
+  post:state.post,
+  profile:state.profile.profile
 })
 
 const mapDispatchToProps=dispatch=>({

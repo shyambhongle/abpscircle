@@ -1,5 +1,5 @@
 
-import { RETRIVE_POST,PROFILE_POST,NEW_POST } from './../actions/actionType';
+import { RETRIVE_POST,PROFILE_POST } from './../actions/actionType';
 
 const initialState = {
   allPost:[],

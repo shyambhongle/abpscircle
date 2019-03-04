@@ -12,5 +12,16 @@ export {
 
 
 export {
-    setProfile
+    setProfile,
+    addFriend,
+    acceptRequest,
+    cancelRequest,
+    unfriend,
+    reject
 } from './profileAction';
+
+export {
+    searchPerson,
+    searchProfile,
+    searchProfilePost
+} from './searchAction';

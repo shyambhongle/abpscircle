@@ -4,12 +4,17 @@ import {BrowserRouter,Route} from 'react-router-dom';
 import store from './store/store';
 import jwt_decode from 'jwt-decode';
 import setAuthToken from './utils/setAuthToken';
+import {connect} from 'react-redux';
+import * as actionCreators from './actions/index';
 import { setCurrentUser, logoutUser } from './actions/authAction';
+
 
 //importing componets
 import Auth from './containers/auth/auth';
 import Home from './containers/home/home';
 import Profile from './containers/profile/profile';
+import Chat from './containers/chat/chat';
+import SearchProfile from './containers/search/searchprofile';
 
 
 
@@ -43,6 +48,17 @@ if (localStorage.jwtToken) {
 
 
 class App extends Component {
+
+
+
+
+componentDidMount(){
+  if (this.props.auth.isAuthenticated) {
+    this.props.setProfile()
+  }
+}
+
+
   render() {
     return (
       <BrowserRouter>
@@ -50,10 +66,23 @@ class App extends Component {
       <Route path='/auth'  component={Auth}/>
       <Route path='/' exact component={Home}/>
       <Route path='/profile' exact component={Profile}/>
+      <Route path='/chat' exact component={Chat}/>
+      <Route path='/profile/:id' exact component={SearchProfile}/>
       </div>
       </BrowserRouter>
     );
   }
 }
 
-export default App;
+const mapStateToProps=state=>({
+  profile:state.search.searchPerson,
+  auth:state.auth
+})
+
+
+const mapDispatchToProps=dispatch=>({
+  setProfile:()=>{dispatch(actionCreators.setProfile())}
+})
+
+
+export default connect(mapStateToProps,mapDispatchToProps)(App);
