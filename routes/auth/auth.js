@@ -63,7 +63,6 @@ router.post('/register', (req, res) => {
 
 
 router.post('/login', (req, res) => {
-
   const { errors, isValid } = validateLoginInput(req.body);
 
   // Check Validation
@@ -85,6 +84,9 @@ router.post('/login', (req, res) => {
     // Check Password
     bcrypt.compare(password, user.password).then(isMatch => {
       if (isMatch) {
+
+
+
         // User Matched
         const payload = { id: user.id, name: user.name, avatar: user.avatar }; // Create JWT Payload
 

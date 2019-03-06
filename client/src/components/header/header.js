@@ -4,11 +4,20 @@ import {connect} from 'react-redux';
 import * as actionCreators from './../../actions/index';
 import {Link,withRouter} from 'react-router-dom';
 
+
+
+
+
 class Header extends Component{
 
 state={
   inputShow:false
 }
+
+
+
+
+
 
 inputShowToogle=(e)=>{
   if (e.target.value.length>2) {

@@ -1,13 +1,14 @@
+const http=require('http');
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const passport = require('passport');
 const path = require('path');
-const socket=require('socket.io');
-
+const socketIo=require('socket.io');
 
 const app = express();
-
+var server = require('http').Server(app);
+const io=socketIo(server);
 
 // Body parser middleware
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -22,7 +23,10 @@ app.use(passport.initialize());
 // Passport Config
 require('./config/passport')(passport);
 
-
+app.use(function(req,res,next){
+    req.io = io;
+    next();
+});
 
 //routes
 const auth=require('./routes/auth/auth');
@@ -41,6 +45,8 @@ mongoose
   .catch(err => console.log(err));
 
 
+
+
 //route middleware
 app.use('/auth',auth);
 app.use('/',home);
@@ -48,7 +54,6 @@ app.use('/profile',profile);
 app.use('/post',post);
 app.use('/search',search);
 app.use('/util',util);
-
 
 
 
@@ -67,15 +72,46 @@ if (process.env.NODE_ENV === 'production') {
 
 const port = process.env.PORT || 5000;
 
-const server=app.listen(port, () => console.log(`Server running on port ${port}`));
+server.listen(port, () => console.log(`Server running on port ${port}`));
 
-const io=socket(server);
 
-io.on('connection',(socket)=>{
-  socket.on('chat',(data)=>{
-    io.sockets.emit('chat',data)
+
+let onlineClients={};
+
+
+io.sockets.on('connection', function (socket) {
+
+  socket.on('adduser',(data)=>{
+    onlineClients[data.id] = {
+      "socket": socket.id
+    };
+    app.use(function(req,res,next){
+        req.testo = onlineClients;
+        next();
+    });
+
+})
+
+socket.on('private-message', function(data){
+    console.log("Sending: " + data.content + " to " + data.username);
+    if (onlineClients[data.username]){
+      io.sockets.connected[onlineClients[data.username].socket].emit("add-message", data);
+    } else {
+      console.log("User does not exist: " + data.username);
+    }
+  });
+
+  //Removing the socket on disconnect
+  socket.on('disconnect', function() {
+  	for(var name in onlineClients) {
+  		if(onlineClients[name].socket === socket.id) {
+  			delete onlineClients[name];
+  			break;
+  		}
+  	}
   })
-  socket.on('typing',(data)=>{
-    socket.broadcast.emit('typing',data);
-  })
+
+  io.myclients=onlineClients;
+
+
 })

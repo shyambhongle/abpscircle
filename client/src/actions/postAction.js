@@ -16,6 +16,7 @@ export const retrivePost=()=>{
              }
               })
             })
+      
             dispatch({type:RETRIVE_POST,payload:friendsPost})
           }).catch(err=>console.log(err))
   };

@@ -7,7 +7,7 @@ import setAuthToken from './utils/setAuthToken';
 import {connect} from 'react-redux';
 import * as actionCreators from './actions/index';
 import { setCurrentUser, logoutUser } from './actions/authAction';
-
+import io from 'socket.io-client';
 
 //importing componets
 import Auth from './containers/auth/auth';
@@ -15,7 +15,6 @@ import Home from './containers/home/home';
 import Profile from './containers/profile/profile';
 import Chat from './containers/chat/chat';
 import SearchProfile from './containers/search/searchprofile';
-
 
 
 // Check for token
@@ -33,7 +32,7 @@ if (localStorage.jwtToken) {
     // Logout user
     store.dispatch(logoutUser());
     // Redirect to login
-    window.location.href = '/login';
+    window.location.href = '/auth/login';
   }
 }
 
@@ -55,6 +54,11 @@ class App extends Component {
 componentDidMount(){
   if (this.props.auth.isAuthenticated) {
     this.props.setProfile()
+    this.socket=io('/');
+    this.socket.emit('adduser',{id:this.props.auth.user.id});
+    this.socket.on('newrequest',(data)=>{
+      this.props.updateProfile(data);
+    })
   }
 }
 
@@ -81,7 +85,8 @@ const mapStateToProps=state=>({
 
 
 const mapDispatchToProps=dispatch=>({
-  setProfile:()=>{dispatch(actionCreators.setProfile())}
+  setProfile:()=>{dispatch(actionCreators.setProfile())},
+  updateProfile:(data)=>{dispatch(actionCreators.updateProfile(data))}
 })
 
 

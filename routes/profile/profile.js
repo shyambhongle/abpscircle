@@ -7,6 +7,9 @@ const Post=require('./../../models/post');
 
 
 
+
+
+
 router.get('/',passport.authenticate('jwt', { session: false }),  (req, res) => {
     const errors = {};
     Profile.findOne({ user: req.user.id })
@@ -25,6 +28,7 @@ router.get('/',passport.authenticate('jwt', { session: false }),  (req, res) => 
         }
       })
       .catch(err => res.status(404).json(err));
+
   }
 );
 

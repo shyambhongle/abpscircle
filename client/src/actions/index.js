@@ -25,3 +25,7 @@ export {
     searchProfile,
     searchProfilePost
 } from './searchAction';
+
+export {
+    updateProfile
+} from './socketAction';
