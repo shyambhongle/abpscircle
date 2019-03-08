@@ -9,10 +9,9 @@ const PostSchema = new Schema({
   },
   text: {
     type: String,
-    required: true
   },
-  media:{
-    type:String
+  img:{
+    type:Object
   },
   name: {
     type: String

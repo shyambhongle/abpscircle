@@ -38,7 +38,7 @@ componentWillReceiveProps(props){
       <div className={classes.ProfileName}>{this.props.profile.name}</div>
       </div>
       <Post/>
-      <PostDisplay data={this.state.profilePostpro}/>
+      <PostDisplay data={this.state.profilePostpro} delete={this.props.deletePost}/>
       </div>
     );
   }
@@ -52,7 +52,8 @@ const mapStateToProps=state=>({
 
 const mapDispatchToProps=dispatch=>({
   profilePost:()=>{dispatch(actionCreators.profilePost())},
-  setProfile:()=>{dispatch(actionCreators.setProfile())}
+  setProfile:()=>{dispatch(actionCreators.setProfile())},
+  deletePost:(id)=>{dispatch(actionCreators.deletePost(id))}
 })
 
 export default connect(mapStateToProps,mapDispatchToProps)(Profile);

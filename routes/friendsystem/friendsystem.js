@@ -19,6 +19,8 @@ router.post('/addfriend',passport.authenticate('jwt',{session:false}),(req,res)=
       ).then(n=>{
         if (req.io.myclients[req.body.id]){
             req.io.sockets.connected[req.io.myclients[req.body.id].socket].emit("newrequest", n);
+          }else {
+            console.log("not happend");
           }
 });
       let oppdata={
@@ -53,7 +55,7 @@ Profile.findOne({user:req.user.id})
             {user:req.user.id},
             {$push:{allFriends:data}},
             {new:true},
-          ).then(ne=>{console.log(ne.allFriends)})
+          ).then(ne=>{})
 
           //deleteing friendRequest which was  accepted
           Profile.findOneAndUpdate(
@@ -67,7 +69,7 @@ Profile.findOne({user:req.user.id})
               {user:req.body.id},
               {$push:{allFriends:oppdata}},
               {new:true}
-            ).then(ne=>{console.log(ne.allFriends)})
+            ).then(ne=>{})
 
             //deleteing sent request from senders
             Profile.findOneAndUpdate(
@@ -76,6 +78,8 @@ Profile.findOne({user:req.user.id})
               {new:true}
             ).then(ne=>{  if (req.io.myclients[req.body.id]){
                   req.io.sockets.connected[req.io.myclients[req.body.id].socket].emit("newrequest", ne);
+                }else {
+                  console.log("not happend");
                 }})
         })
 
@@ -92,6 +96,8 @@ router.post('/cancelrequest',passport.authenticate('jwt',{session:false}),(req,r
     ).then(n=>{
       if (req.io.myclients[req.body.id]){
           req.io.sockets.connected[req.io.myclients[req.body.id].socket].emit("newrequest", n);
+        }else {
+          console.log("not happend");
         }
     })
     Profile.findOneAndUpdate(
@@ -111,13 +117,15 @@ router.post('/reject',passport.authenticate('jwt',{session:false}),(req,res)=>{
     ).then(n=>{
       if (req.io.myclients[req.body.id]){
           req.io.sockets.connected[req.io.myclients[req.body.id].socket].emit("newrequest", n);
+        }else {
+          console.log("not happend");
         }
     })
     Profile.findOneAndUpdate(
       {user:req.user.id},
       {$pull:{friendRequest:{id:req.body.id}}},
       {new:true},
-    ).then(newreq=>{console.log(newreq)})
+    ).then(newreq=>{})
 })
 
 
@@ -130,6 +138,8 @@ router.post('/unfriend',passport.authenticate('jwt',{session:false}),(req,res)=>
     ).then(n=>{
       if (req.io.myclients[req.body.id]){
           req.io.sockets.connected[req.io.myclients[req.body.id].socket].emit("newrequest", n);
+        }else {
+          console.log("not happend");
         }
     })
     Profile.findOneAndUpdate(
@@ -138,13 +148,4 @@ router.post('/unfriend',passport.authenticate('jwt',{session:false}),(req,res)=>
       {new:true},
     ).then(newreq=>{res.json(newreq)})
 })
-
-
-
-
-
-
-
-
-
 module.exports=router;

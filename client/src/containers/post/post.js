@@ -8,8 +8,10 @@ import {newPost} from './../../actions/postAction';
 class Post extends Component {
 
 state={
-  text:""
+  text:"",
+  img:null
 }
+
 
 changeHandler=(e)=>{
   this.setState({
@@ -17,11 +19,23 @@ changeHandler=(e)=>{
   })
 }
 
+imageHandle=(e)=>{
+  this.setState({
+    img: e.target.files[0]
+  })  }
+
+
+
 submitHandler=(e)=>{
   e.preventDefault();
-  this.props.newPost({text:this.state.text})
+  const data = new FormData()
+  data.append('img', this.state.img);
+  data.append('text',this.state.text);
+  let senddata=this.state.img?data:{text:this.state.text};
+  this.props.newPost(senddata,this.state.img);
   this.setState({
-    text:""
+    text:"",
+    img:null
   })
 }
 
@@ -33,10 +47,14 @@ submitHandler=(e)=>{
       <div>
       <div className={classes.Post}>
       <div className={classes.Title}>Create A Post</div>
-      <textarea rows="4" cols="50" placeholder-="create a new post..." onChange={this.changeHandler}
+      <form onSubmit={this.submitHandler}>
+      <textarea rows="4" cols="50"
+      placeholder-="create a new post..." name="text" onChange={this.changeHandler}
       value={this.state.text}>
       </textarea>
-      <button onClick={this.submitHandler}>Post</button>
+      <input type='file' name="img" onChange={this.imageHandle}/>
+      <button type="submit">Post</button>
+      </form>
       </div>
       </div>
     );

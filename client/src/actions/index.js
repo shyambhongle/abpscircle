@@ -7,7 +7,10 @@ export {
 
 export {
     retrivePost,
-    profilePost
+    profilePost,
+    deletePost,
+    addLike,
+    removeLike
 } from './postAction';
 
 
