@@ -14,8 +14,16 @@ const PostSchema = new Schema({
     type:Object
   },
   name: {
-    type: String
+  firstName:{
+    type:String,
+    required:true,
+    trim:true
   },
+  lastName:{
+    type:String,
+    required:true,
+    trim:true
+  }},
   avatar: {
     type: String
   },
@@ -38,7 +46,16 @@ const PostSchema = new Schema({
         required: true
       },
       name: {
-        type: String
+      firstName:{
+        type:String,
+        required:true,
+        trim:true
+      },
+      lastName:{
+        type:String,
+        required:true,
+        trim:true
+      }
       },
       avatar: {
         type: String

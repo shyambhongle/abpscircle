@@ -13,6 +13,7 @@ class CommentItem extends Component {
 
     return (
       <div className={classes.CommentDiplay}>
+
           <div className={classes.CommentHeader}>
           <div className={classes.Avatar}>
           <img
@@ -20,17 +21,18 @@ class CommentItem extends Component {
             alt=""
           />
           </div>
-          <p className="text-center">{comment.name}</p>
+          <p className="text-center">{comment.name.firstName+" "+comment.name.lastName}</p>
           </div>
+
           <div className={classes.CommentData}>
             <p className="lead">{comment.text}</p>
-            {comment.user === auth.user.id || admin===auth.user.id ? (
-              <button
-                onClick={this.onDeleteClick.bind(this, postId, comment._id)}
-                type="button">delete
-              </button>
-            ) : null}
+            {comment.user === auth.user.id || admin===auth.user.id ?
+              <div
+                className={classes.DeleteComment}
+                onClick={this.onDeleteClick.bind(this, postId, comment._id)}></div>
+             : null}
           </div>
+
       </div>
     );
   }

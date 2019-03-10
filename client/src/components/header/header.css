@@ -1,7 +1,10 @@
 .Header{
   width: 100vw;
-  height: 11vh;
-  background-color: yellow;
+  height: 52px;
+  background-color: white;
+  position: sticky;
+  top: 0px;
+  z-index: 50;
 }
 
 .HeaderWrapper{
@@ -9,58 +12,236 @@
   margin: auto;
   height: 100%;
   position: relative;
+  display: flex;
+  align-items: center;
 }
 
 .SearchBox{
     width: 200px;
-    margin: 20px 10px 20px 0;
     background-color: #F5F5F6;
     display: flex;
-    position: relative;
-    left: 33%;
     z-index: 1;
     display: inline-block;
+    border: 1px solid #D5D6D9;
+    border-radius: 3px;
+    margin: auto;
+    position: relative;
   }
 
   .SearchBox input{
-    height: 20px;
-   display: inline-block;
    width: 90%;
+   height: 18px;
    background-color: #F5F5F6;
    line-height: 24px;
    color: #696E79;
    padding: 5px 10px ;
-   border: 1px solid #D5D6D9;
-   border-radius: 4px;
+   border: none;
+   margin: none;
+   outline: none;
+   border-radius: 3px;
   }
 
 .SearchContainer{
   width: 94%;
   padding: 5px 5px 5px 10px;
+  min-height: 50px;
   position: absolute;
   background-color: white;
+  border: 1px solid #dddfe2;
+  top: 50px;
+  border-radius: 5px;
+}
+
+.SearchArrow{
+  width: 16px;
+  height: 16px;
+  transform: rotate(45deg);
+  background-color: white;
+  position: absolute;
+  left: 42%;
+  top: -8px;
+  border-bottom-right-radius: 50%;
 }
 
 
 
 .SearchContainer li{
   list-style: none;
-  color: Black;
+  color: grey;
   font-size: 14px;
   display: block;
   text-decoration: none;
   cursor: pointer;
+  margin-left: 10px;
+  margin-top: 10px;
 }
 
 
 .CompanyName{
-  position: absolute;
   left: 2%;
   top: 33%;
   margin-left: 10%;
   color: Black;
-  font-size: 1.2em;
+  display: flex;
+  width: 180px;
+  height: 32px;
+  justify-content: space-evenly;
+  align-items: center;
 }
+
+.CompanyCircle{
+  width: 50px;
+  height: 50px;
+  background: url('./../../assets/rings.svg');
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+}
+
+.Divider{
+  width: 1px;
+  height: 25px;
+  background-color: #262626;
+}
+
+.CompanyTitle{
+  color: #262626;
+  font-size: 16px;
+  font-weight: bold;
+  letter-spacing: 2px;
+}
+
+
+.IconTray{
+  width: 150px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  margin-right: 40px;
+}
+
+.RequestIcon{
+  width: 25px;
+  height: 25px;
+  background:url('./../../assets/icons/users.svg');
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  cursor: pointer;
+}
+
+.MessageIcon{
+  width: 25px;
+  height: 25px;
+  background:url('./../../assets/icons/mail.svg');
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  cursor: pointer;
+}
+
+.NotificationIcon{
+  width: 25px;
+  height: 25px;
+  background:url('./../../assets/icons/school-bell.svg');
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  cursor: pointer;
+}
+
+
+
+.ProfileIcon{
+  width: 100px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  margin-right: 20px;
+  justify-content: space-around;
+  cursor: pointer;
+}
+
+.ProfileIcon .Avatar{
+  width: 30px;
+  height: 28px;
+  border-radius: 50%;
+}
+
+.ProfileIcon .Avatar img{
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
+
+
+
+
+.ProfileIcon .UserName{
+  color: #262626;
+  font-size: 18px;
+}
+
+
+.SettingContainer{
+  width: 60px;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  position: relative;
+  transition: all 0.3s ease-out;
+}
+.SettingIcon{
+  width: 25px;
+  height: 25px;
+  align-self: center;
+  background:url('./../../assets/icons/settings.svg');
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  transition: all 0.3s ease-out;
+}
+
+.SettingBox{
+  width:180px;
+  height: auto;
+  background-color: white;
+  visibility: hidden;
+  opacity: 0;
+  position: absolute;
+  top:29px;
+  left: -70px;
+}
+
+
+.SettingBox > div{
+  border-bottom: 1px solid #efefef;
+  width:100%;
+  color: #262626;
+  font-size: 16px;
+  padding: 15px 0px;
+  text-align: center;
+  cursor: pointer;
+}
+
+
+.SettingContainer:hover .SettingBox{
+  visibility: visible;
+  opacity: 1;
+  transform: translateY(25px);
+}
+
+.SettingContainer:hover .SettingIcon{
+  transform: rotate(60deg);
+}
+
+
+
+
+
+
+
 
 .ProfileButton{
   background-color: lightgreen;
@@ -75,6 +256,8 @@
   cursor: pointer;
   padding: 10px 20px;
   border-radius: 5px;
+  display: none;
+
 }
 
 .Logout{
@@ -90,10 +273,12 @@
   cursor: pointer;
   padding: 10px 20px;
   border-radius: 5px;
+  display: none;
+
 }
 
 
-.NotificationIcon{
+.NotificsationIcon{
   width: 25px;
   height: 25px;
   background-color: brown;
@@ -102,6 +287,7 @@
    left: 350px;
   display: inline-block;
   z-index: 1;
+  display: none;
 
 }
 
@@ -111,4 +297,6 @@
   width: 200px;
   top: 25px;
   background-color: white;
+  display: none;
+
 }

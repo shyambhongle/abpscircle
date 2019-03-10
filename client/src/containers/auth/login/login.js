@@ -35,20 +35,37 @@ submitHandler=(e)=>{
 
   render(){
     return(
-      <div className={classes.Login}>
-      <div className={classes.LoginBox}>
-      <div className={classes.LoginTitle}>Login</div>
-      <div className={classes.FormBox}>
-      <form onSubmit={this.submitHandler}>
-      <input type="text" className={classes.TextInput} name="email" onChange={this.inputChangeHandler}
-      placeholder='email' value={this.state.email} /><br/>
-      <input type="password" className={classes.TextInput}name="password" onChange={this.inputChangeHandler}
-      placeholder='password' value={this.state.password} />
-      <br/>
-      <button type="submit">Login</button>
-      </form>
-      <div className={classes.NavigateAuth}>Not yet registerd?<Link to='/auth/register'> Register here</Link></div>
+      <div className={classes.AuthBox}>
+      <div className={classes.LoginSection}>
+      <div className={classes.CompanyLogo}>
+      <div className={classes.Logo}></div>
       </div>
+      <form onSubmit={this.submitHandler} className={classes.LoginBox}>
+      <div className={classes.LoginInput}>
+      <input type="text" name="email" onChange={this.inputChangeHandler}
+      placeholder='email' value={this.state.email} />
+      </div>
+
+      <div className={classes.LoginInput}>
+      <input type="password" name="password" onChange={this.inputChangeHandler}
+      placeholder='password' value={this.state.password} />
+      </div>
+
+
+      <div className={classes.Login}>
+      <button type="submit">Login</button>
+      </div>
+
+      </form>
+
+      <div className={classes.ForgotPassword}>
+      Forgot password?
+      </div>
+      </div>
+
+      <div className={classes.SignupBox}>
+        Don't have an account?<span><Link to="/auth/register">Sign up
+        </Link></span>
       </div>
       </div>
     );

@@ -3,24 +3,23 @@
   width: 98%;
   margin:auto;
   border: 1px solid #eaeaec;
-  margin-bottom: 10px;
   box-sizing: border-box;
 }
 
 .CommentHeader{
   width: 250px;
   position: relative;
-  min-height: 25px;
+  margin-left: 25px;
+  min-height: 27px;
+  display: flex;
+  align-items: flex-end;
 }
 
 .CommentHeader .Avatar{
-  width: 28px;
+  width: 25px;
   height: 25px;
-  display: inline-block;
   border-radius: 50%;
-  position: absolute;
-  left: 10px;
-  top: 10px;
+  margin-left: 10px;
 }
 
 .Avatar img{
@@ -31,26 +30,40 @@
 
 .CommentHeader p{
   width: 50%;
-  font-size: 16px;
-  position: absolute;
-  left: 44px;
-  top: -4px;
+  margin: 0px;
+  font-size: 14px;
+  font-weight: 500;
+  margin-left: 10px;
 }
 
 .CommentData{
-  display: inline-block;
-  position: relative;
+  margin-top: 10px;
+  display: flex;
   width: 100%;
+  align-items:center;
+  margin-bottom: 10px;
 }
 
 .CommentData p{
-  display: inline-block;
-  width: 70%;
-  margin-left: 20px;
+  max-width:350px;
+  width: auto;
+  height: auto;
+  margin: 0px;
+  margin-left: 60px;
+  padding: 3px 5px;
+  background-color: #ececed;
+  border-radius: 8px;
+  align-self: flex-start;
 }
 
-.CommentData button{
-  position: relative;
-  top: -2px;
-  display: inline-block;
+.CommentData .DeleteComment{
+  cursor: pointer;
+  position: absolute;
+  width: 18px;
+  height: 20px;
+  right: 20px;
+  background: url('./../../../assets/icons/dustbin.svg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
 }

@@ -51,23 +51,29 @@ render(){
 if (this.props.profile.friendRequest!==undefined) {
   var request=this.props.profile.friendRequest.map((req,i)=>{
     return(<div key={i}>
-      <li>{req.name}</li>
-      <button onClick={()=>{this.acceptRequest(req.id,req.name)}}>yo</button>
+      <li>{req.name.firstName}</li>
+      <button onClick={()=>{this.acceptRequest(req.id,req.name.firstName)}}>yo</button>
     </div>);
 })
 }
 
   return (
-    <div className={classes.Header}>
+    <div className={classes.Header} >
     <div className={classes.HeaderWrapper}>
-    <div className={classes.CompanyName}>ABPS Circle</div>
+
+    <Link style={{textDecoration:'none'}} to="/">
+    <div className={classes.CompanyName}>
+    <div className={classes.CompanyCircle}></div>
+    <div className={classes.Divider}></div>
+    <div className={classes.CompanyTitle}>ABPS circle</div>
+    </div></Link>
 
     <div className={classes.SearchBox}>
     <input type="text" placeholder="search"
      onChange={(e)=>{this.props.searchInput(e); this.inputShowToogle(e)}}/>
-
      {
        this.state.inputShow?<div className={classes.SearchContainer}>
+          <span className={classes.SearchArrow}></span>
           {
             this.props.search.length>0?searchInputList:<li>No User Found</li>
           }
@@ -75,14 +81,38 @@ if (this.props.profile.friendRequest!==undefined) {
      }
 
     </div>
-    <div className={classes.NotificationIcon}>
+
+    <div className={classes.IconTray}>
+    <div className={classes.RequestIcon}></div>
+    <div className={classes.MessageIcon}></div>
+    <div className={classes.NotificationIcon}></div>
+    </div>
+
+    <Link style={{textDecoration:'none'}} to="/profile"><div className={classes.ProfileIcon}>
+    <div className={classes.Avatar}>
+    <img src={this.props.auth.user.avatar} alt="Profile"/>
+    </div>
+    <div className={classes.UserName}>{this.props.auth.user.name.firstName}</div>
+    </div></Link>
+
+
+    <div className={classes.SettingContainer}>
+    <div className={classes.SettingIcon}></div>
+    <div className={classes.SettingBox}>
+    <div className={classes.some}>setting</div>
+    <div className={classes.LogoutTray} onClick={()=>{this.props.logoutUser(this.props.history)}}>logout</div>
+    </div>
+    </div>
+
+
+
+
+    <div className={classes.NotificsationIcon}>
     <div className={classes.Notification}>{request}
     </div>
     </div>
-    <button className={classes.Logout} onClick={()=>{this.props.logoutUser(this.props.history)}}>Logout</button>
-    <Link to={this.props.match.path==="/profile"?"/":"/profile"}><button className={classes.ProfileButton}>{
-      this.props.match.path==="/profile"?"Home":"Profile"
-    }</button></Link>
+
+
 
     </div>
     </div>
@@ -93,6 +123,7 @@ if (this.props.profile.friendRequest!==undefined) {
 
 
 const mapStateToProps=state=>({
+  auth:state.auth,
   search:state.search.searchList,
   profile:state.profile.profile
 })

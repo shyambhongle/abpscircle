@@ -2,7 +2,7 @@
   width: 86%;
   height:auto;
   border-radius: 12px;
-  margin: 25px 0px 15px 8px;
+  margin: 15px 0px 15px 8px;
   position: relative;
 }
 
@@ -39,7 +39,7 @@ font-size: 14px;
   height: 28px;
   border-radius: 50%;
   display: inline-block;
-  padding: 10px 10px 0px 10px;
+  padding: 3px 10px 0px 5px;
   position: relative;
   top:5px;
 }
@@ -62,8 +62,8 @@ font-size: 14px;
    display: inline-block;
    font-size: 14px;
    position: absolute;
-   left: 348px;
-   top: -6.5px;
+   left: 360px;
+   top: -6px;
    border-radius: 5px;
    cursor: pointer;
 }

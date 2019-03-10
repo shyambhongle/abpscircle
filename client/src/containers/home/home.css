@@ -12,3 +12,18 @@
   padding-bottom:50px;
   height: auto;
 }
+
+.Postrelated{
+  width: 550px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
+.CreatePost{
+  width: 100%;
+}
+.DisplayPost{
+  width: 100%;
+}

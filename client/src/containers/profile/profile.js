@@ -29,16 +29,58 @@ componentWillReceiveProps(props){
 
   render(){
     return(
-      <div>
+      <div >
       <Header/>
+
       <div className={classes.ProfileBanner}>
+      <div className={classes.ProfileCoverImage}></div>
       <div className={classes.Avatar}>
       <img src={this.props.profile.avatar} alt="profile pic"/>
       </div>
-      <div className={classes.ProfileName}>{this.props.profile.name}</div>
       </div>
+
+      <div className={classes.ProfileWrapper}>
+      <div className={classes.ProfileNav}></div>
+
+
+      <div className={classes.ProfileDetails}>
+      <div className={classes.ProfileName}>
+      {this.props.auth.user.name.firstName+" "+this.props.auth.user.name.lastName}
+      </div>
+      <div className={classes.ProfileIntro}>
+      <div className={classes.SchoolIcon}></div>
+      <p>Studied at Aditya Birla Public School,Awarpur</p>
+      </div>
+      <div className={classes.ProfileIntro}>
+      <div className={classes.BatchIcon}></div>
+      class of 2015
+       </div>
+      <div className={classes.ProfileIntro}>
+      <div className={classes.PlaceIcon}></div>
+      Lives in Pune
+      </div>
+
+      <div className={classes.ProfileIntro}>
+      <div className={classes.FavQuote}>
+      "Be the captain of your journey!!"
+      <p>-Rabindranath Tagore</p>
+      </div>
+      </div>
+
+      </div>
+
+      <div className={classes.PostRelated}>
+      <div className={classes.ProfilePost}>
       <Post/>
+      </div>
+      <div className={classes.DisplayPost}>
       <PostDisplay data={this.state.profilePostpro} delete={this.props.deletePost}/>
+      </div>
+      </div>
+
+
+      </div>
+
       </div>
     );
   }

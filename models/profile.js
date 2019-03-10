@@ -4,11 +4,22 @@ const Schema = mongoose.Schema;
 // Create Schema
 const ProfileSchema = new Schema({
   user: {
-    type: Schema.Types.ObjectId
+      type: Schema.Types.ObjectId
   },
-  name:{
+  name: {
+  firstName:{
     type:String,
-    required:true
+    required:true,
+    trim:true
+  },
+  lastName:{
+    type:String,
+    required:true,
+    trim:true
+  }
+  },
+  fullName:{
+    type:String
   },
   avatar:{
     type:String,

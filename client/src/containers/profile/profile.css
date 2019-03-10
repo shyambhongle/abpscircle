@@ -1,42 +1,160 @@
 .ProfileBanner{
   width: 80vw;
-  height: 25vh;
+  height: 280px;
   margin:auto;
   position: relative;
-  background-color: skyblue;
-  padding-bottom: 20px;
-  margin-bottom:50px;
+}
+
+
+.ProfileCoverImage{
+  width: 100%;
+  height: 100%;
+background-color: green;
+background:url('./../../assets/banner1.jpg');
+background-attachment:fixed;
+background-repeat: no-repeat;
+background-size: contain;
 }
 
 .Avatar{
-  width: 90px;
-  height: 90px;
+  width: 130px;
+  height: 130px;
   border-radius: 50%;
-  float: left;
   display: inline-block;
   position: absolute;
-  left: 10px;
-  bottom: -30px;
+  left: 70px;
+  bottom: -33px;
 }
 
 .Avatar img{
   width: 100%;
   height: 100%;
   border-radius: 50%;
+  border: 2px solid white;
 }
 
-.ProfileName{
-  color: black;
+
+
+.ProfileWrapper{
+  height: 100vh;
+  width: 80vw;
+  margin: auto;
+}
+
+.ProfileNav{
+  height: 7vh;
+  background: white;
+  border-bottom: 1px solid #efefef;
+}
+
+
+
+.ProfileDetails{
+  width: 300px;
+  height: 250px;
+  margin-top: 10px;
+  margin-right: 20px;
+  border-radius: 5px;
+  display: inline-block;
+  background: white;
+  border: 1px solid #e6e6e6;
+}
+
+
+.ProfileDetails .ProfileName{
+  text-align: center;
+  margin-top: 2px;
+  color: #262626;
   font-size: 1.5em;
-  position: absolute;
-  left: 120px;
-  bottom: 10px;
+  font-weight: bold;
+  text-transform: capitalize;
+}
+
+.SchoolIcon{
+  width: 16px;
+  margin-left: 10px;
+  margin-right: 10px;
+  height: 16px;
+  display: inline-block;
+  background: url('./../../assets/icons/home.svg');
+  margin-bottom: 10px;
+}
+.BatchIcon{
+  margin-right: 10px;
+  margin-left: 10px;
+  width: 18px;
+  height: 18px;
+  display: inline-block;
+  background: url('./../../assets/icons/graduate.svg');
+
+}
+.PlaceIcon{
+  margin-left: 10px;
+  margin-right: 10px;
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  background: url('./../../assets/icons/gps.svg')
+}
+.BioIcon{
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  background: url('./../../assets/icons/bio.svg');
+  background-position:bottom;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.ProfileIntro{
+  margin-top: 15px;
+  width: 90%;
+  font-size: 14px;
+  color: #262626
+}
+
+.ProfileIntro p{
+  width: 80%;
   display: inline-block;
 }
 
-.RequestHandler{
+.ProfileIntro:nth-of-type(3){
+margin-top: 0px;
+}
+
+.FavQuote{
+  margin-left: 30px;
+  width: 90%;
+  color: #262626;
+  font-style: italic;
   display: inline-block;
-  position: absolute;
-  right:110px;
-  bottom: 10px;
+}
+.FavQuote p{
+  line-height: 5px;
+  padding: 6px;
+  margin: 0px;
+  display: inline-block;
+  float: right;
+}
+
+.PostRelated{
+  width: 550px;
+  position: relative;
+  width: 550px;
+  display: inline-block;
+  margin-left: 40px;
+  top: -50px;
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.ProfilePost{
+  width: 100%;
+
+}
+
+.DisplayPost{
+  width: 100%;
+  margin-top: 40px;
 }

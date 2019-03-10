@@ -26,8 +26,14 @@ render(){
     <div className={classes.Home}>
     <Header/>
     <div className={classes.PostWrapper}>
-    <Post/>
+
+    <div className={classes.Postrelated}>
+    <div className={classes.CreatePost}><Post/></div>
+    <div className={classes.DisplayPost}>
     <PostDisplay data={this.props.post.allPost}/>
+    </div>
+    </div>
+
     </div>
     </div>
   );

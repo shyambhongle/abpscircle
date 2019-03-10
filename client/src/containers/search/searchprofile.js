@@ -85,10 +85,10 @@ if (this.props.myprofile.allFriends!==undefined ) {
     <div className={classes.Avatar}>
     <img src={this.props.profile.avatar} alt="profile pic"/>
     </div>
-    <div className={classes.ProfileName}>{this.props.profile.name}</div>
+    <div className={classes.ProfileName}>{this.props.profile.fullName}</div>
     <div className={classes.RequestHandler}>
     <button className={classes.RequestButton}
-    onClick={()=>{this.friendRequestHandle(this.props.profile.user,this.props.profile.name,friendButton)}}>
+    onClick={()=>{this.friendRequestHandle(this.props.profile.user,this.props.profile.fullName,friendButton)}}>
     {friendButton}
     </button>
     </div>

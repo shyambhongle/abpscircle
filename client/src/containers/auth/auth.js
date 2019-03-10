@@ -22,19 +22,10 @@ componentDidMount(){
 
   render(){
     return (
-      <div>
-      <div className={classes.Header}>
-      <div className={classes.HeaderWrapper}>
-      <div className={classes.CompanyName}>
-      <div className={classes.CompanyTitle}>ABPS Circle</div>
-      </div>
-      </div>
-      </div>
+
+      <div className={classes.AuthEnv}>
       <Route path="/auth/login"  component={Login}/>
       <Route path="/auth/register"  component={Register}/>
-      <div className={classes.Footer}>
-
-      </div>
       </div>
     )
   }

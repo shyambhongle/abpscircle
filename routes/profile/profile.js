@@ -19,7 +19,8 @@ router.get('/',passport.authenticate('jwt', { session: false }),  (req, res) => 
             user:req.user.id,
             name:req.user.name,
             avatar:req.user.avatar,
-            handle:Math.floor(req.user.date.getTime()/1000)
+            handle:Math.floor(req.user.date.getTime()/1000),
+            fullName:req.user.fullName
           }).save().then(newprofile=>{
             return res.json(newprofile);
           })

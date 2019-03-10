@@ -40,22 +40,40 @@ submitHandler=(e)=>{
 }
 
 
-
-
   render(){
     return (
-      <div>
       <div className={classes.Post}>
-      <div className={classes.Title}>Create A Post</div>
+
+      <div className={classes.PostHeader}>
+      <div><span className={classes.PostIcon}></span>
+       create post</div>
+      </div>
+
+      <div className={classes.PostContent}>
       <form onSubmit={this.submitHandler}>
-      <textarea rows="4" cols="50"
-      placeholder-="create a new post..." name="text" onChange={this.changeHandler}
+      <textarea
+      placeholder="create a new post..." name="text" onChange={this.changeHandler}
       value={this.state.text}>
       </textarea>
-      <input type='file' name="img" onChange={this.imageHandle}/>
+      <div className={classes.PostButton}>
       <button type="submit">Post</button>
+      </div>
       </form>
       </div>
+
+      <div className={classes.PostFooter}>
+      <div className={classes.DividerPost}></div>
+
+      <div className={classes.UplaodImage}>
+      <div className={classes.UploadLabel}>
+      <span className={classes.imageIcon}></span>
+      Add image</div>
+      <input type="file" name="imageUpload" onChange={this.imageHandle}/>
+      </div>
+
+      </div>
+
+
       </div>
     );
   }

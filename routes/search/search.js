@@ -3,17 +3,18 @@ const router=express.Router();
 const passport=require('passport');
 const Profile=require('./../../models/profile');
 const Post=require('./../../models/post');
+const User=require('./../../models/user');
 
 
 
 
 router.post('/input',(req,res)=>{
-  Profile.find()
+  User.find()
       .then(users=>{
         let newList=[];
         let test=users.map(user=>{
-          let x= user.name.includes(req.body.keyword.toLowerCase());
-          return x?newList.push({friend:user.name,id:user._id}):null
+          let x= user.fullName.includes(req.body.keyword.toLowerCase());
+          return x?newList.push({friend:user.fullName,id:user._id,avatar:user.avatar}):null
         })
         Promise.all(test).then((completed)=>{
       return res.json(newList)
@@ -23,7 +24,7 @@ router.post('/input',(req,res)=>{
 
 
 router.post('/friendprofile',(req,res)=>{
-Profile.findById(req.body.id)
+Profile.findOne({user:req.body.id})
     .then(profile=>{
       return res.json(profile);
     })

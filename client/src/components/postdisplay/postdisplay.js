@@ -41,12 +41,20 @@ render(){
       post=this.props.data.map((singlePost,i)=>{
         return (
           <div className={classes.Post} key={singlePost._id}>
-          <div className={classes.PostArea} >{
-            this.props.auth.user.id!==singlePost.user?null:
-          <div className={classes.DeletePost} onClick={()=>{this.props.delete(singlePost._id)}}>delete</div>
-          }
+          <div className={classes.PostArea} >
+          <div className={classes.PostDisplayHeader}>
+
           <div className={classes.Avatar}><img src={singlePost.avatar} alt="avatar"/></div>
-          <div className={classes.Name}>{singlePost.name}</div>
+          <div className={classes.Name}>{singlePost.name.firstName+" "+
+        singlePost.name.lastName}</div>
+        {
+          this.props.auth.user.id!==singlePost.user?null:
+        <div className={classes.DeletePost}>
+        <div className={classes.DeleteContainer} onClick={()=>{this.props.delete(singlePost._id)}}>Delete Post</div>
+        </div>
+        }
+          </div>
+
           <div className={classes.Article}>{singlePost.text}</div>
           {
             singlePost.img.image!==false?<div className={classes.PostImage}>
@@ -60,13 +68,13 @@ render(){
             <div className={classes.Like} onClick={()=>{this.onLikeClick(singlePost._id)}}></div>
           }
           {
-            singlePost.likes.length>0?singlePost.likes.length:null
+            singlePost.likes.length>0?
+            <div className={classes.LikeHover}>{singlePost.likes.length} likes</div>:<div className={classes.LikeHover}>0 like</div>
           }
           </div>
-
+          </div>
           <CommentForm postId={singlePost._id} />
           <CommentFeed post={singlePost} comments={singlePost.comments} />
-          </div>
           </div>
         )
       })
