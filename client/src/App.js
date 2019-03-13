@@ -16,6 +16,7 @@ import Profile from './containers/profile/profile';
 import Chat from './containers/chat/chat';
 import SearchProfile from './containers/search/searchprofile';
 import Test from './components/test/test';
+import Message from './containers/message/message';
 
 
 // Check for token
@@ -74,6 +75,7 @@ componentDidMount(){
       <Route path='/profile' exact component={Profile}/>
       <Route path='/chat' exact component={Chat}/>
       <Route path='/profile/:id' exact component={SearchProfile}/>
+      <Route path='/' component={Message}/>
       </div>
       </BrowserRouter>
     );

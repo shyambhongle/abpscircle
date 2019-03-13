@@ -1,10 +1,14 @@
 import React,{Component} from 'react';
-import Post from './../post/post';
-import Header from './../../components/header/header';
 import classes from './home.css';
 import {connect} from 'react-redux';
 import * as actionCreators from './../../actions/index';
 import PostDisplay from './../../components/postdisplay/postdisplay';
+import Post from './../post/post';
+import Header from './../../components/header/header';
+
+
+
+
 
 class Home extends Component {
 
@@ -25,16 +29,17 @@ render(){
   return (
     <div className={classes.Home}>
     <Header/>
-    <div className={classes.PostWrapper}>
 
+    <div className={classes.PostWrapper}>
     <div className={classes.Postrelated}>
     <div className={classes.CreatePost}><Post/></div>
     <div className={classes.DisplayPost}>
     <PostDisplay data={this.props.post.allPost}/>
     </div>
     </div>
-
     </div>
+
+
     </div>
   );
 }

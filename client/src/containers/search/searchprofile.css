@@ -1,3 +1,5 @@
+
+
 .ProfileBanner{
   width: 80vw;
   height: 280px;
@@ -9,11 +11,11 @@
 .ProfileCoverImage{
   width: 100%;
   height: 100%;
-background-color: green;
-background:url('./../../assets/banner1.jpg');
-background-attachment:fixed;
-background-repeat: no-repeat;
-background-size: contain;
+  background-color: green;
+  background:url('./../../assets/banner1.jpg');
+  background-attachment:fixed;
+  background-repeat: no-repeat;
+  background-size: contain;
 }
 
 .Avatar{
@@ -33,74 +35,33 @@ background-size: contain;
   border: 2px solid white;
 }
 
-.Avatar .ProfileBackDrop{
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  background-color: rgba(0,0,0,0.5);
+
+.RequestHandler{
+  display: inline-block;
   position: absolute;
-  top: 2%;
-  left: 2%;
-  display: none;
-}
-
-
-.Avatar .UpdateProfilePicture{
-  width: 50px;
-  height: 50px;
-  position: absolute;
-  top: 40%;
-  left: 33%;
-}
-
-.Avatar:hover .ProfileBackDrop{
-display: inline-block;
-}
-
-.UpdateProfilePicture input{
-  width: 0.1px;
-  	height: 0.1px;
-  	opacity: 0;
-  	overflow: hidden;
-  	position: absolute;
-  	z-index: -1;
-}
-
-.UpdateProfilePicture label{
-  cursor: pointer;
-  position: absolute;
-  top: -35px;
-  left: 0px;
-  color: #2488ff;
-  font-size: 4em;
-  font-weight: bolder;
-}
-
-
-.UpdateProfilePicture .UploadImgButton{
-  position: absolute;
-  width: 60px;
+  width: 150px;
   height: 30px;
-  top: -15px;
-  left: -10px;
-  background-color: none;
-  border:none;
-  outline: none;
-  background: url('./../../assets/icons/arrow.svg');
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: contain;
-  cursor: pointer;
+  right: 60px;
+  bottom: 20px;
+  border-radius: 3px;
 }
-.UpdateProfilePicture .UploadImgButton button{
-  background-color: none;
-  border:none;
-  outline: none;
+.RequestHandler button{
   cursor: pointer;
+  width: 100%;
+  border-radius: 3px;
+  height: 100%;
+  border:none;
+  margin: none;
+  outline: none;
+  background-color:#4267b2 ;
+  color: white;
+  font-weight: 500;
 }
 
-
-
+.MessageButton{
+  position: absolute;
+  
+}
 
 .ProfileWrapper{
   height: 100vh;

@@ -11,7 +11,9 @@ import {Link,withRouter} from 'react-router-dom';
 class Header extends Component{
 
 state={
-  inputShow:false
+  inputShow:false,
+  requestShow:false,
+  notification:false
 }
 
 
@@ -31,6 +33,15 @@ inputClick=(id)=>{
   this.props.searchProfile(id,this.props.history)
 }
 
+blurHandler=()=>{
+  setTimeout(()=>{
+    this.setState({
+      inputShow:false,
+      requestShow:false,
+      notification:false
+    })
+  },200)
+}
 
 
 acceptRequest=(id,name)=>{
@@ -45,22 +56,53 @@ acceptRequest=(id,name)=>{
 
 render(){
   let searchInputList=this.props.search.map(profile=>{
-    return <li key={profile.id} onClick={()=>{this.inputClick(profile.id)}}>{profile.friend}</li>;
+    return <div className={classes.SingleUser} key={profile.id} onClick={()=>{this.inputClick(profile.id)}}>
+    <div className={classes.Avatar}>
+    <img src={profile.avatar} alt="" />
+    </div>
+    <div className={classes.UserName}>{profile.friend}</div>
+    </div>;
   })
-
+let request;
 if (this.props.profile.friendRequest!==undefined) {
-  var request=this.props.profile.friendRequest.map((req,i)=>{
-    return(<div key={i}>
-      <li>{req.name.firstName}</li>
-      <button onClick={()=>{this.acceptRequest(req.id,req.name.firstName)}}>yo</button>
-    </div>);
-})
+  request=this.props.profile.friendRequest.map((req,i)=>{
+    return(
+      <div key={i} className={classes.RequestUser}>
+        <img src={req.avatar} alt=""/>
+       <div className={classes.ReName}>{req.name}</div>
+        <button className={classes.AcceptButton} onClick={()=>{this.acceptRequest(req.id,req.name)}}>accept</button>
+        <button className={classes.RejectButton} onClick={()=>{this.acceptRequest(req.id,req.name)}}>reject</button>
+        </div>
+    );
+});
+if (!this.props.profile.friendRequest.length>0) {
+   request=<div className={classes.RequestUser}><div className={classes.ReNo}>No friend request</div></div>
 }
+}
+
+let notificationCount;
+if (this.props.profile.allnotification!==undefined) {
+  notificationCount=this.props.profile.allnotification.map((req,i)=>{
+    return(
+      <div key={i} className={classes.RequestUser}>
+       <div className={classes.NotiName}>{req.message}</div>
+        </div>
+    );
+})
+if (!this.props.profile.allnotification.length>0) {
+   notificationCount=<div className={classes.RequestUser}><div className={classes.ReNo}>No Notification</div></div>
+}
+}
+
+
+
+
+
+
 
   return (
     <div className={classes.Header} >
     <div className={classes.HeaderWrapper}>
-
     <Link style={{textDecoration:'none'}} to="/">
     <div className={classes.CompanyName}>
     <div className={classes.CompanyCircle}></div>
@@ -68,7 +110,7 @@ if (this.props.profile.friendRequest!==undefined) {
     <div className={classes.CompanyTitle}>ABPS circle</div>
     </div></Link>
 
-    <div className={classes.SearchBox}>
+    <div className={classes.SearchBox}   onBlur={this.blurHandler}>
     <input type="text" placeholder="search"
      onChange={(e)=>{this.props.searchInput(e); this.inputShowToogle(e)}}/>
      {
@@ -83,16 +125,42 @@ if (this.props.profile.friendRequest!==undefined) {
     </div>
 
     <div className={classes.IconTray}>
-    <div className={classes.RequestIcon}></div>
+
+    <div className={classes.RequestIcon} onClick={()=>{this.setState({
+      requestShow:this.state.requestShow?false:true});
+      this.props.clearNotification(this.props.profile._id,"friendRequest")}}>
+    {this.props.profile.friendRequest?this.props.profile.notification.friendRequest>0?
+    <span className={classes.RequestCount}>{this.props.profile.notification.friendRequest}</span>:null:null}
+    <span className={classes.RequestArrow} style={{display:this.state.requestShow?'inline-block':'none'}}></span>
+    {this.state.requestShow?
+    <div className={classes.RequestBox}>
+    {request}
+    </div>:null}
+
+    </div>
+
     <div className={classes.MessageIcon}></div>
-    <div className={classes.NotificationIcon}></div>
+
+    <div className={classes.NotificationIcon} onClick={()=>{this.setState({
+      notification:this.state.notification?false:true}); this.props.clearNotification(this.props.profile._id,"newnotification")}}>
+    {this.props.profile.notification?this.props.profile.notification.newnotification>0?
+    <span className={classes.NoificationCount}>{this.props.profile.notification.newnotification}</span>:null:null}
+    <span className={classes.RequestArrow} style={{display:this.state.notification?'inline-block':'none'}}></span>
+    {this.state.notification?
+    <div className={classes.RequestBox}>
+    {notificationCount}
+    </div>:null}
+
+    </div>
+
+
     </div>
 
     <Link style={{textDecoration:'none'}} to="/profile"><div className={classes.ProfileIcon}>
     <div className={classes.Avatar}>
-    <img src={this.props.auth.user.avatar} alt="Profile"/>
+    <img src={this.props.auth.user.name?this.props.auth.user.avatar:null} alt="Profile"/>
     </div>
-    <div className={classes.UserName}>{this.props.auth.user.name.firstName}</div>
+    <div className={classes.UserName}>{this.props.auth.user.name?this.props.auth.user.name.firstName:null}</div>
     </div></Link>
 
 
@@ -134,7 +202,8 @@ const mapDispatchToProps=dispatch=>({
   logoutUser:(history)=>{dispatch(actionCreators.logoutUser(history))},
   searchInput:(e)=>{dispatch(actionCreators.searchPerson(e))},
   searchProfile:(id,history)=>{dispatch(actionCreators.searchProfile(id,history))},
-  acceptRequest:(data)=>{dispatch(actionCreators.acceptRequest(data))}
+  acceptRequest:(data)=>{dispatch(actionCreators.acceptRequest(data))},
+  clearNotification:(id,query)=>{dispatch(actionCreators.clearNotification(id,query))}
 })
 
 

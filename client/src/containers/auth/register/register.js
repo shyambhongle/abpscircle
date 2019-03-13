@@ -4,6 +4,7 @@ import {registerUser} from './../../../actions/authAction';
 import {connect} from 'react-redux';
 import {Link} from  'react-router-dom';
 
+
 class Register extends Component{
 
 state={
@@ -66,6 +67,7 @@ submitHandler=(e)=>{
       <input type="text" className={classes.TextInput} name="email" onChange={this.inputChangeHandler}
       placeholder='email' value={this.state.email} />
       </div>
+
 
       <div className={classes.RegisterationInput}>
       <input type="password" className={classes.TextInput}name="password" onChange={this.inputChangeHandler}

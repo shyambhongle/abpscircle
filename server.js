@@ -80,7 +80,6 @@ let onlineClients={};
 
 
 io.sockets.on('connection', function (socket) {
-
   socket.on('adduser',(data)=>{
     onlineClients[data.id] = {
       "socket": socket.id

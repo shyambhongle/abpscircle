@@ -30,8 +30,25 @@ const ProfileSchema = new Schema({
     required: true,
     max: 40
   },
-  socketInfo:{
-    type:Object
+  notification:{
+    friendRequest:{
+      type:Number,
+      default:0
+    },
+    newmessage:{
+      type:Number,
+      default:0
+    },
+    newnotification:{
+      type:Number,
+      default:0
+    },
+  },
+  allnotification:{
+    type:Array
+  },
+  commonId:{
+    type:Array
   },
   date: {
     type: Date,

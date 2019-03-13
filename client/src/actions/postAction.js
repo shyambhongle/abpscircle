@@ -98,7 +98,7 @@ export const deletePost = id => dispatch => {
 };
 
 // Add Like
-export const addLike = id => dispatch => {
+export const addLike = (id) => dispatch => {
   axios
     .post(`/post/like/${id}`)
     .then(res => {

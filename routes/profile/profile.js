@@ -6,6 +6,27 @@ const User=require('./../../models/user');
 const Post=require('./../../models/post');
 
 
+const multer = require("multer");
+const cloudinary = require("cloudinary");
+
+
+cloudinary.config({
+cloud_name: 'shyambhongle',
+api_key: '366169741728964',
+api_secret: 'DxBneDVi-N71kHLxOWjRvF6FTeI'
+});
+
+const upload= multer({
+  storage: multer.diskStorage({}),
+  fileFilter: (req, file, cb) => {
+    if (!file.mimetype.match(/jpe|jpeg|png|gif$i/)) {
+      cb(new Error('File is not supported'), false)
+      return
+    }
+    cb(null, true)
+  }
+})
+
 
 
 
@@ -25,6 +46,7 @@ router.get('/',passport.authenticate('jwt', { session: false }),  (req, res) => 
             return res.json(newprofile);
           })
         }else {
+          console.log(onlineFriends);
           return res.json(profile);
         }
       })
@@ -33,8 +55,44 @@ router.get('/',passport.authenticate('jwt', { session: false }),  (req, res) => 
   }
 );
 
+router.post('/profilepicture',passport.authenticate('jwt',{session:false}),
+upload.single('img'),(req,res)=>{
+  console.log(req.user.avatarId);
+  cloudinary.v2.uploader.upload(req.file.path,{public_id:req.user.avatarId,folder:"profile"},
+  (error, result)=>
+  {
+    User.findOneAndUpdate(
+      {_id:req.user.id},
+      {$set:{avatar:result.url}},
+      {new:true}
+    ).then(up=>{console.log('')});
+    Profile.findOneAndUpdate(
+      {user:req.user.id},
+      {$set:{avatar:result.url}},
+      {new:true}
+    ).then(update=>res.json(update))
+  })
+})
 
 
+
+router.post('/clear/friendRequest',passport.authenticate('jwt',{session:false}),(req,res)=>{
+console.log(req.params.query);
+  Profile.findOneAndUpdate(
+    {_id:req.body.id},
+    {$set:{"notification.friendRequest":0}},
+    {new:true}
+  ).then(pro=>res.json(pro))
+})
+
+router.post('/clear/newnotification',passport.authenticate('jwt',{session:false}),(req,res)=>{
+console.log(req.params.query);
+  Profile.findOneAndUpdate(
+    {_id:req.body.id},
+    {$set:{"notification.newnotification":0}},
+    {new:true}
+  ).then(pro=>res.json(pro))
+})
 
 
 

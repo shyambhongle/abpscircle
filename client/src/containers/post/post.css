@@ -152,6 +152,9 @@ button{
   cursor: pointer;
 }
 .PostButton button{
+  color: white;
+  font-weight: 500;
+  letter-spacing: 2px;
   position: absolute;
   top: -10px;
   left: 0px;

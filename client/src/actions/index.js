@@ -15,13 +15,25 @@ export {
 
 
 export {
+    openMsgBox,
+    newMessage
+} from './messageAction';
+
+
+export {
     setProfile,
     addFriend,
     acceptRequest,
     cancelRequest,
     unfriend,
-    reject
+    reject,
+    updateProfilePicture
 } from './profileAction';
+
+export {
+    clearNotification
+} from './headerAction';
+
 
 export {
     searchPerson,

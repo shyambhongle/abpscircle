@@ -14,8 +14,8 @@ state={
 
 
 
-   onLikeClick=(id)=>{
-    this.props.addLike(id);
+   onLikeClick=(data)=>{
+    this.props.addLike(data);
   }
 
    onUnlikeClick=(id)=>{
@@ -64,8 +64,10 @@ render(){
           <div className={classes.LikeButton}>
           {
             this.findUserLike(singlePost.likes)?
-            <div className={classes.Unlike} onClick={()=>{this.onUnlikeClick(singlePost._id)}}></div>:
-            <div className={classes.Like} onClick={()=>{this.onLikeClick(singlePost._id)}}></div>
+            <div className={classes.Unlike}
+            onClick={()=>{this.onUnlikeClick(singlePost._id)}}></div>:
+            <div className={classes.Like}
+            onClick={()=>{this.onLikeClick(singlePost._id)}}></div>
           }
           {
             singlePost.likes.length>0?
@@ -98,7 +100,7 @@ const mapStateToProps=state=>({
 })
 
 const mapsDispatchToprops=dispatch=>({
-  addLike:(id)=>{dispatch(actionCreator.addLike(id))},
+  addLike:(data)=>{dispatch(actionCreator.addLike(data))},
   removeLike:(id)=>{dispatch(actionCreator.removeLike(id))},
 })
 

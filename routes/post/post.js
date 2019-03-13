@@ -149,8 +149,16 @@ router.post(
 
           // Add user id to likes array
           post.likes.unshift({ user: req.user.id });
-
           post.save().then(post => res.json(post));
+          let notifyData={
+            message:`${req.user.fullName} liked yout post.`,
+            data:post._id
+          }
+          Profile.findOneAndUpdate(
+            {user:post.user},
+            {$push:{allnotification:notifyData},$inc:{"notification.newnotification":1}},
+            {multi:true,new:true},
+          ).then(newNotify=>{console.log(newNotify)})
         })
         .catch(err => res.status(404).json({ postnotfound: 'No post found' }));
 

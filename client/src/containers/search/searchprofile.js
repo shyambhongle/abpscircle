@@ -4,7 +4,7 @@ import Post from './../post/post';
 import PostDisplay from './../../components/postdisplay/postdisplay';
 import {connect} from 'react-redux';
 import * as actionCreators from './../../actions/index';
-import classes from './profile.css';
+import classes from './searchprofile.css';
 
 class SearchProfile extends Component{
 
@@ -17,8 +17,8 @@ componentDidMount(){
 componentWillReceiveProps(props){
 }
 
-friendRequestHandle=(id,name,query)=>{
-  let data={id,name};
+friendRequestHandle=({user,fullName,avatar},query)=>{
+  let data={id:user,fullName,avatar};
   query = query.split(" ").join("")
   switch (query) {
     case "sendrequest":
@@ -39,9 +39,19 @@ friendRequestHandle=(id,name,query)=>{
     default:
     return null;
   }
-
-
 }
+
+messageHandler=()=>{
+  let data={
+    name:this.props.profile.fullName,
+    avatar:this.props.profile.avatar,
+    id:this.props.profile.user
+  }
+
+  this.props.openMsg(data);
+}
+
+
 
 render(){
 let friendButton;
@@ -81,20 +91,64 @@ if (this.props.myprofile.allFriends!==undefined ) {
   return(
     <div>
     <Header/>
+
     <div className={classes.ProfileBanner}>
-    <div className={classes.Avatar}>
-    <img src={this.props.profile.avatar} alt="profile pic"/>
-    </div>
-    <div className={classes.ProfileName}>{this.props.profile.fullName}</div>
     <div className={classes.RequestHandler}>
     <button className={classes.RequestButton}
-    onClick={()=>{this.friendRequestHandle(this.props.profile.user,this.props.profile.fullName,friendButton)}}>
+    onClick={()=>{this.friendRequestHandle(this.props.profile,friendButton)}}>
     {friendButton}
     </button>
     </div>
+    <button className={classes.MessageButton} onClick={this.messageHandler}>message</button>
+    <div className={classes.ProfileCoverImage}></div>
+    <div className={classes.Avatar}>
+    <img src={this.props.profile.avatar} alt="profile pic"/>
     </div>
+    </div>
+
+
+    <div className={classes.ProfileWrapper}>
+    <div className={classes.ProfileNav}></div>
+
+
+    <div className={classes.ProfileDetails}>
+    <div className={classes.ProfileName}>
+    {this.props.profile.fullName}
+    </div>
+    <div className={classes.ProfileIntro}>
+    <div className={classes.SchoolIcon}></div>
+    <p>Studied at Aditya Birla Public School,Awarpur</p>
+    </div>
+    <div className={classes.ProfileIntro}>
+    <div className={classes.BatchIcon}></div>
+    class of 2015
+     </div>
+    <div className={classes.ProfileIntro}>
+    <div className={classes.PlaceIcon}></div>
+    Lives in Pune
+    </div>
+
+    <div className={classes.ProfileIntro}>
+    <div className={classes.FavQuote}>
+    "Be the captain of your journey!!"
+    <p>-Rabindranath Tagore</p>
+    </div>
+    </div>
+
+    </div>
+
+
+    <div className={classes.PostRelated}>
+    <div className={classes.ProfilePost}>
     <Post/>
-    <PostDisplay data={this.props.post}/>
+    </div>
+    <div className={classes.DisplayPost}>
+    <PostDisplay data={this.props.post} delete={this.props.deletePost}/>
+    </div>
+    </div>
+
+    </div>
+
     </div>
   )
 }
@@ -112,7 +166,8 @@ addFriend:(data)=>{dispatch(actionCreators.addFriend(data))},
 acceptRequest:(data)=>{dispatch(actionCreators.acceptRequest(data))},
 cancelRequest:(data)=>{dispatch(actionCreators.cancelRequest(data))},
 reject:(data)=>{dispatch(actionCreators.reject(data))},
-unfriend:(data)=>{dispatch(actionCreators.unfriend(data))}
+unfriend:(data)=>{dispatch(actionCreators.unfriend(data))},
+openMsg:(data)=>{dispatch(actionCreators.openMsgBox(data))}
 })
 
 export default connect(mapStateToProps,mapDispatchToProps)(SearchProfile);

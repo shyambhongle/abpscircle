@@ -1,4 +1,4 @@
-import {SET_PROFILE} from './actionType';
+import {SET_PROFILE,UPDATE_USER_DATA} from './actionType';
 import axios from 'axios';
 
 
@@ -11,6 +11,17 @@ export const setProfile=()=>{
           })
   }
 }
+
+export const updateProfilePicture=(data)=>{
+  return dispatch=>{
+    axios.post('/profile/profilepicture',data)
+          .then(res=>{
+            dispatch({type:UPDATE_USER_DATA,payload:res.data.avatar})
+            dispatch({type:SET_PROFILE,payload:res.data})
+          })
+  }
+}
+
 
 
 export const addFriend=(data)=>{

@@ -9,7 +9,8 @@ import classes from './profile.css';
 class Profile extends Component{
 
   state={
-    profilePostpro:[]
+    profilePostpro:[],
+    profilePicture:false
   }
 
   componentDidMount(){
@@ -17,6 +18,21 @@ class Profile extends Component{
     this.props.setProfile()
   }
 
+
+ProfileImgUpdate=(e)=>{
+  this.setState({
+    profilePicture:e.target.files[0]
+  })
+}
+
+ProfileImageSubmit=(e)=>{
+  e.preventDefault()
+  const data = new FormData()
+  data.append('img',this.state.profilePicture);
+  data.append('id',this.props.profile._id);
+  this.props.updateProfilePicture(data)
+  this.setState({profilePicture:null})
+}
 
 
 
@@ -35,6 +51,15 @@ componentWillReceiveProps(props){
       <div className={classes.ProfileBanner}>
       <div className={classes.ProfileCoverImage}></div>
       <div className={classes.Avatar}>
+      <div className={classes.ProfileBackDrop}>
+      <form onSubmit={this.ProfileImageSubmit} class={classes.UpdateProfilePicture}>  {this.state.profilePicture?
+          <button type="submit" className={classes.UploadImgButton}></button>:
+        <span><input type="file"
+          onChange={this.ProfileImgUpdate}
+          name="file" id="file" onChange={this.ProfileImgUpdate}/>
+         <label for="file">+</label></span>
+        }</form>
+      </div>
       <img src={this.props.profile.avatar} alt="profile pic"/>
       </div>
       </div>
@@ -95,7 +120,8 @@ const mapStateToProps=state=>({
 const mapDispatchToProps=dispatch=>({
   profilePost:()=>{dispatch(actionCreators.profilePost())},
   setProfile:()=>{dispatch(actionCreators.setProfile())},
-  deletePost:(id)=>{dispatch(actionCreators.deletePost(id))}
+  deletePost:(id)=>{dispatch(actionCreators.deletePost(id))},
+  updateProfilePicture:(data)=>{dispatch(actionCreators.updateProfilePicture(data))}
 })
 
 export default connect(mapStateToProps,mapDispatchToProps)(Profile);
