@@ -99,10 +99,12 @@ if (this.props.myprofile.allFriends!==undefined ) {
     {friendButton}
     </button>
     </div>
-    <button className={classes.MessageButton} onClick={this.messageHandler}>message</button>
+    <div className={classes.MessageButton}><button onClick={this.messageHandler}>message</button>
+   </div>
     <div className={classes.ProfileCoverImage}></div>
     <div className={classes.Avatar}>
-    <img src={this.props.profile.avatar} alt="profile pic"/>
+    <img src={this.props.profile.avatar}
+    alt="profile pic"/>
     </div>
     </div>
 

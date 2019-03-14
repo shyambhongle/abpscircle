@@ -50,6 +50,9 @@ const ProfileSchema = new Schema({
   commonId:{
     type:Array
   },
+  inbox:{
+    type:Array
+  },
   date: {
     type: Date,
     default: Date.now

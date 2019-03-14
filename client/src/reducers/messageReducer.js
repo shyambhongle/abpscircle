@@ -1,4 +1,4 @@
-import {OPEN_MSG_BOX,USER_UPDATE_MESSAGE} from './../actions/actionType';
+import {OPEN_MSG_BOX,USER_UPDATE_MESSAGE,CLOSE_MSG_BOX,INBOX_MESSAGE} from './../actions/actionType';
 
 
 const initialState={
@@ -6,7 +6,8 @@ const initialState={
   name:'',
   avatar:'',
   id:null,
-  userMessages:[]
+  userMessages:[],
+  inbox:[]
 }
 
 const messageReducer=(state=initialState,action)=>{
@@ -20,11 +21,25 @@ const messageReducer=(state=initialState,action)=>{
       id:action.payload.id,
       userMessages:action.payload.userMessages
     };
-    case USER_UPDATE_MESSAGE:
+    case CLOSE_MSG_BOX:
       return {
         ...state,
-        userMessages:action.payload.message
+        MsgBox:false,
       };
+
+    case 'USER_UPDATE_MESSAGE':
+    console.log("reached data to reducer",action.payload);
+      return {
+        ...state,
+        userMessages:action.payload
+      };
+    case INBOX_MESSAGE:
+
+      return {
+        ...state,
+        inbox:action.payload
+      };
+
     default:
       return state;
   }

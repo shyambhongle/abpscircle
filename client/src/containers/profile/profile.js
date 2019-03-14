@@ -52,12 +52,11 @@ componentWillReceiveProps(props){
       <div className={classes.ProfileCoverImage}></div>
       <div className={classes.Avatar}>
       <div className={classes.ProfileBackDrop}>
-      <form onSubmit={this.ProfileImageSubmit} class={classes.UpdateProfilePicture}>  {this.state.profilePicture?
+      <form onSubmit={this.ProfileImageSubmit} className={classes.UpdateProfilePicture}>  {this.state.profilePicture?
           <button type="submit" className={classes.UploadImgButton}></button>:
         <span><input type="file"
-          onChange={this.ProfileImgUpdate}
           name="file" id="file" onChange={this.ProfileImgUpdate}/>
-         <label for="file">+</label></span>
+         <label htmlFor="file">+</label></span>
         }</form>
       </div>
       <img src={this.props.profile.avatar} alt="profile pic"/>

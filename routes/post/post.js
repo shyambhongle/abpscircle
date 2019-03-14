@@ -151,14 +151,20 @@ router.post(
           post.likes.unshift({ user: req.user.id });
           post.save().then(post => res.json(post));
           let notifyData={
-            message:`${req.user.fullName} liked yout post.`,
+            message:`${req.user.fullName} liked your post.`,
             data:post._id
           }
           Profile.findOneAndUpdate(
             {user:post.user},
             {$push:{allnotification:notifyData},$inc:{"notification.newnotification":1}},
             {multi:true,new:true},
-          ).then(newNotify=>{console.log(newNotify)})
+          ).then(newNotify=>{
+            if (req.io.myclients[post.user]){
+                req.io.sockets.connected[req.io.myclients[post.user].socket].emit("newnotification",newNotify);
+              }else {
+                console.log("not happend");
+              }
+          })
         })
         .catch(err => res.status(404).json({ postnotfound: 'No post found' }));
 
@@ -218,6 +224,21 @@ router.post(
         post.comments.unshift(newComment);
         // Save
         post.save().then(post => res.json(post));
+        let notifyData={
+          message:`${req.user.fullName} commented on your post.`,
+          data:post._id
+        }
+        Profile.findOneAndUpdate(
+          {user:post.user},
+          {$push:{allnotification:notifyData},$inc:{"notification.newnotification":1}},
+          {multi:true,new:true},
+        ).then(newNotify=>{
+          if (req.io.myclients[post.user]){
+              req.io.sockets.connected[req.io.myclients[post.user].socket].emit("newnotification",newNotify);
+            }else {
+              console.log("not happend");
+            }
+        })
       })
       .catch(err => res.status(404).json({ postnotfound: 'No post found' }));
   }

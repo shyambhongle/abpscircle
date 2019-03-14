@@ -32,10 +32,11 @@ const upload= multer({
 
 
 router.get('/',passport.authenticate('jwt', { session: false }),  (req, res) => {
-    const errors = {};
     Profile.findOne({ user: req.user.id })
       .then(profile => {
-        if (!profile) {
+        if (profile) {
+          return res.json(profile);
+        }else {
           let newProfile=new Profile({
             user:req.user.id,
             name:req.user.name,
@@ -45,13 +46,9 @@ router.get('/',passport.authenticate('jwt', { session: false }),  (req, res) => 
           }).save().then(newprofile=>{
             return res.json(newprofile);
           })
-        }else {
-          console.log(onlineFriends);
-          return res.json(profile);
         }
       })
       .catch(err => res.status(404).json(err));
-
   }
 );
 
@@ -94,7 +91,14 @@ console.log(req.params.query);
   ).then(pro=>res.json(pro))
 })
 
-
+router.post('/clear/newmessage',passport.authenticate('jwt',{session:false}),(req,res)=>{
+console.log(req.params.query);
+  Profile.findOneAndUpdate(
+    {_id:req.body.id},
+    {$set:{"notification.newmessage":0}},
+    {new:true}
+  ).then(pro=>res.json(pro))
+})
 
 
 

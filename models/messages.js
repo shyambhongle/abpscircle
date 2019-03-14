@@ -10,6 +10,9 @@ const messageSchema=new Schema({
   },
   message:{
     type:Array
+  },
+  date:{
+    type:String
   }
 })
 

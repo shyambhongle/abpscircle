@@ -184,7 +184,7 @@
   border-bottom: none;
   border-bottom-right-radius:3px;
   border-bottom-left-radius: 3px;
-  width: 400px;
+  width: 350px;
   top: 37px;
   left: -220px;
   cursor:move;
@@ -200,7 +200,7 @@
   top: 30px;
   border-top: 1px solid #dddfe2;
   border-left: 1px solid #dddfe2;
-  z-index: 50;
+  z-index: 1;
 }
 
 .RequestBox .RequestUser{
@@ -213,13 +213,33 @@ cursor: default;
 border-bottom: 1px solid #dddfe2;
 }
 
+.RequestBox .RequestInbox{
+  padding: 5px 0px;
+width: 100%;
+height: 50px;
+display:flex;
+align-items: center;
+cursor: pointer;
+border-bottom: 1px solid #dddfe2;
+position: relative;
+}
+.RequestBox .RequestInbox:hover {
+  background-color:  #F5F5F6;
+}
 
-.RequestUser img{
-  width: 48px;
-  height: 48px;
+.RequestInbox img{
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
   margin-left: 10px;
 }
+.RequestUser img{
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  margin-left: 10px;
+}
+
 
 .ReName{
   width: 200px;
@@ -232,7 +252,7 @@ border-bottom: 1px solid #dddfe2;
 }
 
 .ReNo{
-  margin-left: 150px;
+  margin-left: 120px;
   color: grey;
 }
 
@@ -274,6 +294,7 @@ border-bottom: 1px solid #dddfe2;
   background-size: contain;
   background-repeat: no-repeat;
   cursor: pointer;
+  position: relative;
 }
 
 .NotificationIcon{
@@ -299,14 +320,34 @@ border-bottom: 1px solid #dddfe2;
 }
 
 .NotiName{
-  width: 100%;
-  height: 40px;
   color: #262626;
   font-size: 16px;
   font-weight: 500;
   margin-top: 10px;
-  margin-left: 10px;
+  margin-left: 20px;
+  display: inline;
 }
+
+.RequestInbox .ReName{
+  width: 300px;
+  color: #262626;
+  font-size: 16px;
+  font-weight: 500;
+  align-self: flex-start;
+  display: inline;
+  position: absolute;
+  left: 50px;
+  top: 1px;
+}
+.RequestInbox .NotiName{
+  color: #262626;
+  font-size: 12px;
+  display: inline;
+  position: absolute;
+  left: 40px;
+  top: 25px;
+}
+
 
 
 .ProfileIcon{

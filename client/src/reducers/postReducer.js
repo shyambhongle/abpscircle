@@ -3,7 +3,6 @@ import {
   RETRIVE_POST,
   PROFILE_POST ,
   ADD_POST,
-  GET_POST,
   UPDATE_POST,
   DELETE_POST,
   POST_LOADING} from './../actions/actionType';

@@ -15,9 +15,8 @@ import Home from './containers/home/home';
 import Profile from './containers/profile/profile';
 import Chat from './containers/chat/chat';
 import SearchProfile from './containers/search/searchprofile';
-import Test from './components/test/test';
 import Message from './containers/message/message';
-
+import {SET_PROFILE} from './actions/actionType';
 
 // Check for token
 if (localStorage.jwtToken) {
@@ -59,7 +58,20 @@ componentDidMount(){
     this.socket=io('/');
     this.socket.emit('adduser',{id:this.props.auth.user.id});
     this.socket.on('newrequest',(data)=>{
-      this.props.updateProfile(data);
+      store.dispatch({type:SET_PROFILE,payload:data})
+    })
+    this.socket.on('newnotification',(data)=>{
+      console.log("new not",data);
+      store.dispatch({type:SET_PROFILE,payload:data})
+    })
+
+    this.socket.on('newMessage',(data)=>{
+      console.log("newMessage",data.message);
+      store.dispatch({type:'USER_UPDATE_MESSAGE',payload:data.message})
+    })
+    this.socket.on('newMessageNot',(data)=>{
+      console.log("newMessageNot",data);
+      store.dispatch({type:SET_PROFILE,payload:data})
     })
   }
 }
@@ -69,7 +81,6 @@ componentDidMount(){
     return (
       <BrowserRouter>
       <div className="App">
-      <Route path='/' component={Test}/>
       <Route path='/auth'  component={Auth}/>
       <Route path='/' exact component={Home}/>
       <Route path='/profile' exact component={Profile}/>

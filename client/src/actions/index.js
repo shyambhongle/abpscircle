@@ -16,7 +16,9 @@ export {
 
 export {
     openMsgBox,
-    newMessage
+    newMessage,
+    closeMsgBox,
+    inboxMsg
 } from './messageAction';
 
 

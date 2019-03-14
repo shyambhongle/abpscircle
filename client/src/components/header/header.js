@@ -13,7 +13,8 @@ class Header extends Component{
 state={
   inputShow:false,
   requestShow:false,
-  notification:false
+  notification:false,
+  messageNotification:false
 }
 
 
@@ -52,7 +53,15 @@ acceptRequest=(id,name)=>{
   console.log(data);
   this.props.acceptRequest(data)
 }
+messageHandler=({name,user,avatar})=>{
+  let data={
+    name,
+    avatar,
+    id:user
+  }
 
+  this.props.openMsg(data);
+}
 
 render(){
   let searchInputList=this.props.search.map(profile=>{
@@ -94,7 +103,22 @@ if (!this.props.profile.allnotification.length>0) {
 }
 }
 
-
+let messageCount;
+if (this.props.msg.inbox.length>0) {
+  messageCount=this.props.msg.inbox.map((messages,i)=>{
+    return(
+      <div key={i} className={classes.RequestInbox}
+       onClick={()=>{this.messageHandler(messages.user)}}>
+      <img src={messages.user.avatar} alt=""/>
+      <div className={classes.ReName}>{messages.user.name}</div>
+       <div className={classes.NotiName}>{messages.message.msg}</div>
+        </div>
+    );
+})
+if (!this.props.profile.allnotification.length>0) {
+   notificationCount=<div className={classes.RequestUser}><div className={classes.ReNo}>No Notification</div></div>
+}
+}
 
 
 
@@ -139,7 +163,20 @@ if (!this.props.profile.allnotification.length>0) {
 
     </div>
 
-    <div className={classes.MessageIcon}></div>
+    <div className={classes.MessageIcon} onClick={()=>{this.setState({
+      messageNotification:this.state.messageNotification?false:true}); this.props.clearNotification(this.props.profile._id,"newmessage");
+      this.props.inboxMsg(this.props.profile.commonId,this.props.auth.user.id)}}>
+      {this.props.profile.notification?this.props.profile.notification.newmessage>0?
+      <span className={classes.NoificationCount}>{this.props.profile.notification.newmessage}</span>:null:null}
+      <span className={classes.RequestArrow} style={{display:this.state.messageNotification?'inline-block':'none'}}></span>
+      {this.state.messageNotification?
+      <div className={classes.RequestBox}>
+      {messageCount}
+      </div>:null}
+      </div>
+
+
+
 
     <div className={classes.NotificationIcon} onClick={()=>{this.setState({
       notification:this.state.notification?false:true}); this.props.clearNotification(this.props.profile._id,"newnotification")}}>
@@ -150,7 +187,6 @@ if (!this.props.profile.allnotification.length>0) {
     <div className={classes.RequestBox}>
     {notificationCount}
     </div>:null}
-
     </div>
 
 
@@ -193,7 +229,8 @@ if (!this.props.profile.allnotification.length>0) {
 const mapStateToProps=state=>({
   auth:state.auth,
   search:state.search.searchList,
-  profile:state.profile.profile
+  profile:state.profile.profile,
+  msg:state.msg
 })
 
 
@@ -203,7 +240,9 @@ const mapDispatchToProps=dispatch=>({
   searchInput:(e)=>{dispatch(actionCreators.searchPerson(e))},
   searchProfile:(id,history)=>{dispatch(actionCreators.searchProfile(id,history))},
   acceptRequest:(data)=>{dispatch(actionCreators.acceptRequest(data))},
-  clearNotification:(id,query)=>{dispatch(actionCreators.clearNotification(id,query))}
+  clearNotification:(id,query)=>{dispatch(actionCreators.clearNotification(id,query))},
+  inboxMsg:(data,id)=>{dispatch(actionCreators.inboxMsg(data,id))},
+  openMsg:(data)=>{dispatch(actionCreators.openMsgBox(data))}
 })
 
 

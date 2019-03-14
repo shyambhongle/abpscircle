@@ -1,14 +1,15 @@
 .MessageBox{
   position: fixed;
-  bottom: 30px;
-  right: 40px;
-  width: 250px;
-  height: 300px;
+  bottom: 5px;
+  right: 120px;
+  width: 270px;
+  height: 320px;
   display: inline-flex;
   background-color: white;
   border: 1px solid #dddfe2;
   flex-direction: column;
   border-radius: 3px;
+  z-index: 50;
 }
 
 .MessageBox .HeaderMsg{
@@ -34,6 +35,19 @@
   margin-left: 10px;
 }
 
+.HeaderMsg .CloseMsg{
+  width: 18px;
+  height: 18px;
+  display: inline-block;
+  align-self: flex-start;
+  margin-left: 90px;
+  margin-top: 8px;
+  background: url('./../../assets/icons/close.svg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  cursor: pointer;
+}
 
 .MessageBox .BodyMsg{
   width: 100%;
@@ -44,8 +58,7 @@
   overflow-y: auto;
 }
 .MessageBox .BodyMsg::-webkit-scrollbar {
-    width: 0px;  /* remove scrollbar space */
-    background: transparent;  /* optional: just make scrollbar invisible */
+    width: 3px;  /* remove scrollbar space */
 }
 
 .BodyMsg .IndvRight{
@@ -114,7 +127,7 @@
 
 .MessageBox form{
   width: 100%;
-  height: 12%;
+  height: 15%;
   display: flex;
   align-items: center;
   padding-bottom: 5px 0px;
@@ -125,7 +138,6 @@
   height: 70%;
   border: none;
   outline: none;
-  border-bottom: 0.5px solid grey;
   padding-bottom: 0px;
   margin-left: 7px;
 }

@@ -41,7 +41,7 @@
   position: absolute;
   width: 150px;
   height: 30px;
-  right: 60px;
+  right: 230px;
   bottom: 20px;
   border-radius: 3px;
 }
@@ -53,14 +53,32 @@
   border:none;
   margin: none;
   outline: none;
-  background-color:#4267b2 ;
+  background-color:#4CAF50 ;
   color: white;
   font-weight: 500;
 }
 
 .MessageButton{
+  display: inline-block;
   position: absolute;
-  
+  width: 150px;
+  height: 30px;
+  right: 60px;
+  bottom: 20px;
+  border-radius: 3px;
+}
+
+.MessageButton button{
+  cursor: pointer;
+  width: 100%;
+  border-radius: 3px;
+  height: 100%;
+  border:none;
+  margin: none;
+  outline: none;
+  background-color:#4267b2 ;
+  color: white;
+  font-weight: 500;
 }
 
 .ProfileWrapper{

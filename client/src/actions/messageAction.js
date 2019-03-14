@@ -1,4 +1,4 @@
-import {OPEN_MSG_BOX,USER_UPDATE_MESSAGE} from './actionType';
+import {OPEN_MSG_BOX,USER_UPDATE_MESSAGE,CLOSE_MSG_BOX,INBOX_MESSAGE} from './actionType';
 import axios from 'axios';
 
 
@@ -13,19 +13,37 @@ export const openMsgBox=({name,id,avatar})=>{
     }
     axios.post('/usermessage',{id})
           .then(res=>{
-            data.userMessages=res.data
+            data.userMessages=res.data;
+            console.log(data);
             dispatch({type:OPEN_MSG_BOX,payload:data})
           })
   }
 }
 
-
-
-export const newMessage=({name,id,text})=>{
+export const closeMsgBox=()=>{
   return dispatch=>{
-    axios.post('/newmessage',{id,text,name})
+    dispatch({type:CLOSE_MSG_BOX})
+  };
+}
+
+export const newMessage=({name,id,text,senderAvatar})=>{
+  return dispatch=>{
+    axios.post('/newmessage',{id,text,name,senderAvatar})
           .then(res=>{
-            dispatch({type:USER_UPDATE_MESSAGE,payload:res.data})
+            console.log(res);
+            dispatch({type:'USER_UPDATE_MESSAGE',payload:res.data.message})
           })
   };
+}
+
+
+
+
+export const inboxMsg=(commonId,myid)=>{
+  return dispatch=>{
+    axios.post('/inbox',{commonId})
+          .then(res=>{
+            dispatch({type:INBOX_MESSAGE,payload:res.data});
+          })
+  }
 }
