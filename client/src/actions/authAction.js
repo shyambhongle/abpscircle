@@ -4,13 +4,13 @@ import jwt_decode from 'jwt-decode';
 import {setProfile} from './profileAction';
 import store from './../store/store';
 
-import { GET_ERRORS, SET_CURRENT_USER } from './actionType';
+import { GET_ERRORS, SET_CURRENT_USER,CLEAR_ERRORS} from './actionType';
 
 // Register User
 export const registerUser = (userData, history) => dispatch => {
   axios
     .post('/auth/register', userData)
-    .then(res => history.push('/auth/login'))
+    .then(res => {history.push('/auth/login')})
     .catch(err =>
       dispatch({
         type: GET_ERRORS,
@@ -35,7 +35,7 @@ export const loginUser = (userData,history) => dispatch => {
       // Set current user
       dispatch(setCurrentUser(decoded));
       store.dispatch(setProfile());
-      history.push('/')
+      history.push('/');
     })
     .catch(err =>
       dispatch({
@@ -64,4 +64,10 @@ export const logoutUser = (history) => dispatch => {
   if (history) {
     history.push('/auth/login')
   }
+};
+export const clearErrors = () => {
+  return {
+    type: CLEAR_ERRORS,
+    payload:{}
+  };
 };

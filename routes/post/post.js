@@ -83,7 +83,6 @@ router.post('/image',passport.authenticate('jwt', { session: false }),upload.sin
 );
 
 router.post('/',passport.authenticate('jwt', { session: false }),(req,res)=>{
-  console.log(req.body.text);
     const newPost = new Post({
       text: req.body.text,
       name: req.user.name,

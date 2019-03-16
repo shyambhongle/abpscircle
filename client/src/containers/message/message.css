@@ -10,6 +10,7 @@
   flex-direction: column;
   border-radius: 3px;
   z-index: 50;
+  overflow: hidden;
 }
 
 .MessageBox .HeaderMsg{
@@ -62,11 +63,14 @@
 }
 
 .BodyMsg .IndvRight{
-  width: 150px;
   height: auto;
   display: flex;
   align-items: center;
   padding-bottom: 20px;
+}
+
+.BodyMsg {
+  padding-bottom: 40px;
 }
 
 .IndvRight img{
@@ -93,13 +97,13 @@
 
 
 .BodyMsg .IndvLeft{
-  width: 150px;
+  max-width: 200px;
   height: auto;
   display: flex;
   flex-direction: row-reverse;
   align-items: center;
-  margin-left: 100px;
   padding-bottom: 20px;
+  float: right;
 }
 
 .IndvLeft img{
@@ -108,6 +112,7 @@
   border-radius: 50%;
   display: inline-block;
   margin-right: 10px;
+  align-self: flex-start;
 }
 
 

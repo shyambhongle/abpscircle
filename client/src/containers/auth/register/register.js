@@ -1,46 +1,120 @@
 import React,{Component} from 'react';
 import classes from './register.css';
-import {registerUser} from './../../../actions/authAction';
+import {registerUser,clearErrors} from './../../../actions/authAction';
 import {connect} from 'react-redux';
 import {Link} from  'react-router-dom';
 
 
+
+
+
+const emailRegex = RegExp(
+  /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
+);
+
+const formValid = ({ formErrors, ...rest }) => {
+  let valid = true;
+
+  // validate form errors being empty
+  Object.values(formErrors).forEach(val => {
+    val.length > 0 && (valid = false);
+  });
+
+  // validate the form was filled out
+  Object.values(rest).forEach(val => {
+    val === null && (valid = false);
+  });
+
+  return valid;
+};
+
+
+
+
+
+
+
+
+
+
 class Register extends Component{
 
-state={
-  firstName:"",
-  lastName:"",
-  email:'',
-  password:''
-}
-
+  state = {
+       firstName: null,
+       lastName: null,
+       email: null,
+       password: null,
+       disabled:true,
+       formErrors: {
+         firstName: "",
+         lastName: "",
+         email: "",
+         password: ""
+       }}
 
 componentDidMount(){
   if (this.props.auth.isAuthenticated) {
       this.props.history.push('/');
   }
+  this.props.clearErrors()
 }
 
 
+handleSubmit = e => {
+    e.preventDefault();
 
-inputChangeHandler=(e)=>{
-this.setState({
-  [e.target.name]:e.target.value
-})
-}
+    if (formValid(this.state)) {
+      let userDetails={
+        email:this.state.email,
+        password:this.state.password,
+        firstName:this.state.firstName,
+        lastName:this.state.lastName
+      }
+      this.props.registerUser(userDetails,this.props.history);
 
-submitHandler=(e)=>{
-  e.preventDefault();
-  let userDetails={
-    email:this.state.email,
-    password:this.state.password,
-    firstName:this.state.firstName,
-    lastName:this.state.lastName
+    }else {
+      console.error("FORM INVALID - DISPLAY ERROR MESSAGE");
+    }
+  };
+
+
+  handleChange = e => {
+    e.preventDefault();
+    const { name, value } = e.target;
+    let formErrors = { ...this.state.formErrors };
+    switch (name) {
+      case "firstName":
+        formErrors.firstName =
+          value.length < 3 ? "minimum 3 characaters required" : "";
+        break;
+      case "lastName":
+        formErrors.lastName =
+          value.length < 3 ? "minimum 3 characaters required" : "";
+        break;
+      case "email":
+        formErrors.email = emailRegex.test(value)
+          ? ""
+          : "invalid email address";
+        break;
+      case "password":
+        formErrors.password =
+          value.length < 5 ? "minimum 6 characaters required" : "";
+        break;
+      default:
+        break;
+    }
+
+    this.setState({ formErrors, [name]: value });
+    if (formValid(this.state)){
+      this.setState({disabled:false})
+    }else {
+      this.setState({disabled:true})
+    }
   }
-  this.props.registerUser(userDetails,this.props.history);
-}
+
 
   render(){
+    const { formErrors } = this.state;
     return(
       <div className={classes.AuthBox}>
       <div className={classes.RegsiterationSection}>
@@ -51,31 +125,64 @@ submitHandler=(e)=>{
       Sign up to connect with your friends.
       </div>
 
-      <form onSubmit={this.submitHandler} className={classes.RegisterationBox}>
+      <form onSubmit={this.handleSubmit} className={classes.RegisterationBox}>
 
+      <label htmlFor="firstName">First Name</label>
       <div className={classes.RegisterationInput}>
-      <input type="text" className={classes.TextInput} name="firstName" onChange={this.inputChangeHandler}
-      placeholder='first name' value={this.state.firstName} />
+      <input
+      type="text"
+      style={formErrors.firstName.length > 0 ? {border:"1px solid red"}: null}
+      name="firstName"
+      onChange={this.handleChange}
+      placeholder='first name'  />
       </div>
+      {formErrors.firstName.length > 0 && (
+       <span className={classes.errorMessage}>{formErrors.firstName}</span>
+           )}
 
+      <label htmlFor="lastName">Last Name</label>
       <div className={classes.RegisterationInput}>
-      <input type="text" className={classes.TextInput} name="lastName" onChange={this.inputChangeHandler}
-      placeholder='last name' value={this.state.lastName} />
+      <input
+       type="text"
+       style={formErrors.lastName.length > 0 ? {border:"1px solid red"} : null}
+       name="lastName"
+       onChange={this.handleChange}
+       placeholder='last name'  />
       </div>
+      {formErrors.lastName.length > 0 && (
+                      <span className={classes.errorMessage}>{formErrors.lastName}</span>
+            )}
 
+
+      <label htmlFor="email">Email</label>
       <div className={classes.RegisterationInput}>
-      <input type="text" className={classes.TextInput} name="email" onChange={this.inputChangeHandler}
-      placeholder='email' value={this.state.email} />
+      <input
+      type="email"
+      style={formErrors.email.length > 0 || this.props.errors.email!==undefined? {border:"1px solid red"} : null}
+      name="email"
+      onChange={this.handleChange}
+      placeholder='email' />
       </div>
-
-
+      {formErrors.email.length > 0 && (
+                     <span className={classes.errorMessage}>{formErrors.email}</span>
+           )}
+     {this.props.errors.email!==undefined?
+      <span className={classes.errorMessage}>{this.props.errors.email}</span>:
+        null  }
+      <label htmlFor="password">Password</label>
       <div className={classes.RegisterationInput}>
-      <input type="password" className={classes.TextInput}name="password" onChange={this.inputChangeHandler}
-      placeholder='password' value={this.state.password} />
+      <input
+      type="password"
+      style={formErrors.password.length > 0 ?{border:"1px solid red"} : null}
+      name="password"
+      onChange={this.handleChange}
+      placeholder='password' />
       </div>
-
+      {formErrors.password.length > 0 && (
+          <span className={classes.errorMessage}>{formErrors.password}</span>
+      )}
       <div className={classes.SignUp}>
-      <button type="submit">Sign up</button>
+      <button type="submit" disabled={this.state.disabled}>Sign up</button>
       </div>
 
       </form>
@@ -97,7 +204,8 @@ submitHandler=(e)=>{
 }
 
 const mapStateToProps=state=>({
-  auth:state.auth
+  auth:state.auth,
+  errors:state.errors
 })
 
-export default connect(mapStateToProps,{registerUser})(Register);
+export default connect(mapStateToProps,{registerUser,clearErrors})(Register);

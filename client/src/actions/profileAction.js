@@ -12,6 +12,9 @@ export const setProfile=()=>{
   }
 }
 
+
+
+
 export const updateProfilePicture=(data)=>{
   return dispatch=>{
     axios.post('/profile/profilepicture',data)

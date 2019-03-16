@@ -35,7 +35,9 @@ router.get('/',passport.authenticate('jwt', { session: false }),  (req, res) => 
     Profile.findOne({ user: req.user.id })
       .then(profile => {
         if (profile) {
-          return res.json(profile);
+
+           res.json(profile);
+
         }else {
           let newProfile=new Profile({
             user:req.user.id,
@@ -54,7 +56,6 @@ router.get('/',passport.authenticate('jwt', { session: false }),  (req, res) => 
 
 router.post('/profilepicture',passport.authenticate('jwt',{session:false}),
 upload.single('img'),(req,res)=>{
-  console.log(req.user.avatarId);
   cloudinary.v2.uploader.upload(req.file.path,{public_id:req.user.avatarId,folder:"profile"},
   (error, result)=>
   {
@@ -74,7 +75,6 @@ upload.single('img'),(req,res)=>{
 
 
 router.post('/clear/friendRequest',passport.authenticate('jwt',{session:false}),(req,res)=>{
-console.log(req.params.query);
   Profile.findOneAndUpdate(
     {_id:req.body.id},
     {$set:{"notification.friendRequest":0}},
@@ -83,7 +83,6 @@ console.log(req.params.query);
 })
 
 router.post('/clear/newnotification',passport.authenticate('jwt',{session:false}),(req,res)=>{
-console.log(req.params.query);
   Profile.findOneAndUpdate(
     {_id:req.body.id},
     {$set:{"notification.newnotification":0}},
@@ -92,12 +91,20 @@ console.log(req.params.query);
 })
 
 router.post('/clear/newmessage',passport.authenticate('jwt',{session:false}),(req,res)=>{
-console.log(req.params.query);
   Profile.findOneAndUpdate(
     {_id:req.body.id},
     {$set:{"notification.newmessage":0}},
     {new:true}
   ).then(pro=>res.json(pro))
+})
+
+
+router.post('/getselectedpost',passport.authenticate('jwt',{session:false}),(req,res)=>{
+  Post.findById(req.body.id)
+      .exec()
+      .then(post=>{
+        res.json(post)
+      })
 })
 
 

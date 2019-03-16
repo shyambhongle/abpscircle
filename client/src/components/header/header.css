@@ -339,12 +339,13 @@ position: relative;
   left: 50px;
   top: 1px;
 }
-.RequestInbox .NotiName{
-  color: #262626;
+.RequestInbox .NotiName{  color: #262626;
   font-size: 12px;
   display: inline;
   position: absolute;
   left: 40px;
+  max-width: 200px;
+  overflow-x: hidden;
   top: 25px;
 }
 

@@ -1,13 +1,13 @@
 .CommentBox{
-  width: 86%;
+  width: 100%;
   height:auto;
   border-radius: 12px;
-  margin: 15px 0px 15px 8px;
+  margin: 15px 0px 15px 0px;
   position: relative;
 }
 
 .CommentBox input{
-width:100%;
+width:70%;
 display:inline-block;
 border-radius:10px;
 border:none;
@@ -30,7 +30,7 @@ font-size: 14px;
   padding: 2vh 0px;
   position: relative;
   height: auto;
-  width: 70%;
+  width: 60%;
   display: inline-block;
 }
 
@@ -62,7 +62,7 @@ font-size: 14px;
    display: inline-block;
    font-size: 14px;
    position: absolute;
-   left: 360px;
+   left: 88%;
    top: -6px;
    border-radius: 5px;
    cursor: pointer;

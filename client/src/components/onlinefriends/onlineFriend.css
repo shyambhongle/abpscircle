@@ -1,0 +1,67 @@
+.OnlineFriends{
+  border: 1px solid #dddfe2;
+  width: 100%;
+  height: 100%;
+  background-color: white;
+}
+
+.OnlineFriends .HeaderOnline{
+  width: 100%;
+  height: 40px;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #262626;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  border-bottom: 1px solid #dddfe2;
+}
+
+.OnlineFriends .OnlineBody{
+  display: inline-flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+}
+
+.OnlineBody .SingleOnline{
+  height: 50px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding-bottom: 20px;
+}
+
+.SingleOnline img{
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  margin-left: 5px;
+}
+
+
+.SingleOnline .Green{
+  background-color: green;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  margin-left: 15px;
+}
+
+.SingleOnline .Username{
+  cursor: pointer;
+  color: #262626;
+  font-weight: 500;
+  margin-left: 10px;
+  font-size: 14px;
+  padding: 100% 0;
+}
+
+.NoFriends{
+  color: grey;
+  font-weight: 500;
+  margin-left: 70px;
+  font-size: 14px;
+}

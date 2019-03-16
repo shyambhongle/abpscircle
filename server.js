@@ -80,37 +80,26 @@ let onlineClients={};
 
 
 io.sockets.on('connection', function (socket) {
+
   socket.on('adduser',(data)=>{
     onlineClients[data.id] = {
       "socket": socket.id
     };
-    app.use(function(req,res,next){
-        req.testo = onlineClients;
-        next();
-    });
-
 })
-
-socket.on('private-message', function(data){
-    console.log("Sending: " + data.content + " to " + data.username);
-    if (onlineClients[data.username]){
-      io.sockets.connected[onlineClients[data.username].socket].emit("add-message", data);
-    } else {
-      console.log("User does not exist: " + data.username);
-    }
-  });
 
   //Removing the socket on disconnect
   socket.on('disconnect', function() {
   	for(var name in onlineClients) {
   		if(onlineClients[name].socket === socket.id) {
   			delete onlineClients[name];
-  			break;
+        break;
   		}
+      io.emit('checkOnline');
   	}
   })
 
   io.myclients=onlineClients;
+  io.emit('checkOnline');
 
-
+console.log("new client");
 })

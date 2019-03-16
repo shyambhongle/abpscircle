@@ -52,7 +52,6 @@
   height: auto;
   display: flex;
   flex-direction: column;
-  align-items: center;
 }
 
 .RegisterationInput{
@@ -62,7 +61,24 @@
   border: 1px solid #e6e6e6;
   margin-bottom: 8px;
 }
+label {
+  font-size: 12px;
+  padding-bottom: 2px;
+  color: #222;
+  font-weight: 500;
+  width: 69%;
+  margin: auto;
 
+}
+
+.errorMessage {
+  color: red;
+  font-size: 0.75em;
+  display: relative;
+  width: 69%;
+  margin: auto;
+  margin-bottom: 5px;
+}
 .RegisterationInput input{
   width: 96%;
   height: 34px;
@@ -83,7 +99,9 @@
   padding-left: 10px;
 
 }
-
+.Error {
+ border: 1px solid red;
+}
 .RegisterationInput input::placeholder {
   color: #aaaaaa;
   padding-left: 2px;
@@ -91,24 +109,36 @@
 }
 
 .SignUp{
-  width: 247px;
-  min-height: 15px;
-  margin-top: 7px;
-  margin-bottom: 15px;
+  width: 100%;
+  margin: auto;
+  display: inline-flex;
+  justify-content: center;
 }
 
   .SignUp button{
-  background-color: #3897f0;
-  border: 1px solid #3897f0;
-  border-radius: 4px;
-  margin: 0px;
-  color: #fff;
-  width: 100%;
-  font-size: 16px;
-  position: relative;
-  left: -1px;
-  cursor: pointer;
+   background-color: #008CBA;
+   color: #fff;
+   border: 2px solid #fff;
+   width: 72%;
+   font-size: 1em;
+   font-weight: lighter;
+   letter-spacing: 1px;
+   cursor: pointer;
+   display: inline-block;
+   margin-right: 18px;
+   padding: 8px 0px;
+
 }
+
+
+button:disabled,
+button[disabled]{
+  border: 1px solid #999999;
+  background-color: #cccccc;
+  color: #666666;
+  cursor:not-allowed;
+}
+
 
 .Agrrement{
   font-weight: 600;

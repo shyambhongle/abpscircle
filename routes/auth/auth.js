@@ -36,7 +36,7 @@ router.post('/register', (req, res) => {
 
   User.findOne({ email: req.body.email }).then(user => {
     if (user) {
-      errors.email = 'Email already exists';
+      errors.email = 'Email already registerd';
       return res.status(400).json(errors);
     } else {
         cloudinary.v2.uploader.upload("https://res.cloudinary.com/shyambhongle/image/upload/v1552261197/deb67a64fd07270347273e3931fadb73.jpg",{folder:"profile"},

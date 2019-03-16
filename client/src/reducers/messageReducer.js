@@ -1,4 +1,4 @@
-import {OPEN_MSG_BOX,USER_UPDATE_MESSAGE,CLOSE_MSG_BOX,INBOX_MESSAGE} from './../actions/actionType';
+import {OPEN_MSG_BOX,CLOSE_MSG_BOX,INBOX_MESSAGE} from './../actions/actionType';
 
 
 const initialState={

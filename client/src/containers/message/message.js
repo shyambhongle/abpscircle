@@ -7,9 +7,17 @@ import * as actionCreators from './../../actions/index.js';
 class Message extends Component{
 
 state={
-  text:''
+  text:'',
+  scroll:0
 }
 
+componentDidMount(){
+  this.bdyMsg.scrollTop =this.bdyMsg.scrollHeight;
+}
+
+componentWillReceiveProps(){
+  this.ScrollChange();
+}
 
 inputHandler=(e)=>{
     this.setState({
@@ -29,6 +37,12 @@ sendHandler=()=>{
     text:""
   })
 }
+
+ScrollChange=()=>{
+this.bdyMsg.scrollTop =this.bdyMsg.scrollHeight;
+}
+
+
 
 
 render(){
@@ -51,12 +65,12 @@ render(){
     <div className={classes.CloseMsg}
     onClick={this.props.closeMsgBox}></div>
     </div>
-    <div className={classes.BodyMsg}>{userMsg}</div>
+    <div className={classes.BodyMsg}  ref={sc=>{this.bdyMsg=sc}}>{userMsg}</div>
     <form className={classes.MsgInputBox}>
     <input type="text" value={this.state.text}
      onChange={this.inputHandler} placeholder="write here..."/>
     <div className={classes.ButtonSend}
-    onClick={()=>{this.sendHandler()}}></div>
+    onClick={()=>{this.sendHandler();this.ScrollChange()}}></div>
     </form>
     </div>
   )

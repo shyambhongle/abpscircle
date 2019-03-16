@@ -8,8 +8,6 @@ const passport=require('passport');
 
 
 router.post('/addfriend',passport.authenticate('jwt',{session:false}),(req,res)=>{
-  console.log(req.io.myclients);
-
       let data={
         id:req.user.id,
         name:req.user.fullName,

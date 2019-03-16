@@ -1,9 +1,10 @@
-import { SEARCH_INPUT,SEARCH_PROFILE,SEARCH_PROFILEPOST} from './../actions/actionType';
+import { SEARCH_INPUT,SEARCH_PROFILE,SEARCH_PROFILEPOST,ONLINE_FRIENDS} from './../actions/actionType';
 
 const initialState={
     searchList:[],
     searchPerson:{},
-    searchPersonPost:[]
+    searchPersonPost:[],
+    onlinefriends:[]
 }
 
 export default function(state=initialState,action){
@@ -26,6 +27,14 @@ switch (action.type){
       ...state,
       searchPersonPost:action.payload
     };
+
+    case ONLINE_FRIENDS:
+
+      return  {
+        ...state,
+        onlinefriends:action.payload
+      };
+
 
   default:
   return state;

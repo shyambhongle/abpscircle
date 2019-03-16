@@ -7,29 +7,32 @@ const Messages=require('./../../models/messages');
 
 
 router.get('/onlinefriends',passport.authenticate('jwt',{session:false}),(req,res)=>{
-  Profile.findOne({user:req.user.id})
-          .exec()
-          .then(profile=>{
-            let onlineFriends=[];
-            profile.allFriends.map(fri=>{
-              return req.io.myclients[fri.user]!==undefined?onlineFriends.push(fri):null
+    Profile.findOne({user:req.user.id})
+            .exec()
+            .then(profile=>{
+              if (profile) {
+                let onlineList=[];
+                profile.allFriends.map(user=>{
+                   if (user.id!==undefined) {
+                     req.io.myclients[user.id]!==undefined?onlineList.push(user):null;
+                   }
+                })
+                return res.json(onlineList);
+              }
             })
-            console.log(onlineFriends);
-          })
 })
 
-router.post('/usermessage',passport.authenticate('jwt',{session:false}),(req,res)=>{
 
+
+
+router.post('/usermessage',passport.authenticate('jwt',{session:false}),(req,res)=>{
 Profile.findOne({user:req.user.id})
         .exec()
         .then(profile=>{
-          console.log(req.body.id);
           let test=false;
-          console.log(profile);
           profile.commonId.map(i=>{
             return i.reciver==req.body.id?test=i.common:null;
           });
-          console.log(test);
           if (test!==false) {
             Messages.findById(test)
                     .then(allMsg=>{
@@ -60,7 +63,6 @@ router.post('/newmessage',passport.authenticate('jwt',{session:false}),(req,res)
               msg:req.body.text,
               date:new Date()
             }
-            console.log("update");
             Profile.findOneAndUpdate(
               {user:req.body.id},
               {$inc:{"notification.newmessage":1}},
@@ -87,7 +89,6 @@ router.post('/newmessage',passport.authenticate('jwt',{session:false}),(req,res)
 
 
           }else{
-            console.log("new",req.body);
             let msgUser=[{user:req.body.id,name:req.body.name,avatar:req.body.senderAvatar},
             {user:req.user.id,name:req.user.fullName,avatar:req.user.avatar}]
             let msgData={
@@ -112,7 +113,7 @@ router.post('/newmessage',passport.authenticate('jwt',{session:false}),(req,res)
                 {$push:{commonId:{reciver:req.user.id,common:msg._id}},
                 $inc:{"notification.newmessage":1}},
                 {new:true}
-              ).then(re=>{console.log(re)})
+              ).then(re=>{console.log('')})
 
             })
           }

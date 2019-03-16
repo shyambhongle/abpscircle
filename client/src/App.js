@@ -16,6 +16,7 @@ import Profile from './containers/profile/profile';
 import Chat from './containers/chat/chat';
 import SearchProfile from './containers/search/searchprofile';
 import Message from './containers/message/message';
+import BackdropPost from './components/backdropPost/backdropPost';
 import {SET_PROFILE} from './actions/actionType';
 
 // Check for token
@@ -60,11 +61,17 @@ componentDidMount(){
     this.socket.on('newrequest',(data)=>{
       store.dispatch({type:SET_PROFILE,payload:data})
     })
+    this.socket.on("checkOnline",()=>{
+        this.props.onlineFriendSearch()
+    })
+
     this.socket.on('newnotification',(data)=>{
       console.log("new not",data);
       store.dispatch({type:SET_PROFILE,payload:data})
     })
-
+    this.socket.on('onlinefriends',(data)=>{
+      console.log("new not",data);
+    })
     this.socket.on('newMessage',(data)=>{
       console.log("newMessage",data.message);
       store.dispatch({type:'USER_UPDATE_MESSAGE',payload:data.message})
@@ -81,12 +88,13 @@ componentDidMount(){
     return (
       <BrowserRouter>
       <div className="App">
+      {this.props.backPost.visible?<Route path='/' component={BackdropPost}/>:null}
       <Route path='/auth'  component={Auth}/>
       <Route path='/' exact component={Home}/>
       <Route path='/profile' exact component={Profile}/>
       <Route path='/chat' exact component={Chat}/>
       <Route path='/profile/:id' exact component={SearchProfile}/>
-      <Route path='/' component={Message}/>
+      {this.props.msg.MsgBox?<Route path='/' component={Message}/>:null}
       </div>
       </BrowserRouter>
     );
@@ -95,13 +103,16 @@ componentDidMount(){
 
 const mapStateToProps=state=>({
   profile:state.search.searchPerson,
-  auth:state.auth
+  auth:state.auth,
+  msg:state.msg,
+  backPost:state.backpost
 })
 
 
 const mapDispatchToProps=dispatch=>({
   setProfile:()=>{dispatch(actionCreators.setProfile())},
-  updateProfile:(data)=>{dispatch(actionCreators.updateProfile(data))}
+  updateProfile:(data)=>{dispatch(actionCreators.updateProfile(data))},
+  onlineFriendSearch:()=>{dispatch(actionCreators.onlineFriendSearch())}
 })
 
 

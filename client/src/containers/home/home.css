@@ -28,3 +28,11 @@
   width: 100%;
   margin-top: 30px;
 }
+
+.OnlineFriends{
+  width: 19vw;
+  height: 60vh;
+  position: fixed;
+  bottom: 20px;
+  right: 60px;
+}

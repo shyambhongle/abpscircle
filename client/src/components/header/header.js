@@ -93,7 +93,9 @@ let notificationCount;
 if (this.props.profile.allnotification!==undefined) {
   notificationCount=this.props.profile.allnotification.map((req,i)=>{
     return(
-      <div key={i} className={classes.RequestUser}>
+      <div key={i} className={classes.RequestUser} onClick={()=>{
+        this.props.displayBackPost(req.data)
+      }}>
        <div className={classes.NotiName}>{req.message}</div>
         </div>
     );
@@ -111,7 +113,9 @@ if (this.props.msg.inbox.length>0) {
        onClick={()=>{this.messageHandler(messages.user)}}>
       <img src={messages.user.avatar} alt=""/>
       <div className={classes.ReName}>{messages.user.name}</div>
-       <div className={classes.NotiName}>{messages.message.msg}</div>
+       <div className={classes.NotiName}>{
+         messages.message.msg.length>40?messages.message.msg.substring(0,30)+"...":
+           messages.message.msg}</div>
         </div>
     );
 })
@@ -242,7 +246,9 @@ const mapDispatchToProps=dispatch=>({
   acceptRequest:(data)=>{dispatch(actionCreators.acceptRequest(data))},
   clearNotification:(id,query)=>{dispatch(actionCreators.clearNotification(id,query))},
   inboxMsg:(data,id)=>{dispatch(actionCreators.inboxMsg(data,id))},
-  openMsg:(data)=>{dispatch(actionCreators.openMsgBox(data))}
+  openMsg:(data)=>{dispatch(actionCreators.openMsgBox(data))},
+  displayBackPost:(data)=>{dispatch(actionCreators.displayBackPost(data))}
+
 })
 
 

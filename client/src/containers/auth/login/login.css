@@ -8,7 +8,14 @@
   align-items: center;
   flex-direction: column;
 }
-
+.errorMessage {
+  color: red;
+  font-size: 0.75em;
+  display: relative;
+  width: 69%;
+  margin: auto;
+  margin-bottom: 5px;
+}
 .LoginSection{
   background-color: white;
   border-radius: 3px;

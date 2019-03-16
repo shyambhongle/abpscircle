@@ -2,7 +2,8 @@ export {
     registerUser,
     loginUser,
     logoutUser,
-    setCurrentUser
+    setCurrentUser,
+    clearErrors
 } from './authAction';
 
 export {
@@ -33,14 +34,17 @@ export {
 } from './profileAction';
 
 export {
-    clearNotification
+    clearNotification,
+    displayBackPost,
+    fade
 } from './headerAction';
 
 
 export {
     searchPerson,
     searchProfile,
-    searchProfilePost
+    searchProfilePost,
+    onlineFriendSearch
 } from './searchAction';
 
 export {

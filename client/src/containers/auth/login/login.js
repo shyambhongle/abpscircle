@@ -1,7 +1,7 @@
 import React,{Component} from 'react';
 import classes from './login.css';
 import {connect} from 'react-redux';
-import {loginUser} from './../../../actions/authAction';
+import {loginUser,clearErrors} from './../../../actions/authAction';
 import {Link} from  'react-router-dom';
 
 class Login extends Component{
@@ -16,7 +16,10 @@ componentDidMount(){
   if (this.props.auth.isAuthenticated) {
       this.props.history.push('/');
   }
+  this.props.clearErrors();
 }
+
+
 
 inputChangeHandler=(e)=>{
 this.setState({
@@ -41,14 +44,19 @@ submitHandler=(e)=>{
       <div className={classes.Logo}></div>
       </div>
       <form onSubmit={this.submitHandler} className={classes.LoginBox}>
+      {this.props.errors.email!==undefined?
+      <span className={classes.errorMessage}>{this.props.errors.email}</span>:null}
       <div className={classes.LoginInput}>
       <input type="text" name="email" onChange={this.inputChangeHandler}
-      placeholder='email' value={this.state.email} />
+      placeholder='email' value={this.state.email}
+      style={{border:this.props.errors.email!==undefined?"1px solid red":null}}/>
       </div>
-
+      {this.props.errors.password!==undefined?
+      <span className={classes.errorMessage}>{this.props.errors.password}</span>:null}
       <div className={classes.LoginInput}>
       <input type="password" name="password" onChange={this.inputChangeHandler}
-      placeholder='password' value={this.state.password} />
+      placeholder='password' value={this.state.password}
+      style={{border:this.props.errors.password!==undefined?"1px solid red":null}} />
       </div>
 
 
@@ -73,7 +81,8 @@ submitHandler=(e)=>{
 }
 
 const mapStateToProps=state=>({
-  auth:state.auth
+  auth:state.auth,
+  errors:state.errors
 })
 
-export default connect(mapStateToProps,{loginUser})(Login);
+export default connect(mapStateToProps,{loginUser,clearErrors})(Login);

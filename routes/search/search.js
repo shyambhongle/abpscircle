@@ -31,7 +31,6 @@ Profile.findOne({user:req.body.id})
 })
 
 router.post('/friendpost',(req,res)=>{
-  console.log(req.body.id);
   Post.find({user:req.body.id})
       .then(post=>{
         return res.json(post)

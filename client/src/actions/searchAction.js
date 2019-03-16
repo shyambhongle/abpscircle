@@ -1,4 +1,4 @@
-import {SEARCH_INPUT,SEARCH_PROFILE,SEARCH_PROFILEPOST} from './actionType';
+import {SEARCH_INPUT,SEARCH_PROFILE,SEARCH_PROFILEPOST,ONLINE_FRIENDS} from './actionType';
 import axios from 'axios';
 
 export const searchPerson=(e)=>{
@@ -25,6 +25,17 @@ export const searchProfile=(id,history)=>{
           })
   }
 }
+
+export const onlineFriendSearch=()=>{
+    return dispatch=>{
+      axios.get('/onlinefriends')
+            .then(res=>{
+              dispatch({type:ONLINE_FRIENDS,payload:res.data})
+            })
+    }
+}
+
+
 
 export const searchProfilePost=(id)=>{
   return dispatch=>{

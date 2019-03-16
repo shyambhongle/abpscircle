@@ -5,7 +5,7 @@ import * as actionCreators from './../../actions/index';
 import PostDisplay from './../../components/postdisplay/postdisplay';
 import Post from './../post/post';
 import Header from './../../components/header/header';
-
+import OnlineFriends from './../../components/onlinefriends/onlineFriend';
 
 
 
@@ -18,6 +18,8 @@ componentDidMount(){
     return;
   }
   this.props.allPost();
+  this.props.onlineFriendSearch();
+
 }
 
 
@@ -35,6 +37,9 @@ render(){
     <div className={classes.CreatePost}><Post/></div>
     <div className={classes.DisplayPost}>
     <PostDisplay data={this.props.post.allPost}/>
+    <div className={classes.OnlineFriends}>
+    <OnlineFriends/>
+    </div>
     </div>
     </div>
     </div>
@@ -53,7 +58,8 @@ const mapStateToProps=state=>({
 
 
 const mapDispatchToProps=dispatch=>({
-  allPost:()=>{dispatch(actionCreators.retrivePost())}
+  allPost:()=>{dispatch(actionCreators.retrivePost())},
+  onlineFriendSearch:()=>{dispatch(actionCreators.onlineFriendSearch())}
 })
 
 export default connect(mapStateToProps,mapDispatchToProps)(Home);
