@@ -168,3 +168,11 @@ button{
   border: none;
   cursor: pointer;
 }
+
+
+@media screen and (max-width:450px) {
+  .Post{border: none;
+  border-bottom: 1px solid #e6e6e6;
+  border-top: 1px solid #e6e6e6;
+  }
+}

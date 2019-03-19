@@ -2,7 +2,7 @@
   width: 100vw;
   height: 52px;
   background-color: white;
-  position: sticky;
+  position: fixed;
   top: 0px;
   z-index: 50;
   border-bottom: 1px solid #dddfe2;
@@ -515,7 +515,7 @@ position: relative;
     margin:0;
   }
   .HeaderWrapper{
-    width: 100%;
+    width: 100vw;
     margin: 0;
     display: flex;
     justify-content: flex-start;
@@ -524,7 +524,7 @@ position: relative;
     height: 44px;
   }
   .CompanyName{
-    width: 68px;
+    width: 16.66vw;
     height: 44px;
     padding: 0;
     margin:0;
@@ -542,7 +542,7 @@ position: relative;
     background-repeat: no-repeat;
   }
   .SearchBox{
-    width: 68px;
+    width: 16.66%;
     height: 40px;
     margin: 0;
     order: 1;
@@ -570,12 +570,15 @@ position: relative;
     margin: none;
   }
   .IconTray{
-    width: 204px;
+    width: 49.98%;
     height: 44px;
     margin: 0;
     justify-content:space-around;
   }
 
+  .IconTray .MessageIcon{
+    width: 27px
+  }
 
   .RequestCount{
    display: inline-block;
@@ -604,9 +607,10 @@ display: none;
     display: none;
   }
   .SettingContainer{
-    width: 68px;
+    width: 16.66%;
     height: 44px;
     order: 2;
+    z-index: 100;
   }
   .SettingContainer *{
     display: none;
@@ -623,7 +627,7 @@ display: none;
   }
 
   .MobileSettingIcon .MobileMenu{
-    position: fixed;
+    position: absolute;
     top: 45px;
     width: 70vw;
     height: 100vh;
@@ -631,7 +635,7 @@ display: none;
     transform: translateX(20vw);
     transition: all 0.3s ease-out;
     background-color: white;
-    z-index: -1;
+    z-index: 150;
   }
 .MobileSettingIcon:hover .MobileMenu{
   transform: translateX(-58vw);

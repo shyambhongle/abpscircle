@@ -108,7 +108,6 @@ margin-bottom: 10px;
 
 .Article{
   width: 97%;
-  display:block;
   padding: 20px 10px;
   color: #1d2129;
 }
@@ -178,14 +177,4 @@ transition: opacity 0.3s ease-out;
 @keyframes likeanime {
   from {transform: scale(1.5)}
     to {transform: scale(1);}
-}
-
-
-@media screen adn (max-width:450px) {
-  .Post{
-    border: none;
-    border-top: 1px solid #e6e6e6;
-    border-bottom: 1px solid #e6e6e6;
-
-  }
 }

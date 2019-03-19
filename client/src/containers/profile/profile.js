@@ -6,7 +6,7 @@ import {connect} from 'react-redux';
 import * as actionCreators from './../../actions/index';
 import classes from './profile.css';
 import EditProfile from './../editprofile/editprofile';
-
+import mobImg from './../../assets/banner1.jpg';
 
 class Profile extends Component{
 
@@ -53,11 +53,15 @@ componentWillReceiveProps(props){
 
   render(){
     return(
-      <div >
+      <div className={classes.Profile}>
       {this.state.edit?<EditProfile close={this.closeEdit} editbox={this.state.editInfo}/>:null}
       <Header/>
       <div className={classes.ProfileBanner}>
-      <div className={classes.ProfileCoverImage}></div>
+      <div className={classes.ProfileCoverImage}>
+      </div>
+      <div className={classes.MobileProfileBanner}>
+      <img  src={mobImg} alt=''/>
+      </div>
       <div className={classes.Avatar}>
       <div className={classes.ProfileBackDrop}>
       <form onSubmit={this.ProfileImageSubmit} className={classes.UpdateProfilePicture}>  {this.state.profilePicture?

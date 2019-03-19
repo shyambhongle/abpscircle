@@ -55,7 +55,9 @@ render(){
         }
           </div>
 
-          <div className={classes.Article}>{singlePost.text}</div>
+          <div className={classes.Article}
+          style={{display:singlePost.text.length===0?"none":"block"}}>
+          {singlePost.text}</div>
           {
             singlePost.img.image!==false?<div className={classes.PostImage}>
             <img src={singlePost.img.image!==false?singlePost.img.image:null} alt='postImage'/>
