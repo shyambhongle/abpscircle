@@ -37,14 +37,19 @@ render(){
     <div className={classes.CreatePost}><Post/></div>
     <div className={classes.DisplayPost}>
     <PostDisplay data={this.props.post.allPost}/>
+    </div>
+    </div>
+    </div>
+    <div className={classes.EventBox}>
+    <div className={classes.EventHeader}>
+    <p>Events:</p>
+    </div>
+      <div className={classes.EventData}>
+      <div className={classes.UpcomingEvent}></div>
+      </div>
+    </div>
     <div className={classes.OnlineFriends}>
-    <OnlineFriends/>
-    </div>
-    </div>
-    </div>
-    </div>
-
-
+    <OnlineFriends/></div>
     </div>
   );
 }

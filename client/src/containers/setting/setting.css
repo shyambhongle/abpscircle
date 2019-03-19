@@ -1,0 +1,118 @@
+.EditProfile{
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  z-index: 170;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.EditProfile .Backdrop{
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: -1;
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.EditProfile .SettingBox{
+  width: 50%;
+  height: 60%;
+  background-color: white;
+  z-index: 12;
+  border: 1px solid #e6e6e6;
+}
+
+
+.SettingBox .Header{
+  width: 100%;
+  height: 50px;
+  color: #262626;
+  font-weight: 500;
+  font-size: 1.3em;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #e6e6e6;
+}
+
+.SettingBox .Header>div{
+  margin-left: 10px;
+}
+
+.SettingBox .Aside{
+  width: 30%;
+  height: 60%;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  border-right: 1px solid #e6e6e6;
+}
+
+
+.Aside .OptionsAside{
+  width: 100%;
+  height: 50px;
+  border-bottom: 1px solid #e6e6e6;
+  color: #262626;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 500;
+  letter-spacing: 1px;
+
+}
+
+
+
+
+.SettingBox .SettingPassword{
+  width: 60%;
+  height: 50%;
+  display: inline-flex;
+  flex-direction: column;
+  margin-left: 10px;
+}
+
+
+
+
+.SettingBox  label{
+  font-size: 16px;
+  color:#262626;
+  font-weight: 500;
+  letter-spacing: 1px;
+  width: 100%;
+  display: block;
+  padding: 10px 10px;
+}
+
+.SettingBox  label:first-of-type{
+  padding-top:30px;
+}
+
+
+.SettingBox input{
+  width: 400px;
+  height: 36px;
+  border: none;
+  outline: none;
+  border-bottom: 1px solid grey;
+  font-size: 16px;
+  margin-bottom: 10px;
+  margin-left: 10px;
+}
+
+.SettingBox button{
+  background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 8px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    float: right;
+    margin-right: 30px;
+}

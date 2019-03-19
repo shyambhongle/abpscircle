@@ -3,7 +3,7 @@ import classes from './header.css';
 import {connect} from 'react-redux';
 import * as actionCreators from './../../actions/index';
 import {Link,withRouter} from 'react-router-dom';
-
+import SettingBox from './../../containers/setting/setting';
 
 
 
@@ -14,7 +14,8 @@ state={
   inputShow:false,
   requestShow:false,
   notification:false,
-  messageNotification:false
+  messageNotification:false,
+  setting:false
 }
 
 
@@ -129,16 +130,28 @@ if (!this.props.profile.allnotification.length>0) {
 
 
   return (
+
+
+
+
+
     <div className={classes.Header} >
+    {this.state.setting?<SettingBox close={()=>{this.setState({setting:false})}}/>:null}
     <div className={classes.HeaderWrapper}>
+
     <Link style={{textDecoration:'none'}} to="/">
     <div className={classes.CompanyName}>
-    <div className={classes.CompanyCircle}></div>
+    <div className={classes.CompanyCircle}
+     onClick={this.blurHandler}></div>
     <div className={classes.Divider}></div>
     <div className={classes.CompanyTitle}>ABPS circle</div>
-    </div></Link>
+    </div>
+    </Link>
+
+
 
     <div className={classes.SearchBox}   onBlur={this.blurHandler}>
+    <div className={classes.MobileSearch}></div>
     <input type="text" placeholder="search"
      onChange={(e)=>{this.props.searchInput(e); this.inputShowToogle(e)}}/>
      {
@@ -155,7 +168,7 @@ if (!this.props.profile.allnotification.length>0) {
     <div className={classes.IconTray}>
 
     <div className={classes.RequestIcon} onClick={()=>{this.setState({
-      requestShow:this.state.requestShow?false:true});
+      requestShow:this.state.requestShow?false:true,messageNotification:false,notification:false});
       this.props.clearNotification(this.props.profile._id,"friendRequest")}}>
     {this.props.profile.friendRequest?this.props.profile.notification.friendRequest>0?
     <span className={classes.RequestCount}>{this.props.profile.notification.friendRequest}</span>:null:null}
@@ -168,7 +181,7 @@ if (!this.props.profile.allnotification.length>0) {
     </div>
 
     <div className={classes.MessageIcon} onClick={()=>{this.setState({
-      messageNotification:this.state.messageNotification?false:true}); this.props.clearNotification(this.props.profile._id,"newmessage");
+      messageNotification:this.state.messageNotification?false:true,requestShow:false,notification:false}); this.props.clearNotification(this.props.profile._id,"newmessage");
       this.props.inboxMsg(this.props.profile.commonId,this.props.auth.user.id)}}>
       {this.props.profile.notification?this.props.profile.notification.newmessage>0?
       <span className={classes.NoificationCount}>{this.props.profile.notification.newmessage}</span>:null:null}
@@ -183,7 +196,7 @@ if (!this.props.profile.allnotification.length>0) {
 
 
     <div className={classes.NotificationIcon} onClick={()=>{this.setState({
-      notification:this.state.notification?false:true}); this.props.clearNotification(this.props.profile._id,"newnotification")}}>
+      notification:this.state.notification?false:true,messageNotification:false,requestShow:false}); this.props.clearNotification(this.props.profile._id,"newnotification")}}>
     {this.props.profile.notification?this.props.profile.notification.newnotification>0?
     <span className={classes.NoificationCount}>{this.props.profile.notification.newnotification}</span>:null:null}
     <span className={classes.RequestArrow} style={{display:this.state.notification?'inline-block':'none'}}></span>
@@ -206,8 +219,19 @@ if (!this.props.profile.allnotification.length>0) {
 
     <div className={classes.SettingContainer}>
     <div className={classes.SettingIcon}></div>
+
+    <div className={classes.MobileSettingIcon}>
+    <div className={classes.MobileMenu}>
+    <div className={classes.ProfileMobile}>
+    <Link to='/profile'>Profile</Link>
+    </div>
+    <div className={classes.some} onClick={()=>{this.setState({setting:true})}}>setting</div>
+    <div className={classes.LogoutTray} onClick={()=>{this.props.logoutUser(this.props.history)}}>logout</div>
+    </div>
+    </div>
+
     <div className={classes.SettingBox}>
-    <div className={classes.some}>setting</div>
+    <div className={classes.some} onClick={()=>{this.setState({setting:true})}}>setting</div>
     <div className={classes.LogoutTray} onClick={()=>{this.props.logoutUser(this.props.history)}}>logout</div>
     </div>
     </div>

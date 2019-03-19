@@ -3,7 +3,6 @@
   height: 52px;
   background-color: white;
   position: sticky;
-  top: 0px;
   z-index: 50;
   border-bottom: 1px solid #dddfe2;
 }
@@ -543,7 +542,7 @@ position: relative;
   }
   .SearchBox{
     width: 68px;
-    height: 40px;
+    height: 44px;
     margin: 0;
     order: 1;
     display: flex;
@@ -551,8 +550,6 @@ position: relative;
     justify-content: center;
     background-color: white;
     border: none;
-    padding: 0;
-    z-index: 0;
   }
   .SearchBox * {
     display: none;
@@ -560,7 +557,7 @@ position: relative;
   .SearchBox .MobileSearch{
     display: inline-block;
     width: 55%;
-    height: 50%;
+    height: 55%;
     background:url('./../../assets/icons/search.svg');
     background-position: center;
     background-repeat: no-repeat;
@@ -575,31 +572,6 @@ position: relative;
     margin: 0;
     justify-content:space-around;
   }
-
-
-  .RequestCount{
-   display: inline-block;
-  }
-
-
-
-  .RequestBox{
-    width: 100vw;
-    height: 100vh;
-    margin: 0;
-    display: inline-block;
-    position: fixed;
-    top:40px;
-    left: 0px;
-  }
-  .RequestArrow{
-display: none;
-  border: none;
-  width: 0;
- }
-
-
-
   .ProfileIcon{
     display: none;
   }
@@ -607,51 +579,15 @@ display: none;
     width: 68px;
     height: 44px;
     order: 2;
+
   }
-  .SettingContainer *{
+  .SettingContainer * {
     display: none;
   }
-  .SettingContainer .MobileSettingIcon{
-    width: 20px;
-    height: 20px;
-    align-self: center;
-    background:url('./../../assets/icons/menu.svg');
-    background-position: center;
-    background-size: contain;
-    background-repeat: no-repeat;
+
+  .SettingContainer .SettingIcon{
     display: inline-block;
+    background: url('./../../assets/icons/menu.svg');
   }
-
-  .MobileSettingIcon .MobileMenu{
-    position: fixed;
-    top: 45px;
-    width: 70vw;
-    height: 100vh;
-    display: inline-block;
-    transform: translateX(20vw);
-    transition: all 0.3s ease-out;
-    background-color: white;
-    z-index: -1;
-  }
-.MobileSettingIcon:hover .MobileMenu{
-  transform: translateX(-58vw);
-}
-
-.MobileMenu > div{
-  text-align: center;
-  border-bottom: 1px solid #efefef;
-  color: #262626;
-  font-size: 16px;
-  padding: 15px 0px;
-  text-align: center;
-  width: 100%;
-  cursor: pointer;
-  height: 40px;
-  display: inline-block;
-}
-.MobileMenu div * {
-  display: inline-block;
-}
-
 
 }

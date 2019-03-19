@@ -5,12 +5,16 @@ import PostDisplay from './../../components/postdisplay/postdisplay';
 import {connect} from 'react-redux';
 import * as actionCreators from './../../actions/index';
 import classes from './profile.css';
+import EditProfile from './../editprofile/editprofile';
+
 
 class Profile extends Component{
 
   state={
     profilePostpro:[],
-    profilePicture:false
+    profilePicture:false,
+    edit:false,
+    editInfo:null
   }
 
   componentDidMount(){
@@ -18,6 +22,10 @@ class Profile extends Component{
     this.props.setProfile()
   }
 
+
+closeEdit=()=>{
+  this.setState({edit:false})
+}
 
 ProfileImgUpdate=(e)=>{
   this.setState({
@@ -46,8 +54,8 @@ componentWillReceiveProps(props){
   render(){
     return(
       <div >
+      {this.state.edit?<EditProfile close={this.closeEdit} editbox={this.state.editInfo}/>:null}
       <Header/>
-
       <div className={classes.ProfileBanner}>
       <div className={classes.ProfileCoverImage}></div>
       <div className={classes.Avatar}>
@@ -68,6 +76,10 @@ componentWillReceiveProps(props){
 
 
       <div className={classes.ProfileDetails}>
+
+      <div className={classes.SingleProfileDetails}>
+
+      <div className={classes.Edit} onClick={()=>this.setState({edit:true,editInfo:"Basic"})}></div>
       <div className={classes.ProfileName}>
       {this.props.auth.user.name.firstName+" "+this.props.auth.user.name.lastName}
       </div>
@@ -90,8 +102,43 @@ componentWillReceiveProps(props){
       <p>-Rabindranath Tagore</p>
       </div>
       </div>
+      </div>
+
+
+
+
+      <div className={classes.SingleProfileDetails}>
+
+
+      <div className={classes.OtherName}>
+      <p>Get in touch</p>
+      <div className={classes.Edit} onClick={()=>this.setState({edit:true,editInfo:"Contact"})}></div>
+      </div>
+      <div className={classes.ProfileIntro}>
+      <div className={classes.EmailIcon}></div>
+      <p>shyambhongle@gmail.com</p>
+      </div>
+
+      <div className={classes.ProfileIntro}>
+      <div className={classes.ConnectIcon}></div>
+      <p>connect with me</p>
+      </div>
+
+      <div className={classes.Follow}>
+      <div className={classes.FbIcon}></div>
+      <div className={classes.TwitterIcon}></div>
+      <div className={classes.LinkedIcon}></div>
+      </div>
+
 
       </div>
+
+
+      </div>
+
+
+
+
 
       <div className={classes.PostRelated}>
       <div className={classes.ProfilePost}>

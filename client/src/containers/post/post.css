@@ -1,11 +1,13 @@
 .Post{
   width: 100%;
-  display: inline-block;
+  display: inline-flex;
+  flex-direction: column;
   margin:auto;
   border: 1px solid #dddfe2;
   background-color: white;
   border-radius: 5px;
   position: relative;
+  z-index: 1;
 }
 
 
