@@ -6,6 +6,7 @@ import profileReducer from './profileReducer';
 import searchReducer from './searchReducer';
 import messageReducer from './messageReducer';
 import backpostReducer from './backpostReducer';
+import loading from './loading';
 
 export default combineReducers({
   auth: authReducer,
@@ -14,5 +15,6 @@ export default combineReducers({
   profile:profileReducer,
   search:searchReducer,
   msg:messageReducer,
-  backpost:backpostReducer
+  backpost:backpostReducer,
+  loading:loading
 });

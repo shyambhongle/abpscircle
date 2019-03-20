@@ -25,7 +25,8 @@ inputHandler=(e)=>{
     })
 }
 
-sendHandler=()=>{
+sendHandler=(e)=>{
+  e.preventDefault();
   let data={
       id:this.props.msg.id,
       name:this.props.msg.name,
@@ -70,7 +71,7 @@ render(){
     <input type="text" value={this.state.text}
      onChange={this.inputHandler} placeholder="write here..."/>
     <div className={classes.ButtonSend}
-    onClick={()=>{this.sendHandler();this.ScrollChange()}}></div>
+    onClick={(e)=>{this.sendHandler(e);this.ScrollChange()}}></div>
     </form>
     </div>
   )

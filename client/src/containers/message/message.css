@@ -9,7 +9,7 @@
   border: 1px solid #dddfe2;
   flex-direction: column;
   border-radius: 3px;
-  z-index: 50;
+  z-index: 2;
   overflow: hidden;
 }
 
@@ -97,13 +97,11 @@
 
 
 .BodyMsg .IndvLeft{
-  max-width: 200px;
   height: auto;
   display: flex;
   flex-direction: row-reverse;
   align-items: center;
   padding-bottom: 20px;
-  float: right;
 }
 
 .IndvLeft img{
@@ -156,4 +154,42 @@
   background-size: contain;
   background-repeat: no-repeat;
   margin-left: 2px;
+}
+@media screen and (max-width:450px) {
+  .MessageBox{
+    width: 100vw;
+    height: 95vh;
+    top:45px;
+    left: 0px;
+    border: none;
+    border-radius: 0px;
+  }
+  .MessageBox .HeaderMsg{
+    height: 60px;
+    padding: 0px;
+    margin: 0px;
+  }
+   .HeaderMsg .HeaderAvatar{
+    width: 30px;
+    height: 30px;
+  }
+  .HeaderMsg .HeaderNameMsg{
+    font-size: 18px;
+  }
+  .HeaderMsg .CloseMsg{
+    position: absolute;
+    right: 20px;
+    top: 8px;
+  }
+  .MessageBox form{
+    height: 15%;
+  }
+  .MsgInputBox input{
+    font-size: 18px;
+  }
+  .MsgInputBox .ButtonSend{
+    width: 30px;
+    height: 30px;
+    padding-left: 20px;
+  }
 }

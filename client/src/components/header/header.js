@@ -15,7 +15,9 @@ state={
   requestShow:false,
   notification:false,
   messageNotification:false,
-  setting:false
+  setting:false,
+  search:false,
+  menu:false
 }
 
 
@@ -40,7 +42,9 @@ blurHandler=()=>{
     this.setState({
       inputShow:false,
       requestShow:false,
-      notification:false
+      notification:false,
+      search:false,
+      menu:false
     })
   },200)
 }
@@ -151,7 +155,10 @@ if (!this.props.profile.allnotification.length>0) {
 
 
     <div className={classes.SearchBox}   onBlur={this.blurHandler}>
-    <div className={classes.MobileSearch}></div>
+    <div className={classes.MobileSearch} onClick={()=>{this.setState({search:this.state.search?false:true})}}>
+    </div>
+    <div className={classes.MobileInput} style={{display:this.state.search?"inline-block":"none"}}><input type="text" placeholder="search for friends"
+         onChange={(e)=>{this.props.searchInput(e); this.inputShowToogle(e)}}/></div>
     <input type="text" placeholder="search"
      onChange={(e)=>{this.props.searchInput(e); this.inputShowToogle(e)}}/>
      {
@@ -220,8 +227,12 @@ if (!this.props.profile.allnotification.length>0) {
     <div className={classes.SettingContainer}>
     <div className={classes.SettingIcon}></div>
 
-    <div className={classes.MobileSettingIcon}>
-    <div className={classes.MobileMenu}>
+    <div className={classes.MobileSettingIcon} onClick={()=>{this.setState({menu:this.state.menu?false:true})}}>
+    <div className={classes.MobileMenu}
+    style={
+    {transform:this.state.menu?
+      "translateX(-58vw)":"translateX(20vw)"}}
+    >
     <div className={classes.ProfileMobile}>
     <Link to='/profile'>Profile</Link>
     </div>

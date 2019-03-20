@@ -1,4 +1,9 @@
-
+.SearchProfile{
+  max-width: 100vw;
+  width: 100vw;
+  overflow-x: hidden;
+  background-color: #f5f5f5;
+}
 
 .ProfileBanner{
   width: 80vw;
@@ -17,7 +22,15 @@
   background-repeat: no-repeat;
   background-size: contain;
 }
-
+.MobileProfileBanner{
+  width: 100vw;
+  height: 200px;
+  display: none;
+}
+.MobileProfileBanner img{
+  height:100%;
+  width:100%;
+}
 .Avatar{
   width: 130px;
   height: 130px;
@@ -203,4 +216,69 @@ margin-top: 0px;
 .DisplayPost{
   width: 100%;
   margin-top: 40px;
+}
+
+@media screen and (max-width:450px) {
+  .ProfileBanner{
+    width: 100vw;
+    height: 200px;
+    margin: 0;
+  }
+  .ProfileCoverImage{
+    display: none;
+  }
+  .MobileProfileBanner{
+    display: inline-block;
+  }
+
+  .Avatar{
+    width: 100px;
+    height: 100px;
+    left: 35%;
+    top: 70%;
+  }
+
+.ProfileWrapper{
+  width: auto;
+  height: auto;
+  margin: auto;
+}
+.ProfileNav{
+  padding: 0;
+  margin: 0;
+}
+  .ProfileDetails{
+    width: 100vw;
+    border: none;
+    margin-top: 0px;
+    margin-bottom: 20px;
+  }
+  .ProfileDetails .ProfileName{
+    margin-top: 0px;
+  }
+  .PostRelated{
+    display: inline-flex;
+    width: 100vw;
+    flex-direction: column;
+    margin: 0;
+    margin-top: 45px;
+  }
+  .RequestHandler .RequestButton{
+    bottom: -58px;
+    min-width: 103px;
+    left: 33px;
+    margin: 0px;
+    width: auto;
+    padding: 0px 10px;
+  }
+
+  .MessageButton {
+    bottom: -28px;
+    width: 119px;
+    position: absolute;
+    right: 20px;
+    margin: 0px;
+    width: auto;
+    padding: 0px 5px;
+  }
 }

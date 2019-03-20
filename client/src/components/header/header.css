@@ -553,6 +553,7 @@ position: relative;
     border: none;
     padding: 0;
     z-index: 0;
+
   }
   .SearchBox * {
     display: none;
@@ -569,6 +570,55 @@ position: relative;
     border: none;
     margin: none;
   }
+
+ .MobileInput{
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 45px;
+  right: 0px;
+  background-color: white;
+  display: inline-flex;
+  justify-content: center;
+}
+.MobileInput *{
+  display: inline-block;
+}
+.MobileInput input{
+  width: 80%;
+  margin-left: 7%;
+  margin-top: 5px;
+
+}
+
+
+.SearchBox .SearchContainer{
+  display: inline-block;
+  width: 100vw;
+  height: 100vh;
+  left: 0px;
+  border:0px;
+  position: fixed;
+  top: 85px;
+}
+
+.SearchBox .SearchContainer .SingleUser:first-of-type{
+   border-top: 1px solid #e6e6e6;
+}
+
+ .SearchContainer li{
+margin: auto;
+width: 50%;
+left: 33%;
+}
+
+.SearchContainer .SingleUser *{
+  display: flex;
+}
+
+
+
+
   .IconTray{
     width: 49.98%;
     height: 44px;
@@ -632,14 +682,11 @@ display: none;
     width: 70vw;
     height: 100vh;
     display: inline-block;
-    transform: translateX(20vw);
     transition: all 0.3s ease-out;
     background-color: white;
     z-index: 150;
   }
-.MobileSettingIcon:hover .MobileMenu{
-  transform: translateX(-58vw);
-}
+
 
 .MobileMenu > div{
   text-align: center;

@@ -5,6 +5,8 @@ import PostDisplay from './../../components/postdisplay/postdisplay';
 import {connect} from 'react-redux';
 import * as actionCreators from './../../actions/index';
 import classes from './searchprofile.css';
+import mobImg from './../../assets/banner1.jpg';
+
 
 class SearchProfile extends Component{
 
@@ -89,10 +91,11 @@ if (this.props.myprofile.allFriends!==undefined ) {
 
 
   return(
-    <div>
+    <div className={classes.SearchProfile}>
     <Header/>
 
     <div className={classes.ProfileBanner}>
+
     <div className={classes.RequestHandler}>
     <button className={classes.RequestButton}
     onClick={()=>{this.friendRequestHandle(this.props.profile,friendButton)}}>
@@ -102,6 +105,9 @@ if (this.props.myprofile.allFriends!==undefined ) {
     <div className={classes.MessageButton}><button onClick={this.messageHandler}>message</button>
    </div>
     <div className={classes.ProfileCoverImage}></div>
+    <div className={classes.MobileProfileBanner}>
+    <img  src={mobImg} alt=''/>
+    </div>
     <div className={classes.Avatar}>
     <img src={this.props.profile.avatar}
     alt="profile pic"/>

@@ -3,6 +3,7 @@ import classes from './login.css';
 import {connect} from 'react-redux';
 import {loginUser,clearErrors} from './../../../actions/authAction';
 import {Link} from  'react-router-dom';
+import Loading from './../../../components/loading/loading';
 
 class Login extends Component{
 
@@ -39,6 +40,7 @@ submitHandler=(e)=>{
   render(){
     return(
       <div className={classes.AuthBox}>
+      {this.props.load.loading?<Loading/>:null}
       <div className={classes.LoginSection}>
       <div className={classes.CompanyLogo}>
       <div className={classes.Logo}></div>
@@ -82,7 +84,8 @@ submitHandler=(e)=>{
 
 const mapStateToProps=state=>({
   auth:state.auth,
-  errors:state.errors
+  errors:state.errors,
+  load:state.loading
 })
 
 export default connect(mapStateToProps,{loginUser,clearErrors})(Login);
