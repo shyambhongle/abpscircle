@@ -8,18 +8,22 @@ import {
   RETRIVE_POST,
   UPDATE_POST,
   POST_LOADING,
-  DELETE_POST
+  DELETE_POST,
+  BACK_POST
 } from './actionType';
 
 // Add Post
 export const newPost = (payload,img) => dispatch => {
   dispatch(clearErrors());
+  dispatch({type:POST_LOADING,payload:true});
   axios.post(`${img?'/post/image':'/post'}`,payload)
-    .then(res =>
+    .then(res =>{
       dispatch({
         type: ADD_POST,
         payload: res.data
       })
+      window.location.reload();
+    }
     )
     .catch(err =>
       dispatch({
@@ -31,7 +35,6 @@ export const newPost = (payload,img) => dispatch => {
 
 // Get Posts
 export const retrivePost = () => dispatch => {
-  dispatch(setPostLoading());
   axios
     .get('/post')
     .then(res =>
@@ -82,11 +85,16 @@ export const getPost = id => dispatch => {
 export const deletePost = id => dispatch => {
   axios
     .delete(`/post/${id}`)
-    .then(res =>
+    .then(res =>{
       dispatch({
         type: DELETE_POST,
         payload: id
       })
+      dispatch({
+        type:BACK_POST,
+        payload:res.data
+      })
+      }
     )
     .catch(err =>
       dispatch({
@@ -105,6 +113,10 @@ export const addLike = (id) => dispatch => {
         type: UPDATE_POST,
         payload: res.data
       })
+      dispatch({
+        type:BACK_POST,
+        payload:res.data
+      })
     })
     .catch(err =>
       dispatch({
@@ -122,6 +134,10 @@ export const removeLike = id => dispatch => {
       dispatch({
         type: UPDATE_POST,
         payload: res.data
+      })
+      dispatch({
+        type:BACK_POST,
+        payload:res.data
       })
     })
     .catch(err =>
@@ -143,6 +159,10 @@ export const addComment = (postId, commentData) => dispatch => {
           type: UPDATE_POST,
           payload: res.data
         })
+        dispatch({
+          type:BACK_POST,
+          payload:res.data
+        })
     }
     )
     .catch(err =>
@@ -157,11 +177,16 @@ export const addComment = (postId, commentData) => dispatch => {
 export const deleteComment = (postId, commentId) => dispatch => {
   axios
     .delete(`/post/comment/${postId}/${commentId}`)
-    .then(res =>
+    .then(res =>{
       dispatch({
         type: UPDATE_POST,
         payload: res.data
       })
+      dispatch({
+        type:BACK_POST,
+        payload:res.data
+      })
+    }
     )
     .catch(err =>
       dispatch({

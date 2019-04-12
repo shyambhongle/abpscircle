@@ -25,10 +25,53 @@ const ProfileSchema = new Schema({
     type:String,
     required:true
   },
+  cover:{
+    isImage:{
+      type:Boolean,
+      default:false
+    },
+    image:{
+      type:String,
+      default:""
+    }
+  },
   handle: {
     type: String,
     required: true,
     max: 40
+  },
+  profileInfo:{
+    school:{
+      type:String
+    },
+    classof:{
+      type:String
+    },
+    lives:{
+      type:String
+    },
+    dob:{
+      type:String
+    },
+    bio:{
+      type:String
+    },
+    facebook:{
+      type:String
+    },
+    twitter:{
+      type:String
+    },
+    linkedin:{
+      type:String
+    },
+    email:{
+      type:String
+    },
+  },
+  private:{
+    type:Boolean,
+    default:false
   },
   notification:{
     friendRequest:{

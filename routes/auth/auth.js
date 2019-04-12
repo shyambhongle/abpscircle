@@ -125,7 +125,30 @@ router.post('/login', (req, res) => {
   });
 });
 
-
+router.post('/changepassword',passport.authenticate('jwt',{session:false}),(req,res)=>{
+  User.findById(req.user.id)
+      .exec()
+      .then(user=>{
+        bcrypt.compare(req.body.current, user.password).then(isMatch => {
+          if (isMatch){
+            let updatePwd;
+            bcrypt.genSalt(10, (err, salt) => {
+              bcrypt.hash(req.body.newpassword, salt, (err, hash) => {
+                if (err) throw err;
+                User.findOneAndUpdate(
+                  {_id:req.user.id},
+                  {$set:{password:hash}},
+                  {new:true}
+                ).then(re=>{res.json({"message":"successful"})});
+              });
+            });
+          }
+          else {
+            res.json({"message":"current password did not match"});
+          }
+        })
+      })
+})
 
 
 

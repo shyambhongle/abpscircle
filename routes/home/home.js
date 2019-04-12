@@ -1,6 +1,7 @@
 const express=require('express');
 const router=express.Router();
 const Post=require('./../../models/post');
+const User=require('./../../models/user');
 const passport=require('passport')
 const Messages=require('./../../models/messages');
 
@@ -14,7 +15,7 @@ router.get('/onlinefriends',passport.authenticate('jwt',{session:false}),(req,re
                 let onlineList=[];
                 profile.allFriends.map(user=>{
                    if (user.id!==undefined) {
-                     req.io.myclients[user.id]!==undefined?onlineList.push(user):null;
+                     req.io.myclients[user.id]!==undefined && user.id!==req.user.id?onlineList.push(user):null;
                    }
                 })
                 return res.json(onlineList);
@@ -145,7 +146,22 @@ router.post('/inbox',passport.authenticate('jwt',{session:false}),(req,res)=>{
 );
 })
 
-
+router.get('/suggestion',passport.authenticate('jwt',{session:false}),(req,res)=>{
+  User.find()
+      .exec()
+      .then(allUsers=>{
+        let suggestedFriends=[];
+        allUsers.slice(Math.floor(Math.random()*5),4).map(single=>{
+          let data={
+            name:single.fullName,
+            avatar:single.avatar,
+            id:single._id
+          }
+          suggestedFriends.push(data);
+        })
+        res.json(suggestedFriends)
+      })
+})
 
 
 module.exports=router;

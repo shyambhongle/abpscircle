@@ -14,6 +14,12 @@ const backpostReducer=(state=initialState,action)=>{
         visible:true,
         loading:true
       }
+    case "NO_BACK_POST":
+    return {
+      visible:false,
+      loading:false,
+      post:{}
+    }
     case BACK_POST:
     return {
       ...state,

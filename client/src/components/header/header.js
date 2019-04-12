@@ -55,9 +55,19 @@ acceptRequest=(id,name)=>{
     id,
     name
   }
-  console.log(data);
   this.props.acceptRequest(data)
 }
+
+rejectRequest=(id,name)=>{
+  let data={
+    id,
+    name
+  }
+  this.props.reject(data)
+}
+
+
+
 messageHandler=({name,user,avatar})=>{
   let data={
     name,
@@ -83,9 +93,10 @@ if (this.props.profile.friendRequest!==undefined) {
     return(
       <div key={i} className={classes.RequestUser}>
         <img src={req.avatar} alt=""/>
-       <div className={classes.ReName}>{req.name}</div>
+       <div className={classes.ReName} onClick={()=>{this.inputClick(req.id)}}>
+       {req.name}</div>
         <button className={classes.AcceptButton} onClick={()=>{this.acceptRequest(req.id,req.name)}}>accept</button>
-        <button className={classes.RejectButton} onClick={()=>{this.acceptRequest(req.id,req.name)}}>reject</button>
+        <button className={classes.RejectButton} onClick={()=>{this.rejectRequest(req.id,req.name)}}>reject</button>
         </div>
     );
 });
@@ -96,10 +107,13 @@ if (!this.props.profile.friendRequest.length>0) {
 
 let notificationCount;
 if (this.props.profile.allnotification!==undefined) {
-  notificationCount=this.props.profile.allnotification.map((req,i)=>{
+  let noOfNotification=this.props.profile.allnotification.reverse().slice(0,5);
+  notificationCount=noOfNotification.map((req,i)=>{
     return(
-      <div key={i} className={classes.RequestUser} onClick={()=>{
-        this.props.displayBackPost(req.data)
+      <div key={i}
+       className={classes.RequestUser}
+       onClick={()=>{
+      this.props.displayBackPost(req.data)
       }}>
        <div className={classes.NotiName}>{req.message}</div>
         </div>
@@ -127,6 +141,9 @@ if (this.props.msg.inbox.length>0) {
 if (!this.props.profile.allnotification.length>0) {
    notificationCount=<div className={classes.RequestUser}><div className={classes.ReNo}>No Notification</div></div>
 }
+}else {
+  messageCount=<div className={classes.RequestInbox}>
+  <div className={classes.ReNo}>No messgaes to show</div></div>
 }
 
 
@@ -236,14 +253,14 @@ if (!this.props.profile.allnotification.length>0) {
     <div className={classes.ProfileMobile}>
     <Link to='/profile'>Profile</Link>
     </div>
-    <div className={classes.some} onClick={()=>{this.setState({setting:true})}}>setting</div>
-    <div className={classes.LogoutTray} onClick={()=>{this.props.logoutUser(this.props.history)}}>logout</div>
+    <div className={classes.some} onClick={()=>{this.setState({setting:true})}}>Setting</div>
+    <div className={classes.LogoutTray} onClick={()=>{this.props.logoutUser(this.props.history)}}>Log Out</div>
     </div>
     </div>
 
     <div className={classes.SettingBox}>
-    <div className={classes.some} onClick={()=>{this.setState({setting:true})}}>setting</div>
-    <div className={classes.LogoutTray} onClick={()=>{this.props.logoutUser(this.props.history)}}>logout</div>
+    <div className={classes.some} onClick={()=>{this.setState({setting:true})}}>Setting</div>
+    <div className={classes.LogoutTray} onClick={()=>{this.props.logoutUser(this.props.history)}}>Log Out</div>
     </div>
     </div>
 
@@ -279,6 +296,7 @@ const mapDispatchToProps=dispatch=>({
   searchInput:(e)=>{dispatch(actionCreators.searchPerson(e))},
   searchProfile:(id,history)=>{dispatch(actionCreators.searchProfile(id,history))},
   acceptRequest:(data)=>{dispatch(actionCreators.acceptRequest(data))},
+  reject:(data)=>{dispatch(actionCreators.reject(data))},
   clearNotification:(id,query)=>{dispatch(actionCreators.clearNotification(id,query))},
   inboxMsg:(data,id)=>{dispatch(actionCreators.inboxMsg(data,id))},
   openMsg:(data)=>{dispatch(actionCreators.openMsgBox(data))},

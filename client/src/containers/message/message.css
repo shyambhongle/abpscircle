@@ -30,19 +30,21 @@
 }
 
 .HeaderMsg .HeaderNameMsg{
+  cursor: pointer;
   color:#262626;
   font-size: 14px;
   font-weight: 500;
   margin-left: 10px;
+  max-width: 60%;
+  width: 60%;
 }
 
 .HeaderMsg .CloseMsg{
   width: 18px;
   height: 18px;
   display: inline-block;
-  align-self: flex-start;
-  margin-left: 90px;
-  margin-top: 8px;
+  margin-top: 2%;
+  margin-left: 10%;
   background: url('./../../assets/icons/close.svg');
   background-position: center;
   background-repeat: no-repeat;

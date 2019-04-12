@@ -20,8 +20,7 @@ export const searchProfile=(id,history)=>{
     axios.post('/search/friendprofile',{id})
           .then(res=>{
             dispatch({type:SEARCH_PROFILE,payload:res.data})
-            history.push(`/`)
-            history.push(`/profile/${id}`)
+            history.push(`/profile/${res.data.handle}`)
           })
   }
 }

@@ -12,15 +12,46 @@
   position: relative;
 }
 
+.PrivateAcc{
+  color: #999999;
+  font-size: 20px;
+  letter-spacing: 2px;
+  word-spacing: 5px;
+  margin-top: 10%;
+  width: 100%;
+  text-align: center;
+}
+.PrivateAcc p{
+  font-size: 12px;
+  letter-spacing: 1px;
+  word-spacing: 3px;
+}
+
+ .PrivateLock{
+  width: 18px;
+  height: 18px;
+  display: inline-block;
+  margin-left: -5px;
+  position: relative;
+  background: url('./../../assets/icons/padlock.svg');
+  background-position:center;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
 
 .ProfileCoverImage{
   width: 100%;
   height: 100%;
-  background-color: green;
-  background:url('./../../assets/banner1.jpg');
   background-attachment:fixed;
   background-repeat: no-repeat;
-  background-size: contain;
+  background-size: 100% 60%;
+}
+.SearchCoverImg{
+  width: 100%;
+  height: 100%;
+  background-attachment:fixed;
+  background-repeat: no-repeat;
+  background-size: 100% 60%;
 }
 .MobileProfileBanner{
   width: 100vw;
@@ -177,10 +208,6 @@
   display: inline-block;
 }
 
-.ProfileIntro:nth-of-type(3){
-margin-top: 0px;
-}
-
 .FavQuote{
   margin-left: 30px;
   width: 90%;
@@ -198,13 +225,11 @@ margin-top: 0px;
 
 .PostRelated{
   width: 550px;
-  position: relative;
-  width: 550px;
-  display: inline-block;
-  margin-left: 40px;
-  top: -50px;
   display: inline-flex;
   flex-direction: column;
+  float: right;
+  margin-right: 17%;
+  margin-top: 3%;
   justify-content: center;
 }
 
@@ -217,6 +242,121 @@ margin-top: 0px;
   width: 100%;
   margin-top: 40px;
 }
+
+
+.ProfileIntro:nth-of-type(3){
+margin-top: 0px;
+}
+.ConnectIcon{
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  background: url('./../../assets/icons/link.svg');
+  background-position:bottom;
+  background-repeat: no-repeat;
+  background-size: contain;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.SingleProfileDetails{
+  border-radius: 5px;
+  background: white;
+  border: 1px solid #e6e6e6;
+  width: 100%;
+  display: inline-block;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+
+.ProfileIntro{
+  margin-top: 15px;
+  width: 90%;
+  font-size: 14px;
+  color: #262626;
+  display:flex;
+  align-items: center;
+}
+.Follow{
+  width: 90%;
+  display:flex;
+  align-items: center;
+  margin-left: 20px;
+}
+.EmailIcon{
+  margin-right: 10px;
+  margin-left: 10px;
+  width: 20px;
+  height: 18px;
+  display: inline-block;
+  background: url('./../../assets/icons/email.svg');
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+.FbIcon{
+  margin-right: 10px;
+  margin-left: 10px;
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+  background: url('./../../assets/icons/facebook.svg');
+  cursor: pointer;
+
+}
+.TwitterIcon{
+  margin-right: 10px;
+  margin-left: 10px;
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+  background: url('./../../assets/icons/twitter.svg');
+  cursor: pointer;
+}
+.LinkedIcon{
+  margin-right: 10px;
+  margin-left: 10px;
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+  background: url('./../../assets/icons/linkedin.svg');
+  cursor: pointer;
+}
+
+
+.ProfileDetails .OtherName{
+  color: #262626;
+  font-size: 15px;
+  border-bottom: 1px solid #e6e6e6;
+  width: 100%;
+  display:inline-flex;
+  align-items: center;
+  height: 30px;
+}
+
+.ProfileDetails .OtherName .Edit{
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  background: url('./../../assets/icons/edit.svg');
+  cursor: pointer;
+  margin-left: 175px;
+  margin-top: 0px;
+}
+.ProfileDetails .OtherName p{
+  margin-left: 10px;
+}
+
+
+
+
+
+
+
+
+
+
 
 @media screen and (max-width:450px) {
   .ProfileBanner{

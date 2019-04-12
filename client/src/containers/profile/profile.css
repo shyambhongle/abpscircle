@@ -3,6 +3,8 @@
   width: 100vw;
   overflow-x: hidden;
   background-color: #f5f5f5;
+  position: relative;
+  top: 52px;
 }
 .ProfileBanner{
   width: 80vw;
@@ -15,12 +17,87 @@
 .ProfileCoverImage{
   width: 100%;
   height: 100%;
-background-color: green;
-background:url('./../../assets/banner1.jpg');
-background-attachment:fixed;
-background-repeat: no-repeat;
-background-size: contain;
 }
+
+.ProfileCoverImage .CoverBack{
+  height: 100%;
+  width: 100%;
+  background-attachment:fixed;
+  background-repeat: no-repeat;
+  background-size: 100% 60%;
+}
+
+
+.DummyCoverImage{
+  width: 100%;
+  height: 100%;
+  background-attachment:fixed;
+  background-repeat: no-repeat;
+  background-size: 100% 60%;
+}
+
+.ProfileCoverLoad{
+  width: 100%;
+  height: 116%;
+  background-color: rgba(0, 0, 0, 0.1);
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+}
+.UpdateCoverPicture{
+  display: inline-block;
+  width: auto;
+  height: auto;
+  position: absolute;
+  top: 10%;
+  right: 1%;
+}
+
+.UpdateCoverPicture input{
+  width: 0.1px;
+  	height: 0.1px;
+  	opacity: 0;
+  	overflow: hidden;
+  	position: absolute;
+  	z-index: -1;
+}
+
+.UpdateCoverPicture label{
+  cursor: pointer;
+  position: absolute;
+  right: 0px;
+  margin: 0;
+  padding: 0;
+  color: #2488ff;
+  font-size: 18px;
+  display: inline-block;
+  font-weight: bolder;
+  width: auto;
+}
+
+
+.UpdateCoverPicture .UploadCoverButton{
+  display: inline;
+  text-align:center;
+  position: absolute;
+  color: white;
+  font-size: 16px;
+  padding: 5px 10px;
+  background-color: grey;
+  border:none;
+  outline: none;
+  cursor: pointer;
+  left:-80px;
+}
+
+.UpdateCoverPicture button{
+  background-color: none;
+  border:none;
+  outline: none;
+  cursor: pointer;
+}
+
+
 .MobileProfileBanner{
   width: 100vw;
   height: 200px;
@@ -45,6 +122,19 @@ background-size: contain;
   height: 100%;
   border-radius: 50%;
   border: 2px solid white;
+}
+
+.AvatarLoading{
+  width: 130px;
+  height: 130px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  border: 2px solid white;
+  background-color: rgba(0, 0, 0, 0.1);
+  z-index: 200;
+  position: absolute;
 }
 
 .Avatar .ProfileBackDrop{
@@ -92,18 +182,20 @@ display: inline-block;
 
 
 .UpdateProfilePicture .UploadImgButton{
+  text-align:center;
   position: absolute;
   width: 60px;
-  height: 30px;
+  height: 50%;
   top: -15px;
   left: -10px;
   background-color: none;
-  border:none;
-  outline: none;
-  background: url('./../../assets/icons/arrow.svg');
-  background-repeat: no-repeat;
+  background: url('./../../assets/icons/checked.svg');
   background-position: center;
+  background-repeat:no-repeat;
   background-size: contain;
+  border:none;
+  padding: 0px;
+  outline: none;
   cursor: pointer;
 }
 .UpdateProfilePicture .UploadImgButton button{
@@ -326,7 +418,6 @@ margin-top: 0px;
 
 .PostRelated{
   width: 550px;
-  width: 550px;
   display:inline-flex;
   flex-direction: column;
   justify-content: center;
@@ -334,7 +425,6 @@ margin-top: 0px;
 
 .ProfilePost{
   width: 100%;
-
 }
 
 .DisplayPost{

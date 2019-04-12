@@ -3,7 +3,8 @@ export {
     loginUser,
     logoutUser,
     setCurrentUser,
-    clearErrors
+    clearErrors,
+    changepassword
 } from './authAction';
 
 export {
@@ -11,7 +12,8 @@ export {
     profilePost,
     deletePost,
     addLike,
-    removeLike
+    removeLike,
+    deleteComment
 } from './postAction';
 
 
@@ -26,17 +28,20 @@ export {
 export {
     setProfile,
     addFriend,
+    privateacc,
     acceptRequest,
     cancelRequest,
     unfriend,
     reject,
-    updateProfilePicture
+    updateProfilePicture,
+    updateCoverPicture
 } from './profileAction';
 
 export {
     clearNotification,
     displayBackPost,
-    fade
+    fade,
+    suggestion
 } from './headerAction';
 
 

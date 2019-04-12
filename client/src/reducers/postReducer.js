@@ -65,6 +65,7 @@ export default function(state = initialState, action) {
       case ADD_POST:
         return {
           ...state,
+          loading:false,
           profilePost: [action.payload, ...state.profilePost]
           };
     default:

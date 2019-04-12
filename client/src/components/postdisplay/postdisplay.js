@@ -4,6 +4,7 @@ import CommentForm from './commentForm/commentForm';
 import CommentFeed from './commentFeed/commentFeed';
 import {connect} from 'react-redux';
 import * as actionCreator from './../../actions/index';
+import {withRouter} from 'react-router-dom';
 
 class PostDisplay extends Component{
 
@@ -22,6 +23,9 @@ state={
     this.props.removeLike(id);
   }
 
+  inputClick=(id)=>{
+    this.props.searchProfile(id,this.props.history)
+  }
 
 
     findUserLike=(likes)=>{
@@ -40,13 +44,27 @@ render(){
     if (this.props.data.length>0) {
       post=this.props.data.map((singlePost,i)=>{
         return (
-          <div className={classes.Post} key={singlePost._id}>
-          <div className={classes.PostArea} >
+          <div className={classes.Post}
+          key={singlePost._id}>
+          <div className={classes.PostArea}>
           <div className={classes.PostDisplayHeader}>
 
           <div className={classes.Avatar}><img src={singlePost.avatar} alt="avatar"/></div>
-          <div className={classes.Name}>{singlePost.name.firstName+" "+
-        singlePost.name.lastName}</div>
+          {singlePost.user!==singlePost.someoneid.id?
+            <div className={classes.Name}>
+            <div className={classes.Name}
+            onClick={()=>{this.inputClick(singlePost.someoneid.id)}}
+            >{singlePost.name.firstName+" "+
+          singlePost.name.lastName}</div>
+          <span>&nbsp; &gt;</span>  <div className={classes.Name}
+            onClick={()=>{this.inputClick(singlePost.user)}}
+            >{singlePost.someoneid.name}</div>
+            </div>
+            :
+            <div className={classes.Name}
+            onClick={()=>{this.inputClick(singlePost.user)}}
+            >{singlePost.name.firstName+" "+
+          singlePost.name.lastName}</div>}
         {
           this.props.auth.user.id!==singlePost.user?null:
         <div className={classes.DeletePost}>
@@ -56,11 +74,14 @@ render(){
           </div>
 
           <div className={classes.Article}
+          onClick={()=>{this.props.displayBackPost(singlePost._id)}}
           style={{display:singlePost.text.length===0?"none":"block"}}>
           {singlePost.text}</div>
           {
             singlePost.img.image!==false?<div className={classes.PostImage}>
-            <img src={singlePost.img.image!==false?singlePost.img.image:null} alt='postImage'/>
+            <img  onClick={()=>{this.props.displayBackPost(singlePost._id)}}
+            src={singlePost.img.image!==false?singlePost.img.image:null}
+            alt='postImage'/>
             </div>:null
           }
           <div className={classes.LikeButton}>
@@ -88,7 +109,7 @@ render(){
       </div>
     }
   return (
-    <div>
+    <div className={classes.PostPostDisplay}>
     {post}
     </div>
   );
@@ -104,7 +125,9 @@ const mapStateToProps=state=>({
 const mapsDispatchToprops=dispatch=>({
   addLike:(data)=>{dispatch(actionCreator.addLike(data))},
   removeLike:(id)=>{dispatch(actionCreator.removeLike(id))},
+  displayBackPost:(data)=>{dispatch(actionCreator.displayBackPost(data))},
+  searchProfile:(id,history)=>{dispatch(actionCreator.searchProfile(id,history))},
 })
 
 
-export default connect(mapStateToProps,mapsDispatchToprops)(PostDisplay);
+export default connect(mapStateToProps,mapsDispatchToprops)(withRouter(PostDisplay));

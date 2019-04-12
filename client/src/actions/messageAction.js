@@ -28,6 +28,9 @@ export const closeMsgBox=()=>{
 
 export const newMessage=({name,id,text,senderAvatar})=>{
   return dispatch=>{
+    if (text==="") {
+      return;
+    }
     axios.post('/newmessage',{id,text,name,senderAvatar})
           .then(res=>{
             console.log(res);

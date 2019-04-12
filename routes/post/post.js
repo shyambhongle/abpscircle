@@ -37,25 +37,28 @@ router.get('/',passport.authenticate('jwt',{session:false}),(req,res)=>{
   Profile.findOne({user:req.user.id})
           .then(profile=>{
             let allfriendspost=[];
-            let freindsPost=profile.allFriends.map(friend=>{
-              return Post.find({user:friend.id})
-                    .then(
-                      posts=>{
-                        posts.map(singlepost=>{
-                          return allfriendspost.push(singlepost)
-                        })
-                      }
-                    )
-            })
+            let freindsPost;
+            if (profile.allFriends.length>0) {
+              freindsPost=profile.allFriends.map(friend=>{
+                return Post.find({user:friend.id})
+                      .then(
+                        posts=>{
+                          posts.map(singlepost=>{
+                            return allfriendspost.push(singlepost)
+                          })
+                        }
+                      )
+              })
+              Promise.all(freindsPost).then((completed) =>
+              {
+                return   res.json(allfriendspost);
+              }
+            );
+          }else {
+            return   res.json(allfriendspost);
+          }
 
-            Promise.all(freindsPost).then((completed) =>
-            {
 
-
-              return   res.json(allfriendspost);
-
-            }
-          );
           })
 })
 
@@ -64,13 +67,18 @@ router.get('/',passport.authenticate('jwt',{session:false}),(req,res)=>{
 router.post('/image',passport.authenticate('jwt', { session: false }),upload.single('img'),(req,res)=>{
   cloudinary.v2.uploader.upload(req.file.path,{folder:"social"},
   (error, result)=>
-  {
-    let title=req.body.text?req.body.text:""
+  {console.log(req.body);
+    let title=req.body.text?req.body.text:" ";
     const newPost = new Post({
       text: req.body.text,
-      name: req.user.name,
-      avatar: req.user.avatar,
-      user: req.user.id,
+      name:req.user.name,
+      avatar:req.user.avatar,
+      user: req.body.from?req.body.id:req.user.id,
+      someoneid:{
+        id:req.user.id,
+        name:req.body.name,
+        avatar:req.body.avatar
+      },
       img:{
         image:result.url,
         imageTitle:title,
@@ -83,11 +91,17 @@ router.post('/image',passport.authenticate('jwt', { session: false }),upload.sin
 );
 
 router.post('/',passport.authenticate('jwt', { session: false }),(req,res)=>{
+
     const newPost = new Post({
       text: req.body.text,
-      name: req.user.name,
-      avatar: req.user.avatar,
-      user: req.user.id,
+      name:req.user.name,
+      avatar:req.user.avatar,
+      user: req.body.someone.from?req.body.someone.id:req.user.id,
+      someoneid:{
+        id:req.user.id,
+        name:req.body.someone.name,
+        avatar:req.body.someone.avatar
+      },
       img:{
         image:false,
         imageTitle:false,
@@ -153,17 +167,19 @@ router.post(
             message:`${req.user.fullName} liked your post.`,
             data:post._id
           }
-          Profile.findOneAndUpdate(
-            {user:post.user},
-            {$push:{allnotification:notifyData},$inc:{"notification.newnotification":1}},
-            {multi:true,new:true},
-          ).then(newNotify=>{
-            if (req.io.myclients[post.user]){
-                req.io.sockets.connected[req.io.myclients[post.user].socket].emit("newnotification",newNotify);
-              }else {
-                console.log("not happend");
-              }
-          })
+          if (post.user!=req.user.id) {
+            Profile.findOneAndUpdate(
+              {user:post.user},
+              {$push:{allnotification:notifyData},$inc:{"notification.newnotification":1}},
+              {multi:true,new:true},
+            ).then(newNotify=>{
+              if (req.io.myclients[post.user]){
+                  req.io.sockets.connected[req.io.myclients[post.user].socket].emit("newnotification",newNotify);
+                }else {
+                  console.log("not happend");
+                }
+            })
+          }
         })
         .catch(err => res.status(404).json({ postnotfound: 'No post found' }));
 
@@ -227,17 +243,22 @@ router.post(
           message:`${req.user.fullName} commented on your post.`,
           data:post._id
         }
-        Profile.findOneAndUpdate(
-          {user:post.user},
-          {$push:{allnotification:notifyData},$inc:{"notification.newnotification":1}},
-          {multi:true,new:true},
-        ).then(newNotify=>{
-          if (req.io.myclients[post.user]){
-              req.io.sockets.connected[req.io.myclients[post.user].socket].emit("newnotification",newNotify);
-            }else {
-              console.log("not happend");
-            }
-        })
+        if (post.user!=req.user.id) {
+          console.log(post.user);
+          console.log(req.user.id);
+          console.log("kyu");
+          Profile.findOneAndUpdate(
+            {user:post.user},
+            {$push:{allnotification:notifyData},$inc:{"notification.newnotification":1}},
+            {multi:true,new:true},
+          ).then(newNotify=>{
+            if (req.io.myclients[post.user]){
+                req.io.sockets.connected[req.io.myclients[post.user].socket].emit("newnotification",newNotify);
+              }else {
+                console.log("not happend");
+              }
+          })
+        }
       })
       .catch(err => res.status(404).json({ postnotfound: 'No post found' }));
   }

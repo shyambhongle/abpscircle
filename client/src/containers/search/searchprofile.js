@@ -10,13 +10,33 @@ import mobImg from './../../assets/banner1.jpg';
 
 class SearchProfile extends Component{
 
+  state={
+    profileInfo:{
+      school:"",
+      classof:"",
+      dob:"",
+      bio:"",
+      lives:"",
+      email:"",
+      facebook:"",
+      twitter:"",
+      linkedin:""
+    }
+  }
 
 
 componentDidMount(){
+  if (this.props.auth.user.id===this.props.profile.user) {
+    this.props.history.push('/profile');
+    return;
+  }
   this.props.profilePost(this.props.profile.user)
 }
 
 componentWillReceiveProps(props){
+  this.setState({
+    profileInfo:props.profile.profileInfo?props.profile.profileInfo:this.state.profileInfo
+  })
 }
 
 friendRequestHandle=({user,fullName,avatar},query)=>{
@@ -56,8 +76,13 @@ messageHandler=()=>{
 
 
 render(){
+
+let privateTest=true;
+
+
 let friendButton;
 if (this.props.myprofile.allFriends!==undefined ) {
+
   if (this.props.myprofile.allFriends.length>0) {
     this.props.myprofile.allFriends.map(friends=>{
       return friends.id===this.props.profile.user?friendButton="unfriend":null
@@ -86,8 +111,11 @@ if (this.props.myprofile.allFriends!==undefined ) {
 }
 
 
-
-
+if (friendButton==="unfriend") {
+  privateTest=false;
+}else {
+  privateTest=true;
+}
 
 
   return(
@@ -104,7 +132,11 @@ if (this.props.myprofile.allFriends!==undefined ) {
     </div>
     <div className={classes.MessageButton}><button onClick={this.messageHandler}>message</button>
    </div>
-    <div className={classes.ProfileCoverImage}></div>
+    <div className={classes.ProfileCoverImage}>
+    {this.props.profile.cover?<div className={classes.SearchCoverImg}
+    style={{backgroundImage:`url(${this.props.profile.cover.image?
+      this.props.profile.cover.image:""})`}}></div>:null}
+    </div>
     <div className={classes.MobileProfileBanner}>
     <img  src={mobImg} alt=''/>
     </div>
@@ -125,34 +157,70 @@ if (this.props.myprofile.allFriends!==undefined ) {
     </div>
     <div className={classes.ProfileIntro}>
     <div className={classes.SchoolIcon}></div>
-    <p>Studied at Aditya Birla Public School,Awarpur</p>
+    <p>{this.state.profileInfo.school}</p>
     </div>
     <div className={classes.ProfileIntro}>
     <div className={classes.BatchIcon}></div>
-    class of 2015
+    {this.state.profileInfo.classof}
      </div>
     <div className={classes.ProfileIntro}>
     <div className={classes.PlaceIcon}></div>
-    Lives in Pune
-    </div>
+    {this.state.profileInfo.lives}</div>
 
     <div className={classes.ProfileIntro}>
     <div className={classes.FavQuote}>
-    "Be the captain of your journey!!"
-    <p>-Rabindranath Tagore</p>
+    {this.state.profileInfo.bio}
     </div>
     </div>
+
+    <div className={classes.SingleProfileDetails}>
+    <div className={classes.OtherName}>
+    <p >Get in touch</p>
+    </div>
+    <div className={classes.ProfileIntro}>
+    <div className={classes.EmailIcon}></div>
+    <p>{this.state.profileInfo.email}</p>
+    </div>
+
+    <div className={classes.ProfileIntro}>
+    <div className={classes.ConnectIcon}></div>
+    <p>connect with {this.props.profile.name?this.props.profile.name.firstName:"me"}</p>
+    </div>
+
+    <div className={classes.Follow}>
+    <a href={this.state.profileInfo.facebook} target="_blank">
+    <div className={classes.FbIcon}></div>
+    </a>
+    <a href={this.state.profileInfo.TwitterIcon} target="_blank">
+    <div className={classes.TwitterIcon}></div>
+    </a>
+    <a href={this.state.profileInfo.LinkedIcon} target="_blank">
+    <div className={classes.LinkedIcon}></div>
+    </a>
+    </div>
+
 
     </div>
 
 
-    <div className={classes.PostRelated}>
-    <div className={classes.ProfilePost}>
-    <Post/>
+
+
     </div>
-    <div className={classes.DisplayPost}>
-    <PostDisplay data={this.props.post} delete={this.props.deletePost}/>
-    </div>
+
+
+    <div  className={classes.PostRelated}>
+    {this.props.profile.private && privateTest?<div className={classes.PrivateAcc}>
+    This account is private <div className={classes.PrivateLock}></div>
+    <p>To see {this.props.profile.name.firstName}'s post you should be friends. </p>
+    </div>:
+      <div>
+      <div className={classes.ProfilePost}>
+      <Post OtherPro="true"/>
+      </div>
+      <div className={classes.DisplayPost}>
+      <PostDisplay data={this.props.post} delete={this.props.deletePost}/>
+      </div>
+      </div>}
     </div>
 
     </div>
@@ -165,7 +233,8 @@ if (this.props.myprofile.allFriends!==undefined ) {
 const mapStateToProps=state=>({
   profile:state.search.searchPerson,
   post:state.search.searchPersonPost,
-  myprofile:state.profile.profile
+  myprofile:state.profile.profile,
+  auth:state.auth
 })
 
 const mapDispatchToProps=dispatch=>({

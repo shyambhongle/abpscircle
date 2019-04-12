@@ -6,6 +6,7 @@ import profileReducer from './profileReducer';
 import searchReducer from './searchReducer';
 import messageReducer from './messageReducer';
 import backpostReducer from './backpostReducer';
+import suggestionReducer from './suggestionReducer';
 import loading from './loading';
 
 export default combineReducers({
@@ -16,5 +17,6 @@ export default combineReducers({
   search:searchReducer,
   msg:messageReducer,
   backpost:backpostReducer,
-  loading:loading
+  loading:loading,
+  suggestion:suggestionReducer
 });

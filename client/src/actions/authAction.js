@@ -66,6 +66,26 @@ export const logoutUser = (history) => dispatch => {
     history.push('/auth/login')
   }
 };
+
+export const changepassword=(data,history)=>{
+  return dispatch=>{
+    axios.post('/auth/changepassword',data)
+        .then(res=>{
+          console.log(res.data.message);
+          if (res.data.message==="successful") {
+            dispatch(logoutUser(history));
+          }
+          else{
+            dispatch({
+              type: GET_ERRORS,
+              payload: res.data
+            })
+          }
+        })
+  }
+}
+
+
 export const clearErrors = () => {
   return {
     type: CLEAR_ERRORS,

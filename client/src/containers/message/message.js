@@ -1,6 +1,7 @@
 import React,{Component} from 'react';
 import classes from './message.css';
 import {connect} from 'react-redux';
+import {withRouter} from 'react-router-dom';
 import * as actionCreators from './../../actions/index.js';
 
 
@@ -18,6 +19,13 @@ componentDidMount(){
 componentWillReceiveProps(){
   this.ScrollChange();
 }
+
+
+inputClick=(id)=>{
+  this.props.searchProfile(id,this.props.history)
+}
+
+
 
 inputHandler=(e)=>{
     this.setState({
@@ -62,7 +70,9 @@ render(){
     <div className={classes.HeaderMsg}>
     <img className={classes.HeaderAvatar}
     src={this.props.msg.avatar} alt=""/>
-    <div className={classes.HeaderNameMsg}>{this.props.msg.name}</div>
+    <div className={classes.HeaderNameMsg}
+    onClick={()=>{this.inputClick(this.props.msg.id)}}>
+    {this.props.msg.name}</div>
     <div className={classes.CloseMsg}
     onClick={this.props.closeMsgBox}></div>
     </div>
@@ -87,7 +97,8 @@ const mapStateToProps=state=>({
 
 const mapDispatchToProps=dispatch=>({
   sendMessage:(data)=>{dispatch(actionCreators.newMessage(data))},
-  closeMsgBox:()=>{dispatch(actionCreators.closeMsgBox())}
+  closeMsgBox:()=>{dispatch(actionCreators.closeMsgBox())},
+  searchProfile:(id,history)=>{dispatch(actionCreators.searchProfile(id,history))},
 })
 
-export default connect(mapStateToProps,mapDispatchToProps)(Message);
+export default connect(mapStateToProps,mapDispatchToProps)(withRouter(Message));
