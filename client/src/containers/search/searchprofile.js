@@ -30,7 +30,6 @@ componentDidMount(){
     this.props.history.push('/profile');
     return;
   }
-  this.props.profilePost(this.props.profile.user)
 }
 
 componentWillReceiveProps(props){
@@ -238,7 +237,6 @@ const mapStateToProps=state=>({
 })
 
 const mapDispatchToProps=dispatch=>({
-profilePost:(id)=>{dispatch(actionCreators.searchProfilePost(id))},
 addFriend:(data)=>{dispatch(actionCreators.addFriend(data))},
 acceptRequest:(data)=>{dispatch(actionCreators.acceptRequest(data))},
 cancelRequest:(data)=>{dispatch(actionCreators.cancelRequest(data))},

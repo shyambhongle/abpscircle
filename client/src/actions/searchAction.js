@@ -22,8 +22,13 @@ export const searchProfile=(id,history)=>{
             dispatch({type:SEARCH_PROFILE,payload:res.data})
             history.push(`/profile/${res.data.handle}`)
           })
+    axios.post('/search/friendpost',{id})
+          .then(res=>{
+            dispatch({type:SEARCH_PROFILEPOST,payload:res.data})
+          })
   }
-}
+  }
+
 
 export const onlineFriendSearch=()=>{
     return dispatch=>{

@@ -67,13 +67,13 @@ router.get('/',passport.authenticate('jwt',{session:false}),(req,res)=>{
 router.post('/image',passport.authenticate('jwt', { session: false }),upload.single('img'),(req,res)=>{
   cloudinary.v2.uploader.upload(req.file.path,{folder:"social"},
   (error, result)=>
-  {console.log(req.body);
+  {
     let title=req.body.text?req.body.text:" ";
     const newPost = new Post({
       text: req.body.text,
       name:req.user.name,
       avatar:req.user.avatar,
-      user: req.body.from?req.body.id:req.user.id,
+      user: req.body.from==='true'?req.body.id:req.user.id,
       someoneid:{
         id:req.user.id,
         name:req.body.name,
@@ -85,7 +85,24 @@ router.post('/image',passport.authenticate('jwt', { session: false }),upload.sin
         imageId:result.public_id
       }
     });
-    newPost.save().then(post => res.json(post));
+    newPost.save().then(post => {res.json(post);
+      let notifyData={
+        message:`${req.user.fullName} posted on your profile.`,
+        data:post._id
+      }
+      if (req.body.from==='true') {
+        Profile.findOneAndUpdate(
+          {user:req.body.id},
+          {$push:{allnotification:notifyData},$inc:{"notification.newnotification":1}},
+          {multi:true,new:true},
+        ).then(newNotify=>{
+          if (req.io.myclients[req.body.id]){
+              req.io.sockets.connected[req.io.myclients[post.user].socket].emit("newnotification",newNotify);
+            }else {
+              console.log("not happend");
+            }
+        })
+      }});
   })
 }
 );
@@ -108,7 +125,24 @@ router.post('/',passport.authenticate('jwt', { session: false }),(req,res)=>{
         imageId:false
       }
     });
-    newPost.save().then(post => res.json(post));
+    newPost.save().then(post => {res.json(post);
+      let notifyData={
+        message:`${req.user.fullName} posted on your profile.`,
+        data:post._id
+      }
+      if (req.body.someone.from==='true') {
+        Profile.findOneAndUpdate(
+          {user:req.body.someone.id},
+          {$push:{allnotification:notifyData},$inc:{"notification.newnotification":1}},
+          {multi:true,new:true},
+        ).then(newNotify=>{
+          if (req.io.myclients[req.body.someone.id]){
+              req.io.sockets.connected[req.io.myclients[req.body.someone.id].socket].emit("newnotification",newNotify);
+            }else {
+              console.log("not happend");
+            }
+        })
+      }});
   });
 
 
@@ -244,9 +278,6 @@ router.post(
           data:post._id
         }
         if (post.user!=req.user.id) {
-          console.log(post.user);
-          console.log(req.user.id);
-          console.log("kyu");
           Profile.findOneAndUpdate(
             {user:post.user},
             {$push:{allnotification:notifyData},$inc:{"notification.newnotification":1}},

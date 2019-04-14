@@ -38,7 +38,7 @@ submitHandler=(e)=>{
   data.append('img', this.state.img);
   data.append('text',this.state.text);
   let someone={
-    from:this.props.OtherPro?true:false,
+    from:this.props.OtherPro?'true':'false',
     name:this.props.OtherPro?this.props.searchProfile.fullName:"false",
     avatar:this.props.OtherPro?this.props.searchProfile.avatar:"false",
     id:this.props.OtherPro?this.props.searchProfile.user:"false"

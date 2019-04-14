@@ -116,8 +116,8 @@ CoverImageSubmit=(e)=>{
       <form onSubmit={this.CoverImageSubmit} className={classes.UpdateCoverPicture}>  {this.state.coverPicture?
           <button type="submit" className={classes.UploadCoverButton}>Change</button>:
         <span><input type="file"
-          name="file" id="file" onChange={this.CoverImgUpdate}/>
-         <label htmlFor="file">Edit</label></span>
+          name="file" id="coverPic" onChange={this.CoverImgUpdate}/>
+         <label htmlFor="coverPic">Edit</label></span>
         }</form>
       <div className={classes.MobileProfileBanner}>
       <img  src={mobImg} alt=''/>
@@ -129,8 +129,8 @@ CoverImageSubmit=(e)=>{
       <form onSubmit={this.ProfileImageSubmit} className={classes.UpdateProfilePicture}>  {this.state.profilePicture?
           <button type="submit" className={classes.UploadImgButton}></button>:
         <span><input type="file"
-          name="file" id="file" onChange={this.ProfileImgUpdate}/>
-         <label htmlFor="file">+</label></span>
+          name="file" id="avatarFile" onChange={this.ProfileImgUpdate}/>
+         <label htmlFor="avatarFile">+</label></span>
         }</form>
       </div>
       <img src={this.state.preview?this.state.previewUrl:this.props.profile.avatar} alt="profile pic"/>
