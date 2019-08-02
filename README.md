@@ -3,6 +3,9 @@
 
 <h4 align="center">Social network for alumni of ABPS.</h4>
 
+<h1 align="center">
+ <img src="https://user-images.githubusercontent.com/33424140/62378282-1a0d1c00-b562-11e9-8fa6-4dfd20e089f7.gif" width="900" alt="Abps">
+</h1>
 ## Installation
 
 ```bash
