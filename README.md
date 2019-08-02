@@ -45,3 +45,14 @@
 - Passport: For authentication.
 
 ## Screnshots
+
+## Private Account
+
+![Untitled](https://user-images.githubusercontent.com/33424140/62382728-cb647f80-b56b-11e9-9f6f-9582aa887881.png)
+
+## Live Chat
+
+![Uns](https://user-images.githubusercontent.com/33424140/62382820-0a92d080-b56c-11e9-8672-eb60b2962b2c.png)
+
+
+
